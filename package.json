@@ -54,7 +54,7 @@
     },
     "win": {
       "target": "nsis",
-      "icon": "logo.png",
+      "icon": "public/favicon.ico",
       "verifyUpdateCodeSignature": false,
       "artifactName": "taoyuan-Setup.${ext}"
     },
@@ -62,9 +62,9 @@
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "allowElevation": true,
-      "installerIcon": "logo.png",
-      "uninstallerIcon": "logo.png",
-      "installerHeaderIcon": "logo.png",
+      "installerIcon": "public/favicon.ico",
+      "uninstallerIcon": "public/favicon.ico",
+      "installerHeaderIcon": "public/favicon.ico",
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true
     }
