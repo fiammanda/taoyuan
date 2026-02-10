@@ -61,9 +61,9 @@ export const formatTime = (hour: number): string => {
 // === 行动时间开销 (单位：小时) ===
 export const ACTION_TIME_COSTS = {
   // 农场
-  till: 0.33,
+  till: 0.17,
   plant: 0.17,
-  water: 0.17,
+  water: 0.08,
   harvest: 0.17,
   // 钓鱼
   fishStart: 2,
@@ -98,8 +98,8 @@ export const ACTION_TIME_COSTS = {
   // 工具升级
   toolUpgrade: 1,
   // 批量农场操作
-  batchWater: 0.5,
-  batchTill: 0.5,
+  batchWater: 0.17,
+  batchTill: 0.25,
   batchHarvest: 0.5,
   // 淘金
   pan: 0.5,

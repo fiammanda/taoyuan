@@ -33,7 +33,7 @@ type WaveType = 'sine' | 'square' | 'triangle' | 'sawtooth'
 
 /** 播放简单合成音效（一次性 Synth，播放后自动销毁） */
 const playSfx = (freq: number, duration = 0.1, type: WaveType = 'square', vol = sfxVolume) => {
-  if (!sfxEnabled.value || !T) return
+  if (!sfxEnabled.value || !T || document.hidden) return
   try {
     const synth = new T.Synth({
       oscillator: { type },
@@ -578,6 +578,23 @@ const resolveCurrentBgm = (): { type: BgmType; weather: Weather } => {
   }
   return { type: gameStore.season as SeasonBgmType, weather: gameStore.weather as Weather }
 }
+
+// ====== 页面可见性处理（切标签页时停止/恢复音频） ======
+
+let bgmWasPlayingBeforeHidden = false
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    bgmWasPlayingBeforeHidden = bgmPlaying
+    if (bgmPlaying) stopBgm()
+  } else {
+    if (bgmWasPlayingBeforeHidden && bgmEnabled.value) {
+      const { type, weather } = resolveCurrentBgm()
+      playBgmLoop(type, weather)
+    }
+    bgmWasPlayingBeforeHidden = false
+  }
+})
 
 // ====== 导出 composable ======
 

@@ -1,23 +1,19 @@
-import {
-  useGameStore,
-  usePlayerStore,
-  useFarmStore,
-  useInventoryStore,
-  useSaveStore,
-  useSkillStore,
-  useNpcStore,
-  useCookingStore,
-  useProcessingStore,
-  useAchievementStore,
-  useAnimalStore,
-  useHomeStore,
-  useWalletStore,
-  useShopStore,
-  useQuestStore,
-  useFishingStore,
-  SEASON_NAMES,
-  WEATHER_NAMES
-} from '@/stores'
+import { useGameStore, SEASON_NAMES, WEATHER_NAMES } from '@/stores/useGameStore'
+import { usePlayerStore } from '@/stores/usePlayerStore'
+import { useFarmStore } from '@/stores/useFarmStore'
+import { useInventoryStore } from '@/stores/useInventoryStore'
+import { useSaveStore } from '@/stores/useSaveStore'
+import { useSkillStore } from '@/stores/useSkillStore'
+import { useNpcStore } from '@/stores/useNpcStore'
+import { useCookingStore } from '@/stores/useCookingStore'
+import { useProcessingStore } from '@/stores/useProcessingStore'
+import { useAchievementStore } from '@/stores/useAchievementStore'
+import { useAnimalStore } from '@/stores/useAnimalStore'
+import { useHomeStore } from '@/stores/useHomeStore'
+import { useWalletStore } from '@/stores/useWalletStore'
+import { useShopStore } from '@/stores/useShopStore'
+import { useQuestStore } from '@/stores/useQuestStore'
+import { useFishingStore } from '@/stores/useFishingStore'
 import { getItemById, getTodayEvent, getNpcById, getCropById } from '@/data'
 import { RECIPES } from '@/data/recipes'
 import { CAVE_UNLOCK_EARNINGS } from '@/data/buildings'

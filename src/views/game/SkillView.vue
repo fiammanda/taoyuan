@@ -13,8 +13,8 @@
           </p>
           <p v-else class="text-xs text-accent">MAX</p>
         </div>
-        <div class="bg-bg rounded-[2px] h-2 mb-2">
-          <div class="h-2 bg-accent rounded-[2px] transition-all" :style="{ width: expPercent(skill.type) + '%' }" />
+        <div class="bg-bg rounded-xs h-2 mb-2">
+          <div class="h-2 bg-accent rounded-xs transition-all" :style="{ width: expPercent(skill.type) + '%' }" />
         </div>
         <div v-if="skill.perk5 || skill.perk10" class="text-xs text-water">
           <span v-if="skill.perk5">{{ PERK_NAMES[skill.perk5] }}</span>

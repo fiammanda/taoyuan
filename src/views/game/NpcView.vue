@@ -13,7 +13,7 @@
       >
         <div class="flex justify-between items-start">
           <div>
-            <p class="text-sm">
+            <p class="text-sm text-accent">
               {{ npc.name }}
               <span v-if="npcStore.getNpcState(npc.id)?.married" class="text-danger text-xs ml-1">[伴侣]</span>
               <span v-else-if="npcStore.getNpcState(npc.id)?.dating" class="text-danger/70 text-xs ml-1">[约会中]</span>
@@ -72,7 +72,7 @@
               <span
                 v-for="eid in selectedNpcState.triggeredHeartEvents"
                 :key="eid"
-                class="text-xs border border-accent/20 rounded-[2px] px-1"
+                class="text-xs border border-accent/20 rounded-xs px-1"
               >
                 {{ getHeartEventTitle(eid) }}
               </span>
@@ -81,7 +81,7 @@
 
           <!-- 对话 -->
           <div class="mb-3 flex gap-2 flex-wrap">
-            <button class="btn text-xs" :disabled="selectedNpcState?.talkedToday" @click="handleTalk">
+            <button class="btn text-xs w-full" :disabled="selectedNpcState?.talkedToday" @click="handleTalk">
               <MessageCircle :size="14" />
               {{ selectedNpcState?.talkedToday ? '今天已聊过' : '聊天' }}
             </button>
@@ -127,24 +127,77 @@
               送礼（选择背包中的物品）
               <span v-if="npcStore.isBirthday(selectedNpc!)" class="text-danger">— 生日加成中!</span>
             </p>
-            <div class="flex gap-2 flex-wrap">
-              <button
-                v-for="item in giftableItems"
-                :key="`${item.itemId}_${item.quality ?? 'normal'}`"
-                class="btn text-xs"
-                :disabled="selectedNpcState?.giftedToday || (selectedNpcState?.giftsThisWeek ?? 0) >= 2"
-                @click="handleGift(item.itemId, item.quality)"
-              >
-                <Gift :size="14" />
-                {{ getItemById(item.itemId)?.name }}
-                <span v-if="item.quality && item.quality !== 'normal'" class="text-accent ml-0.5">{{ QUALITY_LABELS[item.quality] }}</span>
-                (&times;{{ item.quantity }})
-              </button>
-              <p v-if="giftableItems.length === 0" class="text-xs text-muted">背包为空</p>
-            </div>
-            <p v-if="selectedNpcState?.giftedToday" class="text-xs text-muted mt-1">今天已送过礼物了。</p>
-            <p v-else-if="(selectedNpcState?.giftsThisWeek ?? 0) >= 2" class="text-xs text-muted mt-1">本周已送过2次礼物了。</p>
+            <template v-if="selectedNpcState?.giftedToday">
+              <div class="flex flex-col items-center justify-center py-6 text-muted">
+                <Gift :size="32" class="mb-2" />
+                <p class="text-xs">今天已送过礼物了。</p>
+              </div>
+            </template>
+            <template v-else-if="(selectedNpcState?.giftsThisWeek ?? 0) >= 2">
+              <div class="flex flex-col items-center justify-center py-6 text-muted">
+                <Gift :size="32" class="mb-2" />
+                <p class="text-xs">本周已送过2次礼物了。</p>
+              </div>
+            </template>
+            <template v-else>
+              <div class="flex flex-col gap-1 max-h-40 overflow-y-auto">
+                <div
+                  v-for="item in giftableItems"
+                  :key="`${item.itemId}_${item.quality ?? 'normal'}`"
+                  class="flex items-center justify-between border border-accent/20 rounded-xs px-3 py-1.5 cursor-pointer hover:bg-accent/5"
+                  @click="activeGiftKey = item.itemId + ':' + item.quality"
+                >
+                  <span class="text-xs" :class="qualityTextClass(item.quality)">
+                    {{ getItemById(item.itemId)?.name }}
+                  </span>
+                  <Gift :size="12" class="text-muted" />
+                </div>
+              </div>
+              <div v-if="giftableItems.length === 0" class="flex flex-col items-center justify-center py-6 text-muted">
+                <Package :size="32" class="mb-2" />
+                <p class="text-xs">背包为空</p>
+              </div>
+            </template>
           </div>
+
+          <!-- 送礼物品详情弹窗 -->
+          <Transition name="panel-fade">
+            <div
+              v-if="activeGiftItem && activeGiftDef"
+              class="fixed inset-0 bg-black/60 flex items-center justify-center z-60 p-4"
+              @click.self="activeGiftKey = null"
+            >
+              <div class="game-panel max-w-xs w-full relative">
+                <button class="absolute top-2 right-2 text-muted hover:text-text" @click="activeGiftKey = null">
+                  <X :size="14" />
+                </button>
+                <p class="text-sm mb-2 pr-6" :class="qualityTextClass(activeGiftItem.quality, 'text-accent')">
+                  {{ activeGiftDef.name }}
+                </p>
+                <div class="border border-accent/10 rounded-xs p-2 mb-2">
+                  <p class="text-xs text-muted">{{ activeGiftDef.description }}</p>
+                </div>
+                <div class="border border-accent/10 rounded-xs p-2 mb-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs text-muted">数量</span>
+                    <span class="text-xs">&times;{{ activeGiftItem.quantity }}</span>
+                  </div>
+                  <div v-if="activeGiftItem.quality !== 'normal'" class="flex items-center justify-between mt-0.5">
+                    <span class="text-xs text-muted">品质</span>
+                    <span class="text-xs" :class="qualityTextClass(activeGiftItem.quality)">
+                      {{ QUALITY_NAMES[activeGiftItem.quality] }}
+                    </span>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <button class="btn text-xs w-full justify-center" @click="handleGift(activeGiftItem!.itemId, activeGiftItem!.quality)">
+                    <Gift :size="14" />
+                    赠送给{{ selectedNpcDef?.name }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </Transition>
         </div>
       </div>
     </Transition>
@@ -153,7 +206,7 @@
 
 <script setup lang="ts">
   import { ref, computed } from 'vue'
-  import { MessageCircle, Heart, Gift, Cake } from 'lucide-vue-next'
+  import { MessageCircle, Heart, Gift, Cake, X, Package } from 'lucide-vue-next'
   import { useNpcStore, useInventoryStore, useCookingStore, useGameStore, usePlayerStore } from '@/stores'
   import { NPCS, getNpcById, getItemById, getHeartEventById } from '@/data'
   import { ACTION_TIME_COSTS, isNpcAvailable, getNpcUnavailableReason } from '@/data/timeConstants'
@@ -171,6 +224,18 @@
   const selectedNpc = ref<string | null>(null)
   const dialogueText = ref<string | null>(null)
   const showDivorceConfirm = ref(false)
+  const activeGiftKey = ref<string | null>(null)
+
+  const activeGiftItem = computed(() => {
+    if (!activeGiftKey.value) return null
+    const [itemId, quality] = activeGiftKey.value.split(':')
+    return inventoryStore.items.find(i => i.itemId === itemId && i.quality === quality) ?? null
+  })
+
+  const activeGiftDef = computed(() => {
+    if (!activeGiftItem.value) return null
+    return getItemById(activeGiftItem.value.itemId) ?? null
+  })
 
   const selectedNpcDef = computed(() => (selectedNpc.value ? getNpcById(selectedNpc.value) : null))
   const selectedNpcState = computed(() => (selectedNpc.value ? npcStore.getNpcState(selectedNpc.value) : null))
@@ -232,7 +297,19 @@
 
   const SEASON_NAMES_MAP: Record<string, string> = { spring: '春', summer: '夏', autumn: '秋', winter: '冬' }
 
-  const QUALITY_LABELS: Record<string, string> = { normal: '', fine: '优', excellent: '精', supreme: '极' }
+  const qualityTextClass = (q: Quality, fallback = ''): string => {
+    if (q === 'fine') return 'text-quality-fine'
+    if (q === 'excellent') return 'text-quality-excellent'
+    if (q === 'supreme') return 'text-quality-supreme'
+    return fallback
+  }
+
+  const QUALITY_NAMES: Record<Quality, string> = {
+    normal: '普通',
+    fine: '优良',
+    excellent: '精品',
+    supreme: '极品'
+  }
 
   const levelColor = (level: FriendshipLevel): string => {
     switch (level) {
@@ -294,6 +371,9 @@
       } else {
         addLog(`送给${npcName}${itemName}，${npcName}觉得${result.reaction}。`)
       }
+
+      // 关闭送礼弹窗
+      activeGiftKey.value = null
 
       // 送礼后也检查心事件
       const heartEvent = npcStore.checkHeartEvent(selectedNpc.value)

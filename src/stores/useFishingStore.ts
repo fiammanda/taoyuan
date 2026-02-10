@@ -94,12 +94,11 @@ export const useFishingStore = defineStore('fishing', () => {
   /** 蟹笼 */
   const crabPots = ref<CrabPotState[]>([])
 
-  /** 装备鱼饵 */
+  /** 装备鱼饵（仅标记类型，不从背包取出） */
   const equipBait = (type: BaitType): { success: boolean; message: string } => {
     const def = getBaitById(type)
     if (!def) return { success: false, message: '无效的鱼饵。' }
-    if (!inventoryStore.removeItem(type, 1)) return { success: false, message: '背包中没有该鱼饵。' }
-    if (equippedBait.value) unequipBait()
+    if (inventoryStore.getItemCount(type) <= 0) return { success: false, message: '背包中没有该鱼饵。' }
     equippedBait.value = type
     return { success: true, message: `装备了${def.name}。` }
   }
@@ -108,7 +107,6 @@ export const useFishingStore = defineStore('fishing', () => {
   const unequipBait = (): string => {
     if (!equippedBait.value) return '没有装备鱼饵。'
     const def = getBaitById(equippedBait.value)
-    inventoryStore.addItem(equippedBait.value, 1)
     equippedBait.value = null
     return `卸下了${def?.name ?? '鱼饵'}。`
   }
@@ -166,9 +164,14 @@ export const useFishingStore = defineStore('fishing', () => {
       return { success: false, message: '当前季节和天气没有可钓的鱼。' }
     }
 
-    // 消耗鱼饵
+    // 消耗鱼饵（从背包扣除1个，用完才取消装备）
     activeBaitDef.value = baitDef ?? null
-    if (equippedBait.value) equippedBait.value = null
+    if (equippedBait.value) {
+      inventoryStore.removeItem(equippedBait.value, 1)
+      if (inventoryStore.getItemCount(equippedBait.value) <= 0) {
+        equippedBait.value = null
+      }
+    }
 
     // 浮漂耐久-1
     activeTackleDef.value = tackleDef ?? null

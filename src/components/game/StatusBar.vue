@@ -27,9 +27,9 @@
             <Zap :size="12" class="inline" />
             {{ playerStore.stamina }}/{{ playerStore.maxStamina }}
           </span>
-          <div class="w-14 md:w-20 h-2 bg-bg rounded-[2px] border border-accent/20">
+          <div class="w-14 md:w-20 h-2 bg-bg rounded-xs border border-accent/20">
             <div
-              class="h-full rounded-[2px] transition-all duration-300"
+              class="h-full rounded-xs transition-all duration-300"
               :class="staminaBarColor"
               :style="{ width: playerStore.staminaPercent + '%' }"
             />
@@ -41,9 +41,9 @@
             <Heart :size="12" class="inline" />
             {{ playerStore.hp }}/{{ playerStore.getMaxHp() }}
           </span>
-          <div class="w-12 md:w-16 h-2 bg-bg rounded-[2px] border border-accent/20">
+          <div class="w-12 md:w-16 h-2 bg-bg rounded-xs border border-accent/20">
             <div
-              class="h-full rounded-[2px] transition-all duration-300"
+              class="h-full rounded-xs transition-all duration-300"
               :class="hpBarColor"
               :style="{ width: playerStore.getHpPercent() + '%' }"
             />
@@ -52,31 +52,29 @@
         <!-- 剩余时间 -->
         <div class="flex items-center gap-1">
           <Clock :size="12" class="tinline" />
-          <div class="w-12 md:w-16 h-2 bg-bg rounded-[2px] border border-accent/20">
-            <div class="h-full rounded-[2px] transition-all duration-300" :class="timeBarColor" :style="{ width: timePercent + '%' }" />
+          <div class="w-12 md:w-16 h-2 bg-bg rounded-xs border border-accent/20">
+            <div class="h-full rounded-xs transition-all duration-300" :class="timeBarColor" :style="{ width: timePercent + '%' }" />
           </div>
         </div>
       </div>
       <!-- 操作按钮 -->
       <div class="flex items-center gap-1 shrink-0">
-        <button class="!hidden btn text-xs py-0 px-2 min-h-0 md:!flex" @click="showMobileMap = true">
+        <button class="hidden! btn text-xs py-0 px-2 min-h-0 md:flex!" @click="showMobileMap = true">
           <Map :size="12" />
           地图
         </button>
-        <button class="!hidden btn btn-danger text-xs py-0 px-2 min-h-0 md:!flex" @click.stop="handleSleep">
+        <button class="hidden! btn btn-danger text-xs py-0 px-2 min-h-0 md:flex!" @click.stop="handleSleep">
           <Moon :size="12" />
           {{ sleepLabel }}
         </button>
-        <button class="btn text-xs py-0 px-1 min-h-0" @click="showSettings = true">
+        <button class="hidden! btn btn-danger text-xs py-0 px-2 min-h-0 md:flex!" @click="showSettings = true">
           <SettingsIcon :size="14" />
           <span class="hidden md:flex">设置</span>
         </button>
       </div>
     </div>
     <MobileMapMenu :open="showMobileMap" :current="currentPanel" @close="showMobileMap = false" />
-    <Transition name="panel-fade">
-      <SettingsDialog v-if="showSettings" @close="showSettings = false" />
-    </Transition>
+    <SettingsDialog :open="showSettings" @close="showSettings = false" />
   </div>
 </template>
 

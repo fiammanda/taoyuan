@@ -259,7 +259,10 @@ const SPECIAL_ORDER_TEMPLATES: SpecialOrderTemplate[] = [
     quantity: 25,
     days: 7,
     moneyReward: 4000,
-    itemReward: [{ itemId: 'gold_ore', quantity: 10 }, { itemId: 'jade', quantity: 2 }],
+    itemReward: [
+      { itemId: 'gold_ore', quantity: 10 },
+      { itemId: 'jade', quantity: 2 }
+    ],
     seasons: [],
     npcId: 'a_shi',
     tier: 4
@@ -271,7 +274,10 @@ const SPECIAL_ORDER_TEMPLATES: SpecialOrderTemplate[] = [
     quantity: 20,
     days: 7,
     moneyReward: 4500,
-    itemReward: [{ itemId: 'quality_fertilizer', quantity: 10 }, { itemId: 'speed_gro', quantity: 5 }],
+    itemReward: [
+      { itemId: 'quality_fertilizer', quantity: 10 },
+      { itemId: 'speed_gro', quantity: 5 }
+    ],
     seasons: ['autumn'],
     npcId: 'liu_niang',
     tier: 4
@@ -295,7 +301,10 @@ const SPECIAL_ORDER_TEMPLATES: SpecialOrderTemplate[] = [
     quantity: 30,
     days: 7,
     moneyReward: 3500,
-    itemReward: [{ itemId: 'seed_garlic', quantity: 10 }, { itemId: 'charcoal', quantity: 10 }],
+    itemReward: [
+      { itemId: 'seed_garlic', quantity: 10 },
+      { itemId: 'charcoal', quantity: 10 }
+    ],
     seasons: ['winter'],
     npcId: 'chen_bo',
     tier: 4
@@ -308,9 +317,7 @@ const TIER_FRIENDSHIP = [5, 8, 12, 15]
 /** 根据当前季节和梯度生成特殊订单 (tier: 1-4 对应 第7/14/21/28天) */
 export const generateSpecialOrder = (season: Season, tier: number): QuestInstance | null => {
   const clampedTier = Math.max(1, Math.min(4, tier))
-  const valid = SPECIAL_ORDER_TEMPLATES.filter(
-    t => t.tier === clampedTier && (t.seasons.length === 0 || t.seasons.includes(season))
-  )
+  const valid = SPECIAL_ORDER_TEMPLATES.filter(t => t.tier === clampedTier && (t.seasons.length === 0 || t.seasons.includes(season)))
   if (valid.length === 0) return null
 
   const template = valid[Math.floor(Math.random() * valid.length)]!
@@ -324,7 +331,7 @@ export const generateSpecialOrder = (season: Season, tier: number): QuestInstanc
     type: 'special_order',
     npcId: template.npcId,
     npcName,
-    description: `【特殊订单·${tierLabel}】${npcName}急需${template.quantity}个${template.targetItemName}，限${template.days}天完成。`,
+    description: `【${tierLabel}】${npcName}急需${template.quantity}个${template.targetItemName}，限${template.days}天完成。`,
     targetItemId: template.targetItemId,
     targetItemName: template.targetItemName,
     targetQuantity: template.quantity,

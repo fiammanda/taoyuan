@@ -16,10 +16,7 @@
         <div v-if="selectedItems.length === 0" class="text-xs text-muted">尚未选择任何物品。</div>
         <div v-else class="flex flex-wrap gap-2">
           <button v-for="(sel, i) in selectedItems" :key="i" class="btn text-xs" :title="'点击移除'" @click="removeSelection(i)">
-            {{ getItemById(sel.itemId)?.name }}
-            <span v-if="sel.quality !== 'normal'" class="ml-0.5" :class="qualityClass(sel.quality)">
-              [{{ QUALITY_LABELS[sel.quality] }}]
-            </span>
+            <span :class="qualityClass(sel.quality)">{{ getItemById(sel.itemId)?.name }}</span>
             <span class="text-danger ml-1">×</span>
           </button>
         </div>
@@ -38,15 +35,12 @@
           <button
             v-for="item in selectableItems"
             :key="item.itemId + item.quality"
-            class="border border-accent/20 rounded-[2px] p-2 text-xs text-center hover:border-accent/50 transition-colors"
+            class="border border-accent/20 rounded-xs p-2 text-xs text-center hover:border-accent/50 transition-colors"
             :disabled="selectedItems.length >= 5"
             @click="addSelection(item)"
           >
-            <div class="truncate">{{ getItemById(item.itemId)?.name }}</div>
+            <div class="truncate" :class="qualityClass(item.quality)">{{ getItemById(item.itemId)?.name }}</div>
             <div class="text-muted">×{{ item.quantity }}</div>
-            <div v-if="item.quality !== 'normal'" class="mt-0.5" :class="qualityClass(item.quality)">
-              {{ QUALITY_LABELS[item.quality] }}
-            </div>
             <div class="text-muted mt-0.5">{{ getItemById(item.itemId)?.sellPrice }}文</div>
           </button>
         </div>
@@ -85,8 +79,7 @@
       <div class="mb-3">
         <p class="text-xs text-muted mb-1">你的展品明细：</p>
         <div v-for="(d, i) in scoreDetails" :key="i" class="text-xs mb-0.5">
-          <span class="text-accent">{{ d.name }}</span>
-          <span v-if="d.qualityLabel" class="ml-0.5" :class="qualityClass(d.quality)">[{{ d.qualityLabel }}]</span>
+          <span :class="qualityClass(d.quality) || 'text-accent'">{{ d.name }}</span>
           <span class="text-muted ml-1">{{ d.basePrice }}文 × {{ d.multiplier }} = {{ d.score }}分</span>
         </div>
         <p class="text-xs mt-1">
@@ -119,13 +112,6 @@
 
   const inventoryStore = useInventoryStore()
 
-  const QUALITY_LABELS: Record<Quality, string> = {
-    normal: '普通',
-    fine: '优良',
-    excellent: '精品',
-    supreme: '极品'
-  }
-
   const QUALITY_MULTIPLIERS: Record<Quality, number> = {
     normal: 1,
     fine: 1.25,
@@ -141,7 +127,6 @@
   interface ScoreDetail {
     name: string
     quality: Quality
-    qualityLabel: string
     basePrice: number
     multiplier: number
     score: number
@@ -216,7 +201,6 @@
       details.push({
         name: def.name,
         quality: sel.quality,
-        qualityLabel: sel.quality !== 'normal' ? QUALITY_LABELS[sel.quality] : '',
         basePrice: def.sellPrice,
         multiplier: mult,
         score

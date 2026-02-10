@@ -9,7 +9,7 @@
       <div class="flex-1 flex flex-col gap-2 mb-3" @click="menuOpen = null">
         <div v-for="info in slots" :key="info.slot">
           <div v-if="info.exists" class="flex gap-1 w-full">
-            <button v-if="allowLoad" class="btn flex-1 !justify-between text-xs" @click="$emit('load', info.slot)">
+            <button v-if="allowLoad" class="btn flex-1 justify-between! text-xs" @click="$emit('load', info.slot)">
               <span class="inline-flex items-center gap-1">
                 <FolderOpen :size="12" />
                 存档 {{ info.slot + 1 }}
@@ -20,7 +20,7 @@
                 }}天
               </span>
             </button>
-            <div v-else class="btn flex-1 !justify-between text-xs cursor-default">
+            <div v-else class="btn flex-1 justify-between! text-xs cursor-default">
               <span class="inline-flex items-center gap-1">
                 <FolderOpen :size="12" />
                 存档 {{ info.slot + 1 }}
@@ -37,24 +37,24 @@
               </button>
               <div
                 v-if="menuOpen === info.slot"
-                class="absolute right-0 top-full mt-1 z-10 flex flex-col border border-accent/30 rounded-[2px] overflow-hidden w-30"
+                class="absolute right-0 top-full mt-1 z-10 flex flex-col border border-accent/30 rounded-xs overflow-hidden w-30"
               >
                 <button
                   v-if="!isAndroidWebView"
-                  class="btn text-center !rounded-none justify-center text-sm"
+                  class="btn text-center rounded-none! justify-center text-sm"
                   @click="handleExport(info.slot)"
                 >
                   <Download :size="12" />
                   导出
                 </button>
-                <button class="btn btn-danger !rounded-none text-center justify-center text-sm" @click="handleDelete(info.slot)">
+                <button class="btn btn-danger rounded-none! text-center justify-center text-sm" @click="handleDelete(info.slot)">
                   <Trash2 :size="12" />
                   删除
                 </button>
               </div>
             </div>
           </div>
-          <div v-else class="text-xs text-muted border border-accent/10 rounded-[2px] px-3 py-2">存档 {{ info.slot + 1 }} — 空</div>
+          <div v-else class="text-xs text-muted border border-accent/10 rounded-xs px-3 py-2">存档 {{ info.slot + 1 }} — 空</div>
         </div>
       </div>
 
@@ -66,6 +66,24 @@
         </button>
         <input ref="fileInputRef" type="file" accept=".tyx" class="hidden" @change="handleImportFile" />
       </template>
+
+      <!-- 删除存档确认弹窗 -->
+      <Transition name="panel-fade">
+        <div
+          v-if="deleteTargetSlot !== null"
+          class="fixed inset-0 z-60 flex items-center justify-center bg-bg/80"
+          @click.self="deleteTargetSlot = null"
+        >
+          <div class="game-panel w-full max-w-xs mx-4 text-center">
+            <p class="text-danger text-sm mb-3">确定删除存档 {{ deleteTargetSlot + 1 }}？</p>
+            <p class="text-xs text-muted mb-4">此操作不可恢复。</p>
+            <div class="flex gap-3 justify-center">
+              <button class="btn text-xs" @click="deleteTargetSlot = null">取消</button>
+              <button class="btn btn-danger text-xs" @click="confirmDelete">确认删除</button>
+            </div>
+          </div>
+        </div>
+      </Transition>
     </div>
   </div>
 </template>
@@ -73,7 +91,9 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import { X, FolderOpen, Settings, Download, Trash2, Upload } from 'lucide-vue-next'
-  import { useSaveStore, SEASON_NAMES } from '@/stores'
+  import { SEASON_NAMES } from '@/stores/useGameStore'
+  import { useSaveStore } from '@/stores/useSaveStore'
+  import { showFloat } from '@/composables/useGameLog'
 
   const props = defineProps<{ allowLoad?: boolean }>()
   const emit = defineEmits<{ close: []; load: [slot: number]; change: [] }>()
@@ -92,15 +112,23 @@
 
   const handleExport = (slot: number) => {
     if (!saveStore.exportSave(slot)) {
-      alert('导出失败。')
+      showFloat('导出失败。', 'danger')
     }
   }
 
+  const deleteTargetSlot = ref<number | null>(null)
+
   const handleDelete = (slot: number) => {
-    if (confirm(`确定删除存档 ${slot + 1}？此操作不可恢复。`)) {
-      saveStore.deleteSlot(slot)
+    deleteTargetSlot.value = slot
+  }
+
+  const confirmDelete = () => {
+    if (deleteTargetSlot.value !== null) {
+      saveStore.deleteSlot(deleteTargetSlot.value)
       refreshSlots()
       emit('change')
+      deleteTargetSlot.value = null
+      menuOpen.value = null
     }
   }
 
@@ -119,13 +147,13 @@
       const content = reader.result as string
       const emptySlot = slots.value.find(s => !s.exists)
       if (!emptySlot) {
-        alert('存档槽位已满，请先删除一个旧存档。')
+        showFloat('存档槽位已满，请先删除一个旧存档。')
       } else if (saveStore.importSave(emptySlot.slot, content)) {
         refreshSlots()
         emit('change')
-        alert(`已导入到存档 ${emptySlot.slot + 1}。`)
+        showFloat(`已导入到存档 ${emptySlot.slot + 1}。`, 'success')
       } else {
-        alert('存档文件无效或已损坏。')
+        showFloat('存档文件无效或已损坏。', 'danger')
       }
       input.value = ''
     }

@@ -10,6 +10,7 @@ import { useNpcStore } from './useNpcStore'
 import { useQuestStore } from './useQuestStore'
 import { useShopStore } from './useShopStore'
 import { useAnimalStore } from './useAnimalStore'
+import { useGameStore } from './useGameStore'
 
 export const useAchievementStore = defineStore('achievement', () => {
   const playerStore = usePlayerStore()
@@ -19,6 +20,9 @@ export const useAchievementStore = defineStore('achievement', () => {
 
   /** 已发现的物品ID集合 */
   const discoveredItems = ref<string[]>([])
+
+  /** 物品发现时间记录 { itemId: "第X年 春 第Y天" } */
+  const discoveryTimes = ref<Record<string, string>>({})
 
   /** 已完成的成就ID集合 */
   const completedAchievements = ref<string[]>([])
@@ -47,7 +51,14 @@ export const useAchievementStore = defineStore('achievement', () => {
   const discoverItem = (itemId: string) => {
     if (!discoveredItems.value.includes(itemId)) {
       discoveredItems.value.push(itemId)
+      const gameStore = useGameStore()
+      const SEASON_NAMES: Record<string, string> = { spring: '春', summer: '夏', autumn: '秋', winter: '冬' }
+      discoveryTimes.value[itemId] = `第${gameStore.year}年 ${SEASON_NAMES[gameStore.season] ?? gameStore.season} 第${gameStore.day}天`
     }
+  }
+
+  const getDiscoveryTime = (itemId: string): string | null => {
+    return discoveryTimes.value[itemId] ?? null
   }
 
   const isDiscovered = (itemId: string): boolean => {
@@ -253,7 +264,7 @@ export const useAchievementStore = defineStore('achievement', () => {
     return completedBundles.value.includes(bundleId)
   }
 
-  // === 完美度 ===
+  // === 完成度 ===
 
   const SHIPPABLE_CATEGORIES = ['crop', 'fish', 'animal_product', 'processed', 'fruit', 'ore', 'gem', 'material', 'misc', 'food', 'gift']
   const shippableItemCount = ITEMS.filter(i => SHIPPABLE_CATEGORIES.includes(i.category)).length
@@ -289,6 +300,7 @@ export const useAchievementStore = defineStore('achievement', () => {
   const serialize = () => {
     return {
       discoveredItems: discoveredItems.value,
+      discoveryTimes: discoveryTimes.value,
       completedAchievements: completedAchievements.value,
       bundleSubmissions: bundleSubmissions.value,
       completedBundles: completedBundles.value,
@@ -298,6 +310,7 @@ export const useAchievementStore = defineStore('achievement', () => {
 
   const deserialize = (data: ReturnType<typeof serialize>) => {
     discoveredItems.value = data.discoveredItems ?? []
+    discoveryTimes.value = data.discoveryTimes ?? {}
     completedAchievements.value = data.completedAchievements ?? []
     bundleSubmissions.value = data.bundleSubmissions ?? {}
     completedBundles.value = data.completedBundles ?? []
@@ -320,6 +333,7 @@ export const useAchievementStore = defineStore('achievement', () => {
 
   return {
     discoveredItems,
+    discoveryTimes,
     completedAchievements,
     bundleSubmissions,
     completedBundles,
@@ -327,6 +341,7 @@ export const useAchievementStore = defineStore('achievement', () => {
     discoveredCount,
     discoverItem,
     isDiscovered,
+    getDiscoveryTime,
     recordCropHarvest,
     recordFishCaught,
     recordMoneyEarned,

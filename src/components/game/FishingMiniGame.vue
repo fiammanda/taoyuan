@@ -7,13 +7,13 @@
 
     <div class="flex gap-2 items-end justify-center">
       <!-- 进度条 (左侧竖条) -->
-      <div class="w-3 h-[250px] bg-bg border border-accent/30 rounded-[2px] relative overflow-hidden">
+      <div class="w-3 h-62.5 bg-bg border border-accent/30 rounded-xs relative overflow-hidden">
         <div class="absolute bottom-0 w-full bg-success rounded-[1px]" :style="{ height: score + '%' }" />
       </div>
 
       <!-- 钓鱼区 -->
       <div
-        class="w-10 h-[250px] bg-water/20 border border-accent/30 rounded-[2px] relative overflow-hidden select-none"
+        class="w-10 h-62.5 bg-water/20 border border-accent/30 rounded-xs relative overflow-hidden select-none"
         style="touch-action: none"
         @mousedown.prevent="startHold"
         @mouseup.prevent="stopHold"

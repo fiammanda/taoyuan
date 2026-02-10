@@ -3,7 +3,7 @@
     <!-- 状态栏 -->
     <StatusBar @request-sleep="showSleepConfirm = true" />
 
-    <button class="btn text-center justify-center text-sm md:!hidden" @click.stop="showSleepConfirm = true">
+    <button class="btn text-center justify-center text-sm md:hidden!" @click.stop="showSleepConfirm = true">
       <Moon :size="12" />
       {{ sleepLabel }}
     </button>
@@ -18,9 +18,14 @@
     </div>
 
     <!-- 移动端地图按钮 -->
-    <button class="mobile-map-btn md:!hidden" @click="showMobileMap = true">
+    <button class="mobile-map-btn md:hidden!" @click="showMobileMap = true">
       <Map :size="20" />
     </button>
+    <button class="mobile-setting-btn md:hidden!" @click="showSettings = true">
+      <SettingsIcon :size="20" />
+    </button>
+
+    <SettingsDialog :open="showSettings" @close="showSettings = false" />
 
     <!-- 移动端地图菜单 -->
     <MobileMapMenu :open="showMobileMap" :current="currentPanel" @close="showMobileMap = false" />
@@ -55,14 +60,14 @@
           <p class="text-accent text-sm mb-3">—— 小动物来访 ——</p>
           <p class="text-xs leading-relaxed mb-3">一只小动物在你家门口徘徊，看起来很想有个家。你要收养它吗？</p>
           <div class="flex gap-3 justify-center mb-3">
-            <button class="btn text-xs" :class="petChoice === 'cat' ? '!bg-accent !text-bg' : ''" @click="petChoice = 'cat'">猫</button>
-            <button class="btn text-xs" :class="petChoice === 'dog' ? '!bg-accent !text-bg' : ''" @click="petChoice = 'dog'">狗</button>
+            <button class="btn text-xs" :class="petChoice === 'cat' ? 'bg-accent! text-bg!' : ''" @click="petChoice = 'cat'">猫</button>
+            <button class="btn text-xs" :class="petChoice === 'dog' ? 'bg-accent! text-bg!' : ''" @click="petChoice = 'dog'">狗</button>
           </div>
           <div v-if="petChoice" class="mb-3">
             <p class="text-xs text-muted mb-1">给它取个名字：</p>
             <input
               v-model="petNameInput"
-              class="w-full bg-bg border border-accent/30 rounded-[2px] px-2 py-1 text-xs text-text"
+              class="w-full bg-bg border border-accent/30 rounded-xs px-2 py-1 text-xs text-text"
               :placeholder="petChoice === 'cat' ? '小花' : '旺财'"
               maxlength="8"
             />
@@ -107,7 +112,7 @@
   import { handleEndDay } from '@/composables/useEndDay'
   import { useGameClock } from '@/composables/useGameClock'
   import { useAudio } from '@/composables/useAudio'
-  import { Moon, X, Map } from 'lucide-vue-next'
+  import { Moon, X, Map, Settings as SettingsIcon } from 'lucide-vue-next'
   import MobileMapMenu from '@/components/game/MobileMapMenu.vue'
   import StatusBar from '@/components/game/StatusBar.vue'
   import EventDialog from '@/components/game/EventDialog.vue'
@@ -115,6 +120,7 @@
   import PerkSelectDialog from '@/components/game/PerkSelectDialog.vue'
   import FishingContestView from '@/components/game/FishingContestView.vue'
   import HarvestFairView from '@/components/game/HarvestFairView.vue'
+  import SettingsDialog from '@/components/game/SettingsDialog.vue'
 
   const router = useRouter()
   const route = useRoute()
@@ -148,6 +154,9 @@
   /** 休息确认弹窗 */
   const showSleepConfirm = ref(false)
 
+  /** 设置弹窗 */
+  const showSettings = ref(false)
+
   // 实时时钟生命周期
   onMounted(() => startClock())
   onUnmounted(() => stopClock())
@@ -170,8 +179,7 @@
   )
 
   // 判断是否webview环境
-  const ua = navigator.userAgent || ''
-  const isWebView = /wv/.test(ua) || (/iPad|iPhone|iPod/.test(ua) && !/Safari/.test(ua))
+  const isWebView = window.__WEBVIEW__
 
   /** 从路由名称获取当前面板标识 */
   const currentPanel = computed(() => {
@@ -230,7 +238,8 @@
 
 <style scoped>
   /* 移动端地图按钮 */
-  .mobile-map-btn {
+  .mobile-map-btn,
+  .mobile-setting-btn {
     position: fixed;
     bottom: calc(12px + env(safe-area-inset-bottom, 0px));
     right: 12px;
@@ -249,6 +258,10 @@
     transition:
       background-color 0.15s,
       color 0.15s;
+  }
+
+  .mobile-setting-btn {
+    bottom: calc(60px + env(safe-area-inset-bottom, 0px));
   }
 
   .mobile-map-btn:hover,

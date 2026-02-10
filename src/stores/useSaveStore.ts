@@ -18,6 +18,7 @@ import { useFishingStore } from './useFishingStore'
 import { useWalletStore } from './useWalletStore'
 import { useQuestStore } from './useQuestStore'
 import { useShopStore } from './useShopStore'
+import { useSettingsStore } from './useSettingsStore'
 
 const SAVE_KEY_PREFIX = 'taoyuanxiang_save_'
 const MAX_SLOTS = 3
@@ -128,6 +129,7 @@ export const useSaveStore = defineStore('save', () => {
       const walletStore = useWalletStore()
       const questStore = useQuestStore()
       const shopStore = useShopStore()
+      const settingsStore = useSettingsStore()
 
       const data = {
         game: gameStore.serialize(),
@@ -146,6 +148,7 @@ export const useSaveStore = defineStore('save', () => {
         wallet: walletStore.serialize(),
         quest: questStore.serialize(),
         shop: shopStore.serialize(),
+        settings: settingsStore.serialize(),
         savedAt: new Date().toISOString()
       }
       localStorage.setItem(`${SAVE_KEY_PREFIX}${slot}`, encrypt(JSON.stringify(data)))
@@ -186,6 +189,7 @@ export const useSaveStore = defineStore('save', () => {
       const walletStore = useWalletStore()
       const questStore = useQuestStore()
       const shopStore = useShopStore()
+      const settingsStore = useSettingsStore()
 
       gameStore.deserialize(data.game)
       playerStore.deserialize(data.player)
@@ -203,6 +207,7 @@ export const useSaveStore = defineStore('save', () => {
       if (data.wallet) walletStore.deserialize(data.wallet)
       if (data.quest) questStore.deserialize(data.quest)
       if (data.shop) shopStore.deserialize(data.shop)
+      if (data.settings) settingsStore.deserialize(data.settings)
       activeSlot.value = slot
       return true
     } catch {

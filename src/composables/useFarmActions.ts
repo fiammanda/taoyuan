@@ -115,7 +115,7 @@ export const handlePlotClick = (plotId: number) => {
       return
     }
     const crop = getCropById(plot.cropId!)
-    const baseCost = crop?.deepWatering ? 2 : 1
+    const baseCost = crop?.deepWatering ? 3 : 2
     const farmingBuff = cookingStore.activeBuff?.type === 'farming' ? cookingStore.activeBuff.value / 100 : 0
     const waterRingFarmReduction = inventoryStore.getRingEffectValue('farming_stamina')
     const waterRingGlobalReduction = inventoryStore.getRingEffectValue('stamina_reduction')
@@ -296,7 +296,7 @@ export const handleBatchWater = () => {
   const batchRingGlobalReduction = inventoryStore.getRingEffectValue('stamina_reduction')
   for (const plot of targets) {
     const crop = getCropById(plot.cropId!)
-    const baseCost = crop?.deepWatering ? 2 : 1
+    const baseCost = crop?.deepWatering ? 3 : 2
     const farmingBuff = cookingStore.activeBuff?.type === 'farming' ? cookingStore.activeBuff.value / 100 : 0
     const cost = Math.max(
       1,
