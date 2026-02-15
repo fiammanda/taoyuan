@@ -1,0 +1,148 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::selection {
+  color: hsl(30 30 100);
+  background: hsl(30 10 30);
+}
+
+html {
+  height: 100%;
+  font-size: 16px;
+  text-size-adjust: none;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  color: hsl(240 20 20);
+  background: hsl(30 30 96);
+  accent-color: hsl(30 60 50);
+  cursor: crosshair;
+  touch-action: manipulation;
+  scroll-behavior: smooth;
+  scrollbar-color: hsl(240 20 20 / .25) transparent;
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+  overscroll-behavior: contain;
+}
+body {
+  padding: 0 2rem 2rem 10rem;
+  font: .875rem/1.5 "Iosevka", "Source Han Sans SC", "Noto Sans SC", monospace;
+}
+a {
+  text-decoration: none;
+  color: hsl(240 20 20);
+}
+svg {
+  width: 1em;
+  height: 1em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+h1 {
+  font: 1.25rem/2 "Zpix", "Source Han Sans SC", "Noto Sans SC", sans-serif;
+  font-weight: normal;
+}
+h2 {
+  margin: 2rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+h3 {
+  margin: 2em 0 1em;
+  font-size: 1em;
+  font-weight: 500;
+}
+h2 + h3 {
+  margin-top: 0;
+}
+h3:is(+ .grid) {
+  margin-bottom: .5em;
+}
+p {
+  margin: .5em 0;
+}
+ul {
+  list-style: none;
+}
+
+.nav {
+  position: fixed;
+  inset: 0 auto 0 0;
+  padding: 2rem;
+  width: max-content;
+  overflow: auto;
+}
+.nav-head {
+  margin: .25em 0 .25em 1.25em;
+  color: hsl(240 10 60);
+}
+.nav-item a {
+  display: inline-flex;
+  gap: .25em;
+  align-items: center;
+}
+.nav-item a span {
+  order: 1;
+}
+
+main {
+  margin: 0 auto;
+  max-width: 50rem;
+  padding: 2rem 0;
+}
+section {
+  padding: 1rem 0;
+}
+
+.grid > li {
+  display: grid;
+  gap: 0 1em;
+  padding: .25em 0;
+  background: hsl(30 30 96);
+  border-bottom: 1px solid hsl(240 10 90);
+  transition: .2s ease-in-out;
+}
+.grid > li:hover {
+  border-color: hsl(240 10 70);
+}
+.grid .th {
+  position: sticky;
+  top: 0;
+  border-color: hsl(240 10 70);
+}
+
+#table-a > li {
+  grid-template-columns: 4em 3em 2em 2em 2em 2em 2em 2em 2em 19em;
+}
+#table-b > li {
+  grid-template-columns: 3em 2em 2em 2em 2em 2em;
+}
+#table-c > li {
+  grid-template-columns: 2em 3em 2em 2em;
+}
+#table-d > li {
+  grid-template-columns: 3em 3em 1fr 10em;
+}
+
+
+@font-face {
+  font-family: "Zpix";
+  src: url("../fonts/zpix.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Iosevka";
+  src: url("../fonts/iosevka.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

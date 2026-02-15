@@ -3,10 +3,10 @@ import { defineStore } from 'pinia'
 import type { InventoryItem, Quality } from '@/types'
 import { getItemById } from '@/data/items'
 
-const INITIAL_CAPACITY = 30
-const MAX_CAPACITY = 60
+const INITIAL_CAPACITY = 100 //30
+const MAX_CAPACITY = 500 //60
 const MAX_STACK = 99
-const EXPAND_STEP = 10
+const EXPAND_STEP = 8 //10
 const UNLOCK_COST = 50000
 
 export const useWarehouseStore = defineStore('warehouse', () => {

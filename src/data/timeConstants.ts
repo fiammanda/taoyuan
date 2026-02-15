@@ -61,10 +61,10 @@ export const formatTime = (hour: number): string => {
 // === 行动时间开销 (单位：小时) ===
 export const ACTION_TIME_COSTS = {
   // 农场
-  till: 0.17,
-  plant: 0.17,
+  till: 0.08, //0.17,
+  plant: 0.08, //0.17,
   water: 0.08,
-  harvest: 0.17,
+  harvest: 0.08, //0.17,
   // 钓鱼
   fishStart: 1,
   // 挖矿
@@ -73,43 +73,43 @@ export const ACTION_TIME_COSTS = {
   nextFloor: 0.33,
   revealTile: 0.1,
   // 采集
-  forage: 1,
-  chopTree: 1,
+  forage: 0.5,//1,
+  chopTree: 0.5,//1,
   // 烹饪
   cook: 0.5,
   eat: 0,
   // 社交
-  talk: 0.17,
+  talk: 0.08, //0.17,
   gift: 0,
   // 加工坊
-  craftMachine: 0.17,
+  craftMachine: 0.08, //0.17,
   startProcessing: 0,
   collectProduct: 0,
-  craftSprinkler: 0.17,
-  craftFertilizer: 0.17,
-  craftJadeRing: 0.17,
+  craftSprinkler: 0.08, //0.17,
+  craftFertilizer: 0.08, //0.17,
+  craftJadeRing: 0.08, //0.17,
   // 畜棚
   feedAnimals: 0.5,
-  petAnimal: 0.17,
+  petAnimal: 0.08, //0.17,
   graze: 1,
   // 农舍
-  collectCave: 0.17,
-  aging: 0.17,
+  collectCave: 0.08, //0.17,
+  aging: 0.08, //0.17,
   plantTree: 0.5,
   // 工具升级
   toolUpgrade: 1,
   // 批量农场操作
-  batchWater: 0.17,
+  batchWater: 0.08, //0.17,
   batchTill: 0.25,
-  batchHarvest: 0.5,
+  batchHarvest: 0.25, //0.17,
   // 淘金
-  pan: 1,
+  pan: 0.5,//1,
   // UI
   checkInventory: 0,
   checkSkills: 0,
   checkAchievement: 0,
   // 育种
-  breeding: 0.17
+  breeding: 0.08 //0.17
 } as const
 
 // === 地点分组映射 ===

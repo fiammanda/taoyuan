@@ -10,10 +10,10 @@ import { getShoeById } from '@/data/shoes'
 import { usePlayerStore } from './usePlayerStore'
 import { useAchievementStore } from './useAchievementStore'
 
-const INITIAL_CAPACITY = 24
-const MAX_CAPACITY = 60
+const INITIAL_CAPACITY = 50 //24
+const MAX_CAPACITY = 500 //60
 const MAX_STACK = 99
-const TEMP_CAPACITY = 10
+const TEMP_CAPACITY = 50 //10
 
 export const useInventoryStore = defineStore('inventory', () => {
   const items = ref<InventoryItem[]>([])

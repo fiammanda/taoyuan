@@ -237,10 +237,10 @@ export const useNpcStore = defineStore('npc', () => {
     const npcDef = getNpcById(npcId)
     if (!npcDef?.marriageable) return { success: false, message: '无法与此人约会。' }
 
-    const playerStore = usePlayerStore()
-    if (npcDef.gender === playerStore.gender) {
-      return { success: false, message: '只能向异性赠帕。' }
-    }
+    //const playerStore = usePlayerStore()
+    //if (npcDef.gender === playerStore.gender) {
+    //  return { success: false, message: '只能向异性赠帕。' }
+    //}
 
     if (state.dating) return { success: false, message: '你们已经在约会了。' }
     if (state.married) return { success: false, message: '你们已经结婚了。' }
@@ -266,10 +266,10 @@ export const useNpcStore = defineStore('npc', () => {
     if (!npcDef?.marriageable) return { success: false, message: '这个人无法求婚。' }
 
     // 只允许异性求婚
-    const playerStore = usePlayerStore()
-    if (npcDef.gender === playerStore.gender) {
-      return { success: false, message: '只能向异性求婚。' }
-    }
+    //const playerStore = usePlayerStore()
+    //if (npcDef.gender === playerStore.gender) {
+    //  return { success: false, message: '只能向异性求婚。' }
+    //}
 
     // 检查是否已有配偶
     const alreadyMarried = npcStates.value.some(s => s.married)
@@ -313,10 +313,10 @@ export const useNpcStore = defineStore('npc', () => {
     const npcDef = getNpcById(npcId)
     if (!npcDef?.marriageable) return { success: false, message: '无法与此人结为知己。' }
 
-    const playerStore = usePlayerStore()
-    if (npcDef.gender !== playerStore.gender) {
-      return { success: false, message: '只能与同性结为知己。' }
-    }
+    //const playerStore = usePlayerStore()
+    //if (npcDef.gender !== playerStore.gender) {
+    //  return { success: false, message: '只能与同性结为知己。' }
+    //}
 
     if (state.zhiji) return { success: false, message: '你们已经是知己了。' }
     if (state.dating || state.married) return { success: false, message: '无法与恋人或伴侣结为知己。' }
@@ -330,8 +330,8 @@ export const useNpcStore = defineStore('npc', () => {
 
     state.zhiji = true
     state.friendship += 160
-    const label = playerStore.gender === 'male' ? '蓝颜知己' : '红颜知己'
-    return { success: true, message: `${npcDef.name}郑重地接过了玉佩……你们结为了${label}！` }
+    //const label = playerStore.gender === 'male' ? '蓝颜知己' : '红颜知己'
+    return { success: true, message: `${npcDef.name}郑重地接过了玉佩……你们结为了知己！` }
   }
 
   /** 断绝知己之缘 */

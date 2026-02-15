@@ -1,7 +1,6 @@
 {
   "name": "taoyuan",
   "title": "桃源乡",
-  "qq": "920930589",
   "private": true,
   "version": "1.7.0",
   "type": "module",
@@ -13,6 +12,7 @@
     "lint": "eslint src --ext .ts,.vue",
     "type-check": "vue-tsc -b",
     "check": "pnpm run type-check && pnpm run lint",
+    "export:data": "npx esbuild src/help.ts --bundle --outfile=public/help/data.js --format=iife --charset=utf8 --alias:@=./src",
     "build:electron": "vue-tsc -b && vite build && esbuild electron/main.js --bundle --platform=node --format=esm --outfile=dist-electron/main.js --external:electron && esbuild electron/preload.js --bundle --platform=node --format=cjs --outfile=dist-electron/preload.js --external:electron && electron-builder"
   },
   "description": "一款文字版田园模拟经营游戏，灵感来自星露谷物语",

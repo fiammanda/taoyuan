@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Save Editor</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<style>
+body{font-family:monospace;background:#111;color:#0f0;padding:20px}
+textarea{width:100%;height:200px;background:#000;color:#0f0;margin:10px 0}
+button{padding:10px 20px;margin-right:10px}
+</style>
+</head>
+
+<body>
+<h2>AES Save Editor</h2>
+
+存档密文：
+<textarea id="cipher"></textarea>
+
+<button onclick="decrypt()">解密 ↓</button>
+<button onclick="encrypt()">重新加密 ↑</button>
+
+明文(JSON)：
+<textarea id="plain"></textarea>
+
+<script>
+const KEY = "taoyuanxiang_2024_secret";
+
+function decrypt(){
+  const data = document.getElementById("cipher").value.trim();
+  const bytes = CryptoJS.AES.decrypt(data, KEY);
+  const text = bytes.toString(CryptoJS.enc.Utf8);
+  document.getElementById("plain").value = text;
+}
+
+function encrypt(){
+  const text = document.getElementById("plain").value;
+  const cipher = CryptoJS.AES.encrypt(text, KEY).toString();
+  document.getElementById("cipher").value = cipher;
+}
+</script>
+
+</body>
+</html>
