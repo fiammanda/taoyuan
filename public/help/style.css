@@ -29,29 +29,30 @@ html {
   overscroll-behavior: contain;
 }
 body {
-  padding: 0 2rem 2rem 10rem;
   font: .875rem/1.5 "Iosevka", "Source Han Sans SC", "Noto Sans SC", monospace;
-  font-feature-settings: "cv03" 1, "cv07" 5, "cv10" 6;
+  font-feature-settings: "cv03" 1, "cv07" 5, "cv10" 1;
 }
 a {
   text-decoration: none;
-  color: hsl(240 20 25 / .7);
+  color: hsl(30 30 50);
+  cursor: pointer;
+  transition: .2s ease-in-out;
 }
 svg {
-  width: 1em;
-  height: 1em;
   fill: none;
   stroke: currentColor;
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
+  width: 1.125rem;
+  height: 1.125rem;
 }
 h1 {
   font: 1.25rem/2 "Zpix", "Source Han Sans SC", "Noto Sans SC", sans-serif;
   font-weight: normal;
 }
 h2 {
-  margin: 2rem 0 1rem;
+  margin: 1.125rem 0 1rem;
   font-size: 1rem;
   font-weight: 500;
 }
@@ -70,20 +71,97 @@ ul {
   list-style: none;
 }
 
+div[role] {
+  background: url("../logo.png") center / contain;
+}
+
 .nav {
   position: fixed;
-  inset: 0 auto 0 0;
-  padding: 2rem;
-  width: max-content;
-  overflow: auto;
+  inset: auto 2rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  font: .75rem/1 "Zpix", "Source Han Sans SC", "Noto Sans SC", sans-serif;
+  backdrop-filter: blur(.5rem);
+  z-index: 1;
+}
+.nav div {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: .3125rem;
+  border: 1px solid hsl(30 30 90);
+  overflow: hidden;
+  will-change: transform;
+}
+.nav div a {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.125rem;
+  line-height: 1.25;
+}
+.nav div a:hover {
+  background: hsl(30 30 90 / .5);
+}
+.nav div svg {
+  stroke-width: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+.nav div span {
+  display: flex;
+  align-items: center;
+  padding: .75rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  text-align: center;
+}
+.nav div:first-child a {
+  left: 0;
+  width: 7rem;
+  height: 3.5rem;
+}
+.nav div:first-child a:hover {
+  left: -3.5rem;
+}
+.nav div:last-child a {
+  flex-direction: column;
+  top: 0;
+  width: 3.5rem;
+  height: 7rem;
+}
+.nav div:last-child a:hover {
+  top: -3.5rem;
+}
+.nav div:last-child svg {
+  transform: rotate(90deg);
+}
+.nav ul {
+  display: flex;
+  padding: .25rem;
+  background: hsl(30 30 90 / .5);
+  border-radius: .3125rem;
 }
 .nav-head {
-  margin: .25em 0 .25em 1.25em;
+  margin: .25rem .5rem;
+  width: 1px;
+  background: hsl(30 30 50 / .25);
+}
+.nav-head:first-child {
+  display: none;
 }
 .nav-item a {
-  display: inline-flex;
-  gap: .25em;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: space-around;
+  padding: .25rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: .25rem;
+}
+.nav-item a:hover {
+  background: hsl(30 30 60 / .25);
 }
 .nav-item a span {
   order: 1;
@@ -92,10 +170,13 @@ ul {
 main {
   margin: 0 auto;
   max-width: 50rem;
-  padding: 2rem 0;
+  padding: 5rem 0;
 }
 section {
   padding: 1rem 0;
+}
+section a:hover {
+  color: hsl(240 10 25);
 }
 
 .color-gray {
@@ -110,7 +191,8 @@ section {
 
 .grid > li {
   display: grid;
-  justify-content: space-between;;
+  grid-template-columns: repeat(auto-fit, minmax(0, max-content));
+  justify-content: space-between;
   gap: 0 1em;
   padding: .25em 0;
   border-bottom: 1px solid hsl(240 20 25 / .1);
@@ -138,6 +220,15 @@ section {
 #table-农舍 > li {
   grid-template-columns: 3em 3em 8em 15em;
 }
+#加工坊 li {
+  grid-template-columns: 5em 2em 16em 23em 2em;
+}
+#table-加工机器 > li {
+  grid-template-columns: 5em 2em 11em 16em;
+}
+#table-加工区 > li {
+  grid-template-columns: 6em 2em 10em 10em 2em;
+}
 #table-桃源村 > li {
   grid-template-columns: 3em 3em 1fr 9.5em;
 }
@@ -155,6 +246,12 @@ section {
 }
 #table-博物馆 > li {
   grid-template-columns: 5em 3em 10em;
+}
+#table-竹林 > li {
+  grid-template-columns: 4em 4em 2em 2em;
+}
+#table-清溪 > li {
+  grid-template-columns: 4em 4em 4em 2em 18em 2em 2em 2em 2em;
 }
 
 
@@ -174,5 +271,5 @@ section {
 }
 
 :root {
-  --background: hsl(40 20 96);
+  --background: hsl(30 20 96);
 }

@@ -12,7 +12,7 @@
 
       <div v-for="cat in craftCategories" :key="cat.label" class="mb-3 last:mb-0">
         <p class="text-xs text-muted mb-1">{{ cat.label }}</p>
-        <div class="flex flex-col space-y-1 max-h-60 overflow-y-auto">
+        <div class="flex flex-col space-y-1 overflow-y-auto">
           <div
             v-for="item in cat.items"
             :key="item.id"

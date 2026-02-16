@@ -1,8 +1,11 @@
 const table = Object.fromEntries(
   [
-    "田庄", "果树", "野树", "农舍", "桃源村", 
-    "商圈", "万物铺", "铁匠铺", "镖局", "渔具铺", "药铺", "绸缎庄",
-    "工坊", "灶台", "博物馆"
+    "田庄", "果树", "野树", "农舍", 
+    "加工机器", "农场设施", "渔具", "其它", "加工区", 
+    "桃源村", "商圈", 
+    "万物铺", "铁匠铺", "镖局", "渔具铺", "药铺", "绸缎庄", 
+    "工坊", "灶台", "博物馆", 
+    "竹林", "清溪"
   ].map((i) => [i, document.createDocumentFragment()])
 );
 
@@ -24,10 +27,20 @@ const term = new Map([
   ["snowy", "雪"],
   ["windy", "风"],
   ["green_rain", "绿"],
+  ["easy", "简单"],
+  ["normal", "普通"],
+  ["hard", "困难"],
+  ["legendary", "传奇"],
   ["stone", "石头"]
 ]);
 
 DATA.ITEMS.forEach(({id, name}) => {
+  term.set(id, name);
+});
+DATA.PROCESSING_MACHINES.forEach(({id, name}) => {
+  term.set(id, name);
+});
+DATA.FISHING_LOCATIONS.forEach(({id, name}) => {
   term.set(id, name);
 });
 DATA.MUSEUM_CATEGORIES.forEach(({key, label}) => {
@@ -103,11 +116,11 @@ DATA.SHOP_ITEMS = {
     ...DATA.BOMBS.filter(b => b.shopPrice !== null)
   ],
   "渔具铺": [
-    { name: "鱼饵", price: ``, description: `<a href="">见上</a>` },
-    { name: "浮漂", price: ``, description: `<a href="">见上</a>` }
+    { name: "鱼饵", price: ``, description: `<a href="#table-渔具">见上</a>` },
+    { name: "浮漂", price: ``, description: `<a href="#table-渔具">见上</a>` }
   ],
   "药铺": [
-    { name: "肥料", price: ``, description: `<a href="">见上</a>` },
+    { name: "肥料", price: ``, description: `<a href="#table-农场设施">见上</a>` },
     { itemId: "herb", name: "草药", price: 50, description: "山间野生的草药" },
     { itemId: "ginseng", name: "人参", price: 600, description: "极其珍贵的野生人参" },
     { itemId: "animal_medicine", name: "兽药", price: 150, description: "治疗生病的牲畜" },
@@ -136,7 +149,7 @@ DATA.CROPS.forEach(({ name, season, growthDays, sellPrice, seedPrice, descriptio
         <span>${name}</span>
         <span>${season.map((s) => term.get(s)).join("")}</span>
         <span class="cell-r">${growthDays}</span>
-        <span class="cell-r">${seedPrice || ""}</span>
+        <span class="cell-r">${seedPrice || "-"}</span>
         <span class="cell-r">${sellPrice}</span>
         <span class="cell-c">${giantCropEligible ? "√" : ""}</span>
         <span class="cell-c">${regrowth ? "√" : ""}</span>
@@ -181,9 +194,89 @@ DATA.FARMHOUSE_UPGRADES.forEach(({ name, description, cost, materialCost }) => {
     Object.assign(document.createElement("li"), {
       innerHTML: `
         <span>${name}</span>
-        <span>${cost}</span>
+        <span class="cell-r">${cost}</span>
         <span>${materialCost.map(({itemId, quantity}) => `${term.get(itemId)}×${quantity}`).join(" ")}</span>
         <span>${description.replace("的", "").replace("。", "")}</span>
+      `
+    })
+  );
+});
+
+DATA.PROCESSING_MACHINES.forEach(({ name, description, craftCost, craftMoney }) => {
+  table.加工机器.append(
+    Object.assign(document.createElement("li"), {
+      innerHTML: `
+        <span>${name}</span>
+        <span class="cell-r">${craftMoney}</span>
+        <span>${craftCost.map(({itemId, quantity}) => `${term.get(itemId)}×${quantity}`).join(" ")}</span>
+        <span>${description.replace("。", "")}</span>
+      `
+    })
+  );
+});
+
+[
+  ...DATA.SPRINKLERS, ...DATA.FERTILIZERS, 
+  DATA.TAPPER, DATA.LIGHTNING_ROD, DATA.SCARECROW
+].forEach(({ name, description, craftCost, craftMoney, shopPrice }) => {
+  table.农场设施.append(
+    Object.assign(document.createElement("li"), {
+      innerHTML: `
+        <span>${name}</span>
+        <span class="cell-r">${craftMoney}</span>
+        <span>${craftCost.map(({itemId, quantity}) => `${term.get(itemId)}×${quantity}`).join(" ")}</span>
+        <span>${description.replace("。", "")}</span>
+        <span class="cell-r">${shopPrice || "-"}</span>
+      `
+    })
+  );
+});
+
+[...DATA.BAITS, ...DATA.TACKLES, DATA.CRAB_POT_CRAFT].forEach(({ name, description, craftCost, craftMoney, shopPrice }) => {
+  table.渔具.append(
+    Object.assign(document.createElement("li"), {
+      innerHTML: `
+        <span>${name}</span>
+        <span class="cell-r">${craftMoney}</span>
+        <span>${craftCost.map(({itemId, quantity}) => `${term.get(itemId)}×${quantity}`).join(" ")}</span>
+        <span>${description.replace("。", "")}</span>
+        <span class="cell-r">${shopPrice || "-"}</span>
+      `
+    })
+  );
+});
+
+[...DATA.BOMBS, { //views/game/ProcessingView.vue
+  name: "翡翠戒指",
+  description: "用翡翠和金矿制成的戒指，可以用来求婚",
+  craftCost: [
+    { itemId: "jade", quantity: 1 },
+    { itemId: "gold_ore", quantity: 2 }
+  ],
+  craftMoney: 500
+}].forEach(({ name, description, craftCost, craftMoney, shopPrice }) => {
+  table.其它.append(
+    Object.assign(document.createElement("li"), {
+      innerHTML: `
+        <span>${name}</span>
+        <span class="cell-r">${craftMoney}</span>
+        <span>${craftCost.map(({itemId, quantity}) => `${term.get(itemId)}×${quantity}`).join(" ")}</span>
+        <span>${description.replace("。", "")}</span>
+        <span class="cell-r">${shopPrice || "-"}</span>
+      `
+    })
+  );
+});
+
+DATA.PROCESSING_RECIPES.forEach(({ machineType, name, inputItemId, inputQuantity, outputQuantity, processingDays }) => {
+  table.加工区.append(
+    Object.assign(document.createElement("li"), {
+      innerHTML: `
+        <span>${name}</span>
+        <span class="cell-r">${outputQuantity}</span>
+        <span>${inputItemId ? `${term.get(inputItemId)}×${inputQuantity}` : ``}</span>
+        <span>${term.get(machineType)}</span>
+        <span class="cell-r">${processingDays}</span>
       `
     })
   );
@@ -303,7 +396,36 @@ DATA.MUSEUM_ITEMS.forEach(({name, category, sourceHint}) => {
   );
 });
 
+DATA.FORAGE_ITEMS.forEach(({ name, season, chance, expReward }) => {
+  table.竹林.append(
+    Object.assign(document.createElement("li"), {
+      innerHTML: `
+        <span>${name}</span>
+        <span>${season.map((s) => term.get(s)).join("")}</span>
+        <span class="cell-r">${chance * 100}%</span>
+        <span class="cell-r">${expReward}</span>
+      `
+    })
+  );
+});
 
+DATA.FISH.forEach(({ name, season, weather, difficulty, sellPrice, description, location, miniGameSpeed, miniGameDirChange }) => {
+  table.清溪.append(
+    Object.assign(document.createElement("li"), {
+      innerHTML: `
+        <span>${name}</span>
+        <span>${term.get(location)}</span>
+        <span>${season.map((s) => term.get(s)).join("")}</span>
+        <span>${weather.map((w) => term.get(w)).join("")}</span>
+        <span>${description.replace("。", "")}</span>
+        <span class="cell-r">${sellPrice}</span>
+        <span class="cell-r">${miniGameSpeed}</span>
+        <span class="cell-r">${miniGameDirChange}</span>
+        <span>${term.get(difficulty)}</span>
+      `
+    })
+  );
+});
 
 
 
@@ -316,6 +438,9 @@ Object.entries(table).forEach(([i, t]) => {
 
 
 
+document.querySelector(`a:not([href])`).addEventListener("click", () =>
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  );
 document.querySelectorAll(`a[href^="#"]`).forEach((a) => {
   a.addEventListener("click", e => {
     const id = a.getAttribute("href").slice(1);
@@ -328,4 +453,4 @@ document.querySelectorAll(`a[href^="#"]`).forEach((a) => {
     })
     history.replaceState(null, "", location.pathname + location.search)
   })
-})
+});

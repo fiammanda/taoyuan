@@ -10,8 +10,14 @@
 
 <body>
   <nav class="nav">
+    <div>
+      <a href="/" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M20 11v2H8v2H6v-2H4v-2h2V9h2v2zM10 7H8v2h2zm0 0h2V5h-2zm0 10H8v-2h2zm0 0h2v2h-2z" /></svg>
+        <span>前往游戏</span>
+      </a>
+    </div>
     <ul>
-      <li class="nav-head">田庄</li>
+      <li class="nav-head" data-text="田庄"></li>
       <li class="nav-item">
         <a href="#农场">
           <span>农场</span>
@@ -37,12 +43,18 @@
         </a>
       </li>
       <li class="nav-item">
+        <a href="#鱼塘">
+          <span>鱼塘</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path></svg>
+        </a>
+      </li>
+      <li class="nav-item">
         <a href="#加工坊">
           <span>加工坊</span>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 10.27 7 3.34" /><path d="m11 13.73-4 6.93" /><path d="M12 22v-2" /><path d="M12 2v2" /><path d="M14 12h8" /><path d="m17 20.66-1-1.73" /><path d="m17 3.34-1 1.73" /><path d="M2 12h2" /><path d="m20.66 17-1.73-1" /><path d="m20.66 7-1.73 1" /><path d="m3.34 17 1.73-1" /><path d="m3.34 7 1.73 1" /><circle cx="12" cy="12" r="2"></circle><circle cx="12" cy="12" r="8"></circle></svg>
         </a>
       </li>
-      <li class="nav-head">村落</li>
+      <li class="nav-head" data-text="村落"></li>
       <li class="nav-item">
         <a href="#桃源村">
           <span>桃源村</span>
@@ -79,7 +91,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 18v-7" /><path d="M11.12 2.198a2 2 0 0 1 1.76.006l7.866 3.847c.476.233.31.949-.22.949H3.474c-.53 0-.695-.716-.22-.949z" /><path d="M14 18v-7" /><path d="M18 18v-7" /><path d="M3 22h18" /><path d="M6 18v-7" /></svg>
         </a>
       </li>
-      <li class="nav-head">野外</li>
+      <li class="nav-head" data-text="野外"></li>
       <li class="nav-item">
         <a href="#竹林">
           <span>竹林</span>
@@ -104,7 +116,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 21 14 3" /><path d="M20.5 21 10 3" /><path d="M15.5 21 12 15l-3.5 6" /><path d="M2 21h20" /></svg>
         </a>
       </li>
-      <li class="nav-head">随身</li>
+      <li class="nav-head" data-text="随身"></li>
       <li class="nav-item">
         <a href="#技能">
           <span>技能</span>
@@ -118,6 +130,12 @@
         </a>
       </li>
     </ul>
+    <div>
+      <a>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M20 11v2H8v2H6v-2H4v-2h2V9h2v2zM10 7H8v2h2zm0 0h2V5h-2zm0 10H8v-2h2zm0 0h2v2h-2z" /></svg>
+        <span>返回顶部</span>
+      </a>
+    </div>
   </nav>
 
   <main>
@@ -133,9 +151,9 @@
           <span>季节</span>
           <span>生长</span>
           <span>种价</span>
-          <span>卖价</span>
-          <span>巨化</span>
-          <span>多收</span>
+          <span>售价</span>
+          <span>巨型</span>
+          <span>再生</span>
           <span>时长</span>
           <span>次数</span>
           <span>说明</span>
@@ -186,7 +204,7 @@
       <ul id="table-农舍" class="grid">
         <li class="th">
           <span>等级</span>
-          <span>价格</span>
+          <span class="cell-r">成本</span>
           <span>材料</span>
           <span>说明</span>
         </li>
@@ -213,8 +231,66 @@
       <h2>育种</h2>
     </section>
 
+    <section id="鱼塘">
+      <h2>鱼塘</h2>
+    </section>
+
     <section id="加工坊">
       <h2>加工坊</h2>
+
+      <h3>加工机器</h3>
+      <ul id="table-加工机器" class="grid">
+        <li class="th">
+          <span>名称</span>
+          <span class="cell-r">成本</span>
+          <span>材料</span>
+          <span>说明</span>
+        </li>
+      </ul>
+
+      <h3>农场设施</h3>
+      <ul id="table-农场设施" class="grid">
+        <li class="th">
+          <span>名称</span>
+          <span class="cell-r">成本</span>
+          <span>材料</span>
+          <span>说明</span>
+          <span class="cell-r">进价</span>
+        </li>
+      </ul>
+
+      <h3>渔具</h3>
+      <ul id="table-渔具" class="grid">
+        <li class="th">
+          <span>名称</span>
+          <span class="cell-r">成本</span>
+          <span>材料</span>
+          <span>说明</span>
+          <span class="cell-r">进价</span>
+        </li>
+      </ul>
+
+      <h3>其它</h3>
+      <ul id="table-其它" class="grid">
+        <li class="th">
+          <span>名称</span>
+          <span class="cell-r">成本</span>
+          <span>材料</span>
+          <span>说明</span>
+          <span class="cell-r">进价</span>
+        </li>
+      </ul>
+
+      <h3>加工区</h3>
+      <ul id="table-加工区" class="grid">
+        <li class="th">
+          <span>名称</span>
+          <span class="cell-r">产量</span>
+          <span>材料</span>
+          <span>机器</span>
+          <span class="cell-r">工期</span>
+        </li>
+      </ul>
     </section>
 
     <section id="桃源村">
@@ -234,7 +310,7 @@
       <h2>商圈</h2>
       <ul id="table-商圈" class="grid">
         <li class="th">
-          <span>价格系数</span>
+          <span>进价系数</span>
           <span class="cell-r">春</span>
           <span class="cell-r">夏</span>
           <span class="cell-r">秋</span>
@@ -250,7 +326,7 @@
         <li class="th">
           <span>名称</span>
           <span>等级</span>
-          <span class="cell-r">价格</span>
+          <span class="cell-r">进价</span>
           <span>材料</span>
         </li>
       </ul>
@@ -286,12 +362,32 @@
 
     <section id="竹林">
       <h2>竹林</h2>
-      <p>雨：+10% 风：+15%</p>
+      <p>天气影响：雨+15% 雷-20% 雪-20% 风+10% 绿雨+50%</p>
+      <ul id="table-竹林" class="grid">
+        <li class="th">
+          <span>名称</span>
+          <span>季节</span>
+          <span class="cell-r">概率</span>
+          <span class="cell-r">经验</span>
+        </li>
+      </ul>
     </section>
 
     <section id="清溪">
       <h2>清溪</h2>
-
+      <ul id="table-清溪" class="grid">
+        <li class="th">
+          <span>名称</span>
+          <span>地点</span>
+          <span>季节</span>
+          <span>天气</span>
+          <span>描述</span>
+          <span class="cell-r">售价</span>
+          <span class="cell-r">鱼速</span>
+          <span class="cell-r">挣扎</span>
+          <span>难度</span>
+        </li>
+      </ul>
     </section>
 
     <section id="矿洞">
@@ -303,14 +399,6 @@
       <h2>瀚海</h2>
 
     </section>
-
-    <section id="灶台">
-      <h2>灶台</h2>
-
-    </section>
-
-    <section id="工坊">
-      <h2>工坊</h2>
 
     </section>
 
