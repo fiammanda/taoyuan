@@ -21,7 +21,7 @@ export const WEEKDAY_NAMES: Record<Weekday, string> = {
 
 /** 第1天=周一, 第7天=周日, 第8天=周一 ... */
 export const getWeekday = (day: number): Weekday => {
-  return WEEKDAYS[(day - 1) % 7]!
+  return WEEKDAYS[(day - 1) % 7] as Weekday
 }
 
 // === 时段判断 ===
@@ -66,15 +66,15 @@ export const ACTION_TIME_COSTS = {
   water: 0.08,
   harvest: 0.17,
   // 钓鱼
-  fishStart: 1,
+  fishStart: 0.5, //1,
   // 挖矿
-  mineOre: 0.5,
-  combat: 0.5,
-  nextFloor: 0.33,
-  revealTile: 0.1,
+  mineOre: 0.25, //0.5,
+  combat: 0.25, //0.5,
+  nextFloor: 0.25, //0.33,
+  revealTile: 0, //0.1,
   // 采集
-  forage: 1,
-  chopTree: 1,
+  forage: 0.5, //1,
+  chopTree: 0.5, //1,
   // 烹饪
   cook: 0.5,
   eat: 0,
@@ -89,13 +89,13 @@ export const ACTION_TIME_COSTS = {
   craftFertilizer: 0.17,
   craftJadeRing: 0.17,
   // 畜棚
-  feedAnimals: 0.5,
-  petAnimal: 0.17,
+  feedAnimals: 0.25, //0.5,
+  petAnimal: 0.08, //0.17,
   graze: 1,
   // 农舍
-  collectCave: 0.17,
-  aging: 0.17,
-  plantTree: 0.5,
+  collectCave: 0.08, //0.17,
+  aging: 0.08, //0.17,
+  plantTree: 0.25, //0.5,
   // 工具升级
   toolUpgrade: 1,
   // 批量农场操作
@@ -103,13 +103,13 @@ export const ACTION_TIME_COSTS = {
   batchTill: 0.25,
   batchHarvest: 0.5,
   // 淘金
-  pan: 1,
+  pan: 0.5, //1,
   // UI
   checkInventory: 0,
   checkSkills: 0,
   checkAchievement: 0,
   // 育种
-  breeding: 0.17,
+  breeding: 0.08, //0.17,
   // 鱼塘
   feedFish: 0.5,
   cleanPond: 0.5,
@@ -142,26 +142,26 @@ export const TAB_TO_LOCATION_GROUP: Record<string, LocationGroup | null> = {
 
 // === 移动时间 ===
 export const TRAVEL_TIME: Record<string, number> = {
-  'farm->village_area': 0.5,
-  'farm->nature': 0.5,
-  'farm->mine': 1,
-  'village_area->farm': 0.5,
-  'village_area->nature': 0.5,
-  'village_area->mine': 1,
-  'nature->farm': 0.5,
-  'nature->village_area': 0.5,
-  'nature->mine': 1,
-  'mine->farm': 1,
-  'mine->village_area': 1,
-  'mine->nature': 1,
+  'farm->village_area': 0.25, //0.5,
+  'farm->nature': 0.25, //0.5,
+  'farm->mine': 0.75, //1,
+  'village_area->farm': 0.25, //0.5,
+  'village_area->nature': 0.25, //0.5,
+  'village_area->mine': 0.75, //1,
+  'nature->farm': 0.25, //0.5,
+  'nature->village_area': 0.25, //0.5,
+  'nature->mine': 0.5, //1,
+  'mine->farm': 0.75, //1,
+  'mine->village_area': 0.75, //1,
+  'mine->nature': 0.5, //1,
   'farm->hanhai': 2,
   'hanhai->farm': 2,
   'village_area->hanhai': 2,
   'hanhai->village_area': 2,
-  'nature->hanhai': 2,
-  'hanhai->nature': 2,
-  'mine->hanhai': 1.5,
-  'hanhai->mine': 1.5
+  'nature->hanhai': 1.75, //2,
+  'hanhai->nature': 1.75, //2,
+  'mine->hanhai': 1.25, //1.5,
+  'hanhai->mine': 1.25, //1.5
 }
 
 const LOCATION_GROUP_NAMES: Record<LocationGroup, string> = {

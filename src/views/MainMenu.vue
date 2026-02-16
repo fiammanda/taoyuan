@@ -78,28 +78,28 @@
           <button class="absolute top-2 right-2 text-muted hover:text-text" @click="showAbout = false">
             <X :size="14" />
           </button>
-          <h2 class="text-accent text-lg mb-3">关于{{ pkg.title }}</h2>
-          <p class="text-xs text-muted mb-2">游戏灵感来自 Stardew Valley</p>
-          <div class="flex flex-col space-y-3 text-sm">
+          <h2 class="text-accent text-lg">关于{{ pkg.title }}</h2>
+          <p class="text-xs text-muted mb-4">一款文字田园物语，灵感来自 Stardew Valley</p>
+          <div class="flex flex-col gap-3 text-sm">
             <div class="border border-accent/20 rounded-xs p-3">
               <p class="text-muted text-xs mb-1">当前版本</p>
-              <p class="text-accent">v{{ pkg.version }}</p>
+              <p class="text-accent">V{{ pkg.version }}-modified</p>
             </div>
             <div class="border border-accent/20 rounded-xs p-3">
-              <p class="text-muted text-xs mb-1">QQ 交流群</p>
-              <p class="text-accent">{{ pkg.qq }}</p>
+              <p class="text-muted text-xs mb-1">修改内容</p>
+              <p class="text-accent">增加背包仓库空间</p>
+              <p class="text-accent">降低部分行动时长</p>
+              <p class="text-accent">丰富性向选择</p>
             </div>
             <div class="border border-accent/20 rounded-xs p-3">
-              <p class="text-muted text-xs mb-1">GitHub 仓库</p>
-              <a :href="`https://github.com/setube/${pkg.name}`" target="_blank" class="text-accent underline break-all">
-                https://github.com/setube/{{ pkg.name }}
-              </a>
-            </div>
-            <div class="border border-accent/20 rounded-xs p-3">
-              <p class="text-muted text-xs mb-1">TapTap</p>
-              <a :href="`https://www.taptap.cn/app/${pkg.tapid}`" target="_blank" class="text-accent underline break-all">
-                https://www.taptap.cn/app/{{ pkg.tapid }}
-              </a>
+              <p class="text-muted text-xs mb-1">相关链接</p>
+              <a href="https://taoyuan.wenzi.games" target="_blank" rel="noopener" class="text-accent break-all">原作地址</a>
+              |
+              <a :href="`https://github.com/fiammanda/${pkg.name}`" target="_blank" rel="noopener" class="text-accent break-all">本作仓库</a>
+              |
+              <a href="/help/" target="_blank" rel="noopener" class="text-accent break-all">攻略指南</a>
+              |
+              <a href="/save/" target="_blank" rel="noopener" class="text-accent break-all">存档修改</a>
             </div>
           </div>
         </div>

@@ -171,7 +171,7 @@
 
           <!-- 恋爱/求婚面板 -->
           <div
-            v-if="selectedNpcDef?.marriageable && !selectedNpcState?.married && selectedNpcDef.gender !== playerStore.gender"
+            v-if="selectedNpcDef?.marriageable && !selectedNpcState?.married/* && selectedNpcDef.gender !== playerStore.gender*/"
             class="border border-danger/20 rounded-xs p-2 mb-3"
           >
             <p class="text-xs text-danger/80 mb-1.5 flex items-center space-x-1">
@@ -235,10 +235,10 @@
           <!-- 知己面板（同性可婚NPC，未约会/未结婚） -->
           <div
             v-if="
+              /*selectedNpcDef.gender === playerStore.gender &&*/
               selectedNpcDef?.marriageable &&
               !selectedNpcState?.married &&
-              !selectedNpcState?.dating &&
-              selectedNpcDef.gender === playerStore.gender
+              !selectedNpcState?.dating
             "
             class="border border-accent/20 rounded-xs p-2 mb-3"
           >
@@ -404,6 +404,7 @@
   const inventoryStore = useInventoryStore()
   const cookingStore = useCookingStore()
   const gameStore = useGameStore()
+  // @ts-ignore
   const playerStore = usePlayerStore()
 
   const selectedNpc = ref<string | null>(null)
@@ -484,7 +485,7 @@
   /** 是否可以赠帕开始约会 */
   const canStartDating = computed(() => {
     if (!selectedNpcDef.value?.marriageable) return false
-    if (selectedNpcDef.value.gender === playerStore.gender) return false
+    //if (selectedNpcDef.value.gender === playerStore.gender) return false
     if (selectedNpcState.value?.dating) return false
     if (selectedNpcState.value?.married) return false
     if (npcStore.npcStates.some(s => s.married)) return false
@@ -496,7 +497,7 @@
   /** 是否可以求婚 */
   const canPropose = computed(() => {
     if (!selectedNpcDef.value?.marriageable) return false
-    if (selectedNpcDef.value.gender === playerStore.gender) return false
+    //if (selectedNpcDef.value.gender === playerStore.gender) return false
     if (!selectedNpcState.value?.dating) return false
     if (selectedNpcState.value?.married) return false
     if (npcStore.npcStates.some(s => s.married)) return false
@@ -509,7 +510,7 @@
   /** 是否可以结为知己 */
   const canBecomeZhiji = computed(() => {
     if (!selectedNpcDef.value?.marriageable) return false
-    if (selectedNpcDef.value.gender !== playerStore.gender) return false
+    //if (selectedNpcDef.value.gender !== playerStore.gender) return false
     if (selectedNpcState.value?.zhiji || selectedNpcState.value?.dating || selectedNpcState.value?.married) return false
     if (npcStore.npcStates.some(s => s.zhiji)) return false
     if ((selectedNpcState.value?.friendship ?? 0) < 2000) return false

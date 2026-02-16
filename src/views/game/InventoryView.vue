@@ -103,7 +103,7 @@
 
           <!-- 空格子 -->
           <div
-            v-for="i in Math.max(0, 10 - inventoryStore.tempItems.length)"
+            v-for="i in Math.max(0, 50 - inventoryStore.tempItems.length)"
             :key="'temp-empty-' + i"
             class="border border-danger/10 rounded-xs p-1.5 text-center text-xs text-muted/30"
           >

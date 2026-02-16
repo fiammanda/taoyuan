@@ -1,0 +1,174 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::selection {
+  color: var(--background);
+  background: hsl(240 10 30);
+}
+
+html {
+  height: 100%;
+  font-size: 16px;
+  text-size-adjust: none;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  color: hsl(240 10 25);
+  background: var(--background);
+  accent-color: hsl(240 60 60);
+  cursor: crosshair;
+  touch-action: manipulation;
+  scroll-behavior: smooth;
+  scrollbar-color: hsl(240 40 25 / .5) transparent;
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+  overscroll-behavior: contain;
+}
+body {
+  padding: 0 2rem 2rem 10rem;
+  font: .875rem/1.5 "Iosevka", "Source Han Sans SC", "Noto Sans SC", monospace;
+}
+a {
+  text-decoration: none;
+  color: hsl(240 20 25 / .7);
+}
+svg {
+  width: 1em;
+  height: 1em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+h1 {
+  font: 1.25rem/2 "Zpix", "Source Han Sans SC", "Noto Sans SC", sans-serif;
+  font-weight: normal;
+}
+h2 {
+  margin: 2rem 0 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+h3 {
+  margin: 2em 0 1em;
+  font-size: 1em;
+  font-weight: 500;
+}
+h3:is(+ .grid) {
+  margin-bottom: .5em;
+}
+p {
+  margin: .5em 0;
+}
+ul {
+  list-style: none;
+}
+
+.nav {
+  position: fixed;
+  inset: 0 auto 0 0;
+  padding: 2rem;
+  width: max-content;
+  overflow: auto;
+}
+.nav-head {
+  margin: .25em 0 .25em 1.25em;
+}
+.nav-item a {
+  display: inline-flex;
+  gap: .25em;
+  align-items: center;
+}
+.nav-item a span {
+  order: 1;
+}
+
+main {
+  margin: 0 auto;
+  max-width: 50rem;
+  padding: 2rem 0;
+}
+section {
+  padding: 1rem 0;
+}
+
+.color-gray {
+  color: hsl(240 10 50);
+}
+.cell-c {
+  text-align: center;
+}
+.cell-r {
+  text-align: right;
+}
+
+.grid > li {
+  display: grid;
+  justify-content: space-between;;
+  gap: 0 1em;
+  padding: .25em 0;
+  border-bottom: 1px solid hsl(240 20 25 / .1);
+  transition: .2s ease-in-out;
+}
+.grid > li:hover {
+  border-color: hsl(240 20 25 / .3);
+}
+.grid .th {
+  position: sticky;
+  top: 0;
+  background: var(--background);
+  border-color: hsl(240 20 25 / .3);
+}
+
+#table-田庄 > li {
+  grid-template-columns: 4em 3em 2em 2em 2em 2em 2em 2em 2em 19em;
+}
+#table-果树 > li {
+  grid-template-columns: 3em 2em 2em 2em 2em 2em;
+}
+#table-野树 > li {
+  grid-template-columns: 2em 3em 2em 2em;
+}
+#table-农舍 > li {
+  grid-template-columns: 3em 3em 8em 15em;
+}
+#table-桃源村 > li {
+  grid-template-columns: 3em 3em 1fr 9.5em;
+}
+#商圈 li {
+  grid-template-columns: 5em 2.5em 1fr 1fr;
+}
+#table-工坊 > li {
+  grid-template-columns: 3em 2em 2.5em 7em;
+}
+#table-灶台 > li {
+  grid-template-columns: 5em 13.5em 1fr 11em;
+}
+#table-博物馆 > li {
+  grid-template-columns: 5em 3em 10em;
+}
+
+
+@font-face {
+  font-family: "Zpix";
+  src: url("../fonts/zpix.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Iosevka";
+  src: url("../fonts/iosevka.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --background: hsl(40 20 96);
+}
