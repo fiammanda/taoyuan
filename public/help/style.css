@@ -167,7 +167,7 @@ section {
 }
 @font-face {
   font-family: "Iosevka";
-  src: url("../fonts/i.woff2") format("woff2");
+  src: url("../fonts/iosevka.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
