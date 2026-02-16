@@ -17847,13 +17847,10 @@
   };
   var ACTION_TIME_COSTS = {
     // 农场
-    till: 0.08,
-    //0.17,
-    plant: 0.08,
-    //0.17,
+    till: 0.17,
+    plant: 0.17,
     water: 0.08,
-    harvest: 0.08,
-    //0.17,
+    harvest: 0.17,
     // 钓鱼
     fishStart: 0.5,
     //1,
@@ -17875,20 +17872,15 @@
     cook: 0.5,
     eat: 0,
     // 社交
-    talk: 0.08,
-    //0.17,
+    talk: 0.17,
     gift: 0,
     // 加工坊
-    craftMachine: 0.08,
-    //0.17,
+    craftMachine: 0.17,
     startProcessing: 0,
     collectProduct: 0,
-    craftSprinkler: 0.08,
-    //0.17,
-    craftFertilizer: 0.08,
-    //0.17,
-    craftJadeRing: 0.08,
-    //0.17,
+    craftSprinkler: 0.17,
+    craftFertilizer: 0.17,
+    craftJadeRing: 0.17,
     // 畜棚
     feedAnimals: 0.25,
     //0.5,
@@ -17905,11 +17897,9 @@
     // 工具升级
     toolUpgrade: 1,
     // 批量农场操作
-    batchWater: 0.08,
-    //0.17,
+    batchWater: 0.17,
     batchTill: 0.25,
-    batchHarvest: 0.25,
-    //0.17,
+    batchHarvest: 0.5,
     // 淘金
     pan: 0.5,
     //1,

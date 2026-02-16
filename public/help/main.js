@@ -1,7 +1,7 @@
 const table = Object.fromEntries(
   [
     "田庄", "果树", "野树", "农舍", "桃源村", 
-    "万物铺", "铁匠铺", "镖局", "渔具铺", "药铺", "绸缎庄",
+    "商圈", "万物铺", "铁匠铺", "镖局", "渔具铺", "药铺", "绸缎庄",
     "工坊", "灶台", "博物馆"
   ].map((i) => [i, document.createDocumentFragment()])
 );
@@ -57,6 +57,15 @@ DATA.EFFECTS = {
   ore_bonus: "矿石额外",
   luck: "幸运",
   travel_speed: "旅行加速"
+};
+DATA.SEASON_COEFFICIENTS = {
+  crop: [1.0, 0.9, 0.85, 1.2], // 秋收最便宜，冬季最贵
+  fish: [1.0, 0.9, 1.0, 1.15], // 夏季鱼多便宜，冬季贵
+  animal_product: [1.0, 0.95, 1.0, 1.1], // 冬季畜产品需求高
+  processed: [0.95, 1.0, 1.1, 1.05], // 秋季加工品需求旺
+  fruit: [1.1, 0.85, 0.9, 1.2], // 夏季水果多便宜，冬季贵
+  ore: [1.0, 1.05, 1.0, 0.9], // 冬季矿多便宜
+  gem: [1.0, 1.05, 1.0, 0.9] // 同矿石
 }
 DATA.SHOP_ITEMS = {
   "万物铺": [
@@ -193,6 +202,20 @@ DATA.NPCS.sort((a, b) => {
         <span>${term.get(birthday.season)}${birthday.day}日</span>
         <span>${lovedItems.map((i) => term.get(i) || i).join(" ")} <span class="color-gray">></span> ${likedItems.map((i) => term.get(i) || i).join(" ")} <span class="color-gray">> … ></span> ${hatedItems.map((i) => term.get(i) || i).join(" ")}</span>
         <span>${schedule.availableDays === "all" ? "全周" : schedule.availableDays.map((i) => term.get(i)).join("")} ${schedule.availableHours.from}-${schedule.availableHours.to}</span>
+      `
+    })
+  );
+});
+
+Object.entries(DATA.SEASON_COEFFICIENTS).forEach(([category, coefficient]) => {
+  table.商圈.append(
+    Object.assign(document.createElement("li"), {
+      innerHTML: `
+        <span>${DATA.MARKET_CATEGORY_NAMES[category]}</span>
+        <span class="cell-r">${coefficient[0]}</span>
+        <span class="cell-r">${coefficient[1]}</span>
+        <span class="cell-r">${coefficient[2]}</span>
+        <span class="cell-r">${coefficient[3]}</span>
       `
     })
   );

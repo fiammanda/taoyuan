@@ -145,7 +145,7 @@
     <Transition name="panel-fade">
       <div
         v-if="showElevatorModal"
-        class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4"
+        class="fixed inset-0 bg-black/60 flex items-center justify-center z-10 p-4"
         @click.self="showElevatorModal = false"
       >
         <div class="game-panel max-w-xs w-full relative">
@@ -200,7 +200,7 @@
     <Transition name="panel-fade">
       <div
         v-if="miningStore.isExploring && !miningStore.inCombat"
-        class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4"
+        class="fixed inset-0 bg-black/60 flex items-center justify-center z-10 p-4"
       >
         <div class="game-panel max-w-sm w-full">
           <!-- 标题栏 -->
@@ -505,7 +505,7 @@
     <Transition name="panel-fade">
       <div
         v-if="showPresetListModal"
-        class="fixed inset-0 bg-black/60 flex items-center justify-center z-70 p-4"
+        class="fixed inset-0 bg-black/60 flex items-center justify-center z-30 p-4"
         @click.self="showPresetListModal = false"
       >
         <div class="game-panel max-w-xs w-full relative">
@@ -897,29 +897,29 @@
   /** 格子样式 */
   const getTileClass = (tile: MineTile): string => {
     if (tile.state === 'hidden') {
-      if (bombModeId.value) return 'bg-panel/50 border-accent/10 cursor-not-allowed opacity-40'
-      if (miningStore.canRevealTile(tile.index)) return 'bg-panel border-accent/30 hover:border-accent cursor-pointer'
-      return 'bg-panel/50 border-accent/10 cursor-not-allowed opacity-40'
+      if (bombModeId.value) return 'border-accent/10 cursor-not-allowed opacity-40'
+      if (miningStore.canRevealTile(tile.index)) return 'border-accent/30 hover:border-accent cursor-pointer'
+      return 'border-accent/10 cursor-not-allowed opacity-40'
     }
     switch (tile.type) {
       case 'empty':
-        return 'bg-bg border-accent/10'
+        return 'bg-[var(--color-bg)] border-accent/10'
       case 'ore':
-        return tile.state === 'collected' ? 'bg-bg border-accent/10' : 'bg-accent/20 border-accent/40'
+        return tile.state === 'collected' ? 'bg-[var(--color-bg)] border-accent/10' : 'bg-accent/20 border-accent/40'
       case 'monster':
-        return tile.state === 'defeated' ? 'bg-bg border-accent/10' : 'bg-danger/20 border-danger/40 cursor-pointer'
+        return tile.state === 'defeated' ? 'bg-[var(--color-bg)] border-accent/10' : 'bg-danger/20 border-danger/40 cursor-pointer'
       case 'boss':
-        return tile.state === 'defeated' ? 'bg-bg border-accent/10' : 'bg-danger/30 border-danger/50 cursor-pointer'
+        return tile.state === 'defeated' ? 'bg-[var(--color-bg)] border-accent/10' : 'bg-danger/30 border-danger/50 cursor-pointer'
       case 'stairs':
         return 'bg-success/20 border-success/40'
       case 'trap':
         return 'bg-danger/10 border-danger/20'
       case 'treasure':
-        return tile.state === 'collected' ? 'bg-bg border-accent/10' : 'bg-accent/30 border-accent/50'
+        return tile.state === 'collected' ? 'bg-[var(--color-bg)] border-accent/10' : 'bg-accent/30 border-accent/50'
       case 'mushroom':
-        return tile.state === 'collected' ? 'bg-bg border-accent/10' : 'bg-success/20 border-success/30'
+        return tile.state === 'collected' ? 'bg-[var(--color-bg)] border-accent/10' : 'bg-success/20 border-success/30'
       default:
-        return 'bg-bg border-accent/10'
+        return 'bg-[var(--color-bg)] border-accent/10'
     }
   }
 
