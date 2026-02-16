@@ -102,7 +102,7 @@
     <Transition name="panel-fade">
       <div
         v-if="showMapModal"
-        class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4"
+        class="fixed inset-0 bg-black/60 flex items-center justify-center z-10 p-4"
         @click.self="showMapModal = false"
       >
         <div class="game-panel max-w-xs w-full">
@@ -324,7 +324,7 @@
 
     <!-- 战斗弹窗 -->
     <Transition name="panel-fade">
-      <div v-if="miningStore.inCombat" class="fixed inset-0 bg-black/60 flex items-center justify-center z-60 p-4">
+      <div v-if="miningStore.inCombat" class="fixed inset-0 bg-black/60 flex items-center justify-center z-20 p-4">
         <div class="game-panel max-w-xs w-full">
           <!-- 标题 -->
           <div class="flex items-center justify-between mb-2">
@@ -471,7 +471,7 @@
     <Transition name="panel-fade">
       <div
         v-if="showCombatItems"
-        class="fixed inset-0 bg-black/60 flex items-center justify-center z-70 p-4"
+        class="fixed inset-0 bg-black/60 flex items-center justify-center z-30 p-4"
         @click.self="showCombatItems = false"
       >
         <div class="game-panel max-w-xs w-full">
@@ -552,7 +552,7 @@
     <Transition name="panel-fade">
       <div
         v-if="showPresetDetailModal && detailPreset"
-        class="fixed inset-0 bg-black/60 flex items-center justify-center z-80 p-4"
+        class="fixed inset-0 bg-black/60 flex items-center justify-center z-40 p-4"
         @click.self="showPresetDetailModal = false"
       >
         <div class="game-panel max-w-xs w-full relative">
@@ -620,7 +620,7 @@
     <Transition name="panel-fade">
       <div
         v-if="showEquipPropertyModal && equipPropertyInfo"
-        class="fixed inset-0 bg-black/60 flex items-center justify-center z-90 p-4"
+        class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4"
         @click.self="showEquipPropertyModal = false"
       >
         <div class="game-panel max-w-xs w-full relative">
