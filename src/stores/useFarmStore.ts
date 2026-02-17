@@ -238,7 +238,7 @@ export const useFarmStore = defineStore('farm', () => {
       // 周围8块
       for (let dr = -1; dr <= 1; dr++) {
         for (let dc = -1; dc <= 1; dc++) {
-          if (dr === 0 && dc === 0) continue
+          //if (dr === 0 && dc === 0) continue
           const nr = row + dr,
             nc = col + dc
           if (nr >= 0 && nr < size && nc >= 0 && nc < size) {
@@ -250,7 +250,7 @@ export const useFarmStore = defineStore('farm', () => {
       // 5×5 区域（2格半径）
       for (let dr = -2; dr <= 2; dr++) {
         for (let dc = -2; dc <= 2; dc++) {
-          if (dr === 0 && dc === 0) continue
+          //if (dr === 0 && dc === 0) continue
           const nr = row + dr,
             nc = col + dc
           if (nr >= 0 && nr < size && nc >= 0 && nc < size) {

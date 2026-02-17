@@ -9096,7 +9096,7 @@
       id: "copper_sprinkler",
       name: "铜管洒水器",
       description: "自动灌溉周围8块地。",
-      range: 8,
+      range: 9,
       craftCost: [
         { itemId: "copper_bar", quantity: 3 },
         { itemId: "iron_bar", quantity: 1 }
@@ -9107,7 +9107,7 @@
       id: "gold_sprinkler",
       name: "金管洒水器",
       description: "自动灌溉周围5×5共24块地。",
-      range: 24,
+      range: 29,
       craftCost: [
         { itemId: "gold_bar", quantity: 2 },
         { itemId: "iron_bar", quantity: 2 },

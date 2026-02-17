@@ -309,13 +309,13 @@ export const useFishingStore = defineStore('fishing', () => {
       if (f.difficulty === 'legendary') {
         const minLevel = hasAngler ? 6 : 8
         if (rodTier === 'basic' || effectiveLevel < minLevel) return 0
-        return (hasAngler ? 1.5 : 0.5) * (1 + luckBuff) * legendaryMult
+        return (hasAngler ? 1.5 : 0.5) * (1 + luckBuff + effectiveLevel * .05) * legendaryMult
       }
       if (f.difficulty === 'hard') {
         if (rodTier === 'basic' && effectiveLevel < 4) return 0
-        return (rodTier === 'basic' ? 0.5 : 1) * (1 + luckBuff) * hardMult
+        return (rodTier === 'basic' ? 0.5 : 1) * (1 + luckBuff + effectiveLevel * .05) * hardMult
       }
-      if (f.difficulty === 'easy') return 3
+      if (f.difficulty === 'easy') return (3 - Math.min(effectiveLevel, 10) * .1)
       if (f.difficulty === 'normal') return 2
       return 0.5
     })

@@ -58,7 +58,7 @@
           </div>
 
           <!-- 空闲：选择配方 -->
-          <div v-if="!slot.recipeId">
+          <div v-if="!slot.recipeId" class="max-h-60 overflow-y-auto">
             <div v-if="processingStore.getAvailableRecipes(slot.machineType).length > 0" class="grid space-y-1">
               <Button
                 v-for="recipe in processingStore.getAvailableRecipes(slot.machineType)"
@@ -369,7 +369,7 @@
       sfxClick()
       const name = SPRINKLERS.find(s => s.id === sprinklerId)?.name ?? sprinklerId
       addLog(`制造了${name}，已放入背包。去农场放置吧。`)
-      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.craftMachine)
+      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.craftProduct)
       if (tr.message) addLog(tr.message)
       if (tr.passedOut) {
         handleEndDay()
@@ -385,7 +385,7 @@
       sfxClick()
       const name = FERTILIZERS.find(f => f.id === fertilizerId)?.name ?? fertilizerId
       addLog(`制造了${name}，已放入背包。`)
-      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.craftMachine)
+      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.craftProduct)
       if (tr.message) addLog(tr.message)
       if (tr.passedOut) {
         handleEndDay()
@@ -401,7 +401,7 @@
       sfxClick()
       const name = BAITS.find(b => b.id === baitId)?.name ?? baitId
       addLog(`制造了${name}，已放入背包。`)
-      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.craftMachine)
+      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.craftProduct)
       if (tr.message) addLog(tr.message)
       if (tr.passedOut) {
         handleEndDay()
@@ -417,7 +417,7 @@
       sfxClick()
       const name = TACKLES.find(t => t.id === tackleId)?.name ?? tackleId
       addLog(`制造了${name}，已放入背包。`)
-      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.craftMachine)
+      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.craftProduct)
       if (tr.message) addLog(tr.message)
       if (tr.passedOut) {
         handleEndDay()
@@ -432,7 +432,7 @@
     if (processingStore.craftCrabPot()) {
       sfxClick()
       addLog(`制造了${CRAB_POT_CRAFT.name}，已放入背包。`)
-      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.craftMachine)
+      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.craftProduct)
       if (tr.message) addLog(tr.message)
       if (tr.passedOut) {
         handleEndDay()
@@ -447,7 +447,7 @@
     if (processingStore.craftTapper()) {
       sfxClick()
       addLog(`制造了采脂器，已放入背包。去农场安装到野树上吧。`)
-      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.craftMachine)
+      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.craftProduct)
       if (tr.message) addLog(tr.message)
       if (tr.passedOut) {
         handleEndDay()
@@ -463,7 +463,7 @@
       sfxClick()
       farmStore.lightningRods++
       addLog(`制造了避雷针，已安装到农场。(共${farmStore.lightningRods}根)`)
-      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.craftMachine)
+      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.craftProduct)
       if (tr.message) addLog(tr.message)
       if (tr.passedOut) {
         handleEndDay()
@@ -479,7 +479,7 @@
       sfxClick()
       farmStore.scarecrows++
       addLog(`制造了稻草人，已安装到农场。(共${farmStore.scarecrows}个)`)
-      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.craftMachine)
+      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.craftProduct)
       if (tr.message) addLog(tr.message)
       if (tr.passedOut) {
         handleEndDay()
@@ -495,7 +495,7 @@
       sfxClick()
       const name = BOMBS.find(b => b.id === bombId)?.name ?? bombId
       addLog(`制造了${name}，已放入背包。`)
-      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.craftMachine)
+      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.craftProduct)
       if (tr.message) addLog(tr.message)
       if (tr.passedOut) {
         handleEndDay()
@@ -518,7 +518,7 @@
     inventoryStore.addItem('jade_ring')
     sfxClick()
     addLog('制造了翡翠戒指！可以用来求婚。')
-    const tr = gameStore.advanceTime(ACTION_TIME_COSTS.craftMachine)
+    const tr = gameStore.advanceTime(ACTION_TIME_COSTS.craftProduct)
     if (tr.message) addLog(tr.message)
     if (tr.passedOut) {
       handleEndDay()

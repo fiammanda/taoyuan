@@ -154,7 +154,7 @@ DATA.SHOP_ITEMS = {
   ]
 }
 
-DATA.CROPS.forEach(({ name, season, growthDays, sellPrice, seedPrice, description, giantCropEligible, regrowth, regrowthDays, maxHarvests }) => {
+DATA.CROPS.forEach(({ name, season, growthDays, sellPrice, seedPrice, description, deepWatering, giantCropEligible, regrowth, regrowthDays, maxHarvests }) => {
   table.田庄.append(
     Object.assign(document.createElement("li"), {
       innerHTML: `
@@ -163,6 +163,7 @@ DATA.CROPS.forEach(({ name, season, growthDays, sellPrice, seedPrice, descriptio
         <span class="cell-r">${growthDays}</span>
         <span class="cell-r">${seedPrice || "-"}</span>
         <span class="cell-r">${sellPrice}</span>
+        <span class="cell-c">${deepWatering ? "√" : ""}</span>
         <span class="cell-c">${giantCropEligible ? "√" : ""}</span>
         <span class="cell-c">${regrowth ? "√" : ""}</span>
         <span class="cell-r">${regrowthDays || ""}</span>

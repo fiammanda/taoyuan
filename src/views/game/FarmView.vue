@@ -1147,7 +1147,7 @@
   const isSprinklerCovered = (plotId: number): boolean => sprinklerCoverage.value.has(plotId)
 
   const needsWater = (plot: (typeof farmStore.plots)[number]): boolean => {
-    return (plot.state === 'planted' || plot.state === 'growing') && !plot.watered && !sprinklerCoverage.value.has(plot.id)
+    return (plot.state === 'planted' || plot.state === 'growing') && !plot.watered //&& !sprinklerCoverage.value.has(plot.id)
   }
 
   const unwateredCount = computed(() => farmStore.plots.filter(needsWater).length)

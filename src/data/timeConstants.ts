@@ -83,15 +83,16 @@ export const ACTION_TIME_COSTS = {
   gift: 0,
   // 加工坊
   craftMachine: 0.17,
+  craftProduct: 0.08,
   startProcessing: 0,
   collectProduct: 0,
   craftSprinkler: 0.17,
   craftFertilizer: 0.17,
   craftJadeRing: 0.17,
   // 畜棚
-  feedAnimals: 0.25, //0.5,
+  feedAnimals: 0.17, //0.5,
   petAnimal: 0.08, //0.17,
-  graze: 1,
+  graze: 0.5, //1,
   // 农舍
   collectCave: 0.08, //0.17,
   aging: 0.08, //0.17,
