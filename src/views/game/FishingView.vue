@@ -191,7 +191,7 @@
         @click.self="showBaitModal = false"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="showBaitModal = false">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="showBaitModal = false">
             <X :size="14" />
           </button>
           <p class="text-sm text-accent mb-2">鱼饵</p>
@@ -235,7 +235,7 @@
         @click.self="showTackleModal = false"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="showTackleModal = false">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="showTackleModal = false">
             <X :size="14" />
           </button>
           <p class="text-sm text-accent mb-2">浮漂</p>
@@ -282,7 +282,7 @@
         @click.self="handleCloseFishingModal"
       >
         <div class="game-panel max-w-sm w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="handleCloseFishingModal">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="handleCloseFishingModal">
             <X :size="14" />
           </button>
           <p class="text-sm text-accent mb-2">
@@ -310,7 +310,7 @@
         @click.self="selectedFish = null"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="selectedFish = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="selectedFish = null">
             <X :size="14" />
           </button>
           <p class="text-sm mb-2" :class="DIFFICULTY_COLORS[selectedFish.difficulty]">{{ selectedFish.name }}</p>

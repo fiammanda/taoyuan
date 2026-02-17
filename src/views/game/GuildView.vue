@@ -56,12 +56,12 @@
                 class="shrink-0"
                 :class="getKillCount(goal.monsterId) >= goal.killTarget ? 'text-accent' : 'text-muted'"
               />
-              <span class="text-xs" :class="isGoalClaimed(goal.monsterId) ? 'text-success' : 'text-text'">{{ goal.monsterName }}</span>
+              <span class="text-xs" :class="isGoalClaimed(goal.monsterId) ? 'text-success' : 'text-[var(--color-text)] '">{{ goal.monsterName }}</span>
             </div>
             <span class="text-xs text-muted">{{ getKillCount(goal.monsterId) }}/{{ goal.killTarget }}</span>
           </div>
           <!-- 进度条 -->
-          <div class="h-1 bg-bg rounded-xs overflow-hidden">
+          <div class="h-1 bg-[var(--color-bg)] rounded-xs overflow-hidden">
             <div
               class="h-full transition-all"
               :class="getKillCount(goal.monsterId) >= goal.killTarget ? 'bg-success' : 'bg-accent/60'"
@@ -80,7 +80,7 @@
         @click.self="selectedGoal = null"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="selectedGoal = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="selectedGoal = null">
             <X :size="14" />
           </button>
 
@@ -97,7 +97,7 @@
               <span class="text-xs text-muted">进度</span>
               <span class="text-xs">{{ getKillCount(selectedGoal.monsterId) }}/{{ selectedGoal.killTarget }}</span>
             </div>
-            <div class="h-1.5 bg-bg rounded-xs overflow-hidden mt-1.5">
+            <div class="h-1.5 bg-[var(--color-bg)] rounded-xs overflow-hidden mt-1.5">
               <div
                 class="h-full transition-all"
                 :class="getKillCount(selectedGoal.monsterId) >= selectedGoal.killTarget ? 'bg-success' : 'bg-accent/60'"
@@ -163,7 +163,7 @@
         @click.self="shopModalItem = null"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="shopModalItem = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="shopModalItem = null">
             <X :size="14" />
           </button>
           <p class="text-sm text-accent mb-2">{{ shopModalItem.name }}</p>
@@ -179,7 +179,7 @@
             </div>
             <div class="flex items-center justify-between mt-0.5">
               <span class="text-xs text-muted">持有金币</span>
-              <span class="text-xs" :class="playerStore.money >= shopModalItem.price ? 'text-text' : 'text-danger'">
+              <span class="text-xs" :class="playerStore.money >= shopModalItem.price ? 'text-[var(--color-text)] ' : 'text-danger'">
                 {{ playerStore.money }}文
               </span>
             </div>
@@ -219,7 +219,7 @@
             class="border rounded-xs p-1.5 text-xs text-center transition-colors truncate"
             :class="
               guildStore.isEncountered(monster.id)
-                ? 'border-accent/20 cursor-pointer hover:bg-accent/5 text-text'
+                ? 'border-accent/20 cursor-pointer hover:bg-accent/5 text-[var(--color-text)] '
                 : 'border-accent/10 text-muted/30'
             "
             @click="guildStore.isEncountered(monster.id) && (selectedMonster = monster)"
@@ -239,7 +239,7 @@
         @click.self="selectedMonster = null"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="selectedMonster = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="selectedMonster = null">
             <X :size="14" />
           </button>
 
@@ -279,7 +279,7 @@
     <div class="mt-3 border border-accent/20 rounded-xs p-2">
       <div class="flex items-center space-x-2 text-xs mb-1.5">
         <span class="text-muted shrink-0">讨伐进度</span>
-        <div class="flex-1 h-1 bg-bg rounded-xs border border-accent/10">
+        <div class="flex-1 h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
           <div
             class="h-full bg-accent rounded-xs transition-all"
             :style="{ width: Math.round((guildStore.completedGoalCount / MONSTER_GOALS.length) * 100) + '%' }"

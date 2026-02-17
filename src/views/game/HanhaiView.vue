@@ -230,7 +230,7 @@
         @click.self="shopModalItem = null"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="shopModalItem = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="shopModalItem = null">
             <X :size="14" />
           </button>
 

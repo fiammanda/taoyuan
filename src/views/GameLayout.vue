@@ -73,7 +73,7 @@
             <p class="text-xs text-muted mb-1">给它取个名字：</p>
             <input
               v-model="petNameInput"
-              class="w-full bg-bg border border-accent/30 rounded-xs px-2 py-1 text-xs text-text"
+              class="w-full bg-[var(--color-bg)] border border-accent/30 rounded-xs px-2 py-1 text-xs text-[var(--color-text)] "
               :placeholder="petChoice === 'cat' ? '小花' : '旺财'"
               maxlength="8"
             />

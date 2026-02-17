@@ -24,7 +24,7 @@
       <div class="flex-1">
         <div class="flex items-center justify-between text-xs mb-0.5">
           <span :class="isPlayerTurn && !gameOver ? 'text-accent' : 'text-muted'">你</span>
-          <span class="text-text">{{ playerHP }}/{{ maxPlayerHP }}</span>
+          <span class="text-[var(--color-text)] ">{{ playerHP }}/{{ maxPlayerHP }}</span>
         </div>
         <div class="h-1.5 bg-panel rounded-full overflow-hidden" :class="{ 'buckshot-flash-red': playerHit }">
           <div
@@ -41,7 +41,7 @@
       <div class="flex-1">
         <div class="flex items-center justify-between text-xs mb-0.5">
           <span :class="!isPlayerTurn && !gameOver ? 'text-danger' : 'text-muted'">庄家</span>
-          <span class="text-text">{{ dealerHP }}/{{ maxDealerHP }}</span>
+          <span class="text-[var(--color-text)] ">{{ dealerHP }}/{{ maxDealerHP }}</span>
         </div>
         <div class="h-1.5 bg-panel rounded-full overflow-hidden" :class="{ 'buckshot-flash-red': dealerHit }">
           <div
@@ -68,7 +68,7 @@
         v-for="(log, i) in actionLog"
         :key="i"
         class="text-[10px] leading-relaxed"
-        :class="i === actionLog.length - 1 ? 'text-text' : 'text-muted/60'"
+        :class="i === actionLog.length - 1 ? 'text-[var(--color-text)] ' : 'text-muted/60'"
       >
         {{ log }}
       </p>

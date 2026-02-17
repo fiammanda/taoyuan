@@ -70,7 +70,7 @@
           >
             <CircleCheck v-if="isMilestoneClaimed(ms.count)" :size="12" class="text-success shrink-0" />
             <Circle v-else :size="12" class="shrink-0" :class="museumStore.donatedCount >= ms.count ? 'text-accent' : 'text-muted'" />
-            <span class="flex-1" :class="museumStore.donatedCount >= ms.count ? 'text-text' : 'text-muted'">
+            <span class="flex-1" :class="museumStore.donatedCount >= ms.count ? 'text-[var(--color-text)] ' : 'text-muted'">
               {{ ms.name }} ({{ ms.count }}件)
             </span>
             <span class="text-muted">{{ ms.reward.money }}文{{ ms.reward.items ? '+物品' : '' }}</span>
@@ -89,7 +89,7 @@
       <div class="mt-3 border border-accent/20 rounded-xs p-2">
         <div class="flex items-center space-x-2 text-xs mb-1.5">
           <span class="text-muted shrink-0">捐赠进度</span>
-          <div class="flex-1 h-1 bg-bg rounded-xs border border-accent/10">
+          <div class="flex-1 h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
             <div
               class="h-full bg-accent rounded-xs transition-all"
               :style="{ width: Math.round((museumStore.donatedCount / museumStore.totalCount) * 100) + '%' }"
@@ -122,7 +122,7 @@
         @click.self="selectedItem = null"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="selectedItem = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="selectedItem = null">
             <X :size="14" />
           </button>
 

@@ -17,7 +17,7 @@
         </div>
         <div class="flex items-center space-x-1">
           <span class="text-[10px] text-muted w-6">好感</span>
-          <div class="flex-1 h-1.5 bg-bg rounded-xs border border-accent/10">
+          <div class="flex-1 h-1.5 bg-[var(--color-bg)] rounded-xs border border-accent/10">
             <div class="h-full rounded-xs bg-danger transition-all" :style="{ width: Math.floor(animalStore.pet.friendship / 10) + '%' }" />
           </div>
           <span class="text-[10px] text-muted">{{ animalStore.pet.friendship }}/1000</span>
@@ -113,13 +113,13 @@
             <div class="space-y-0.5">
               <div class="flex items-center space-x-1">
                 <span class="text-[10px] text-muted w-6">好感</span>
-                <div class="flex-1 h-1.5 bg-bg rounded-xs border border-accent/10">
+                <div class="flex-1 h-1.5 bg-[var(--color-bg)] rounded-xs border border-accent/10">
                   <div class="h-full rounded-xs bg-danger transition-all" :style="{ width: Math.floor(animal.friendship / 10) + '%' }" />
                 </div>
               </div>
               <div class="flex items-center space-x-1">
                 <span class="text-[10px] text-muted w-6">心情</span>
-                <div class="flex-1 h-1.5 bg-bg rounded-xs border border-accent/10">
+                <div class="flex-1 h-1.5 bg-[var(--color-bg)] rounded-xs border border-accent/10">
                   <div
                     class="h-full rounded-xs transition-all"
                     :class="getMoodBarColor(animal.mood)"
@@ -130,7 +130,7 @@
               </div>
               <div v-if="animal.hunger > 0" class="flex items-center space-x-1">
                 <span class="text-[10px] text-muted w-6">饥饿</span>
-                <div class="flex-1 h-1.5 bg-bg rounded-xs border border-accent/10">
+                <div class="flex-1 h-1.5 bg-[var(--color-bg)] rounded-xs border border-accent/10">
                   <div class="h-full rounded-xs bg-danger transition-all" :style="{ width: Math.floor((animal.hunger / 7) * 100) + '%' }" />
                 </div>
                 <span class="text-[10px] text-danger w-6">{{ animal.hunger }}天</span>
@@ -189,7 +189,7 @@
           <div class="space-y-0.5">
             <div class="flex items-center space-x-1">
               <span class="text-[10px] text-muted w-6">好感</span>
-              <div class="flex-1 h-1.5 bg-bg rounded-xs border border-accent/10">
+              <div class="flex-1 h-1.5 bg-[var(--color-bg)] rounded-xs border border-accent/10">
                 <div
                   class="h-full rounded-xs bg-danger transition-all"
                   :style="{ width: Math.floor(animalStore.getHorse.friendship / 10) + '%' }"
@@ -198,7 +198,7 @@
             </div>
             <div class="flex items-center space-x-1">
               <span class="text-[10px] text-muted w-6">心情</span>
-              <div class="flex-1 h-1.5 bg-bg rounded-xs border border-accent/10">
+              <div class="flex-1 h-1.5 bg-[var(--color-bg)] rounded-xs border border-accent/10">
                 <div
                   class="h-full rounded-xs transition-all"
                   :class="getMoodBarColor(animalStore.getHorse.mood)"
@@ -209,7 +209,7 @@
             </div>
             <div v-if="animalStore.getHorse.hunger > 0" class="flex items-center space-x-1">
               <span class="text-[10px] text-muted w-6">饥饿</span>
-              <div class="flex-1 h-1.5 bg-bg rounded-xs border border-accent/10">
+              <div class="flex-1 h-1.5 bg-[var(--color-bg)] rounded-xs border border-accent/10">
                 <div
                   class="h-full rounded-xs bg-danger transition-all"
                   :style="{ width: Math.floor((animalStore.getHorse.hunger / 7) * 100) + '%' }"
@@ -398,11 +398,11 @@
     <Transition name="panel-fade">
       <div v-if="sellTarget" class="fixed inset-0 bg-black/60 flex items-center justify-center z-60 p-4" @click.self="sellTarget = null">
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="sellTarget = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="sellTarget = null">
             <X :size="14" />
           </button>
           <p class="text-accent text-sm mb-2">出售动物</p>
-          <p class="text-xs text-text mb-1">
+          <p class="text-xs text-[var(--color-text)]  mb-1">
             确定要卖掉
             <span class="text-accent">{{ sellTarget.name }}</span>
             吗？
@@ -414,7 +414,7 @@
           </p>
           <div class="flex space-x-2">
             <Button class="flex-1" @click="sellTarget = null">取消</Button>
-            <Button class="flex-1 !bg-danger !text-text" :icon="Coins" :icon-size="12" @click="confirmSellAnimal">确认出售</Button>
+            <Button class="flex-1 !bg-danger !text-[var(--color-text)] " :icon="Coins" :icon-size="12" @click="confirmSellAnimal">确认出售</Button>
           </div>
         </div>
       </div>
@@ -428,7 +428,7 @@
         @click.self="upgradeModal = null"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="upgradeModal = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="upgradeModal = null">
             <X :size="14" />
           </button>
 

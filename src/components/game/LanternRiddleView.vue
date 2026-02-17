@@ -39,7 +39,7 @@
       </div>
 
       <!-- 倒计时条 -->
-      <div class="h-1 bg-bg border border-accent/20 mb-3">
+      <div class="h-1 bg-[var(--color-bg)] border border-accent/20 mb-3">
         <div
           class="h-full transition-all duration-1000 ease-linear"
           :class="countdown <= 3 ? 'bg-danger/60' : 'bg-accent/60'"
@@ -50,7 +50,7 @@
       <!-- 谜面 -->
       <div class="border border-accent/30 p-3 mb-3 text-center">
         <p class="text-xs text-muted mb-1">谜面</p>
-        <p class="text-xs text-text leading-relaxed">{{ currentRiddle.question }}</p>
+        <p class="text-xs text-[var(--color-text)]  leading-relaxed">{{ currentRiddle.question }}</p>
       </div>
 
       <!-- 选项 -->

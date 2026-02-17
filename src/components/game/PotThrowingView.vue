@@ -27,7 +27,7 @@
       </div>
 
       <!-- 瞄准条 -->
-      <div class="relative h-8 bg-bg border border-accent/20 mb-2">
+      <div class="relative h-8 bg-[var(--color-bg)] border border-accent/20 mb-2">
         <!-- 区域着色 -->
         <div class="absolute inset-0 flex">
           <div class="flex-1 bg-danger/5" />

@@ -7,7 +7,7 @@
 
     <div class="flex space-x-2 items-end justify-center">
       <!-- 进度条 (左侧竖条) -->
-      <div class="w-3 h-62.5 bg-bg border border-accent/30 rounded-xs relative overflow-hidden">
+      <div class="w-3 h-62.5 bg-[var(--color-bg)] border border-accent/30 rounded-xs relative overflow-hidden">
         <div class="absolute bottom-0 w-full bg-success rounded-[1px]" :style="{ height: score + '%' }" />
       </div>
 

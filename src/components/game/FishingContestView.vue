@@ -58,7 +58,7 @@
 
       <div class="flex space-x-3 items-stretch mb-3">
         <!-- 张力条 (竖条) -->
-        <div class="w-8 h-44 bg-bg border border-accent/30 relative overflow-hidden shrink-0">
+        <div class="w-8 h-44 bg-[var(--color-bg)] border border-accent/30 relative overflow-hidden shrink-0">
           <!-- 最佳区 60-72% -->
           <div class="absolute left-0 right-0 bg-success/15 border-y border-success/30" style="bottom: 60%; height: 12%" />
           <!-- 危险区 85%+ -->
@@ -75,7 +75,7 @@
         </div>
 
         <!-- 水域 (鱼移动区) -->
-        <div class="flex-1 h-44 bg-bg border border-accent/20 relative overflow-hidden">
+        <div class="flex-1 h-44 bg-[var(--color-bg)] border border-accent/20 relative overflow-hidden">
           <div class="absolute inset-0 opacity-10 water-ripple" />
           <!-- 鱼 -->
           <div class="absolute transition-none" :style="{ top: `${fishVisualY}%`, left: `${fishVisualX}%` }">

@@ -96,7 +96,7 @@
             </span>
           </div>
           <div v-if="quest.type !== 'delivery'" class="mt-1 flex items-center space-x-2">
-            <div class="flex-1 h-1 bg-bg rounded-xs border border-accent/10">
+            <div class="flex-1 h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
               <div
                 class="h-full rounded-xs bg-accent transition-all"
                 :style="{ width: Math.floor((getEffectiveProgress(quest) / quest.targetQuantity) * 100) + '%' }"
@@ -122,7 +122,7 @@
     <Transition name="panel-fade">
       <div v-if="questModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4" @click.self="questModal = null">
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="questModal = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="questModal = null">
             <X :size="14" />
           </button>
 
@@ -240,7 +240,7 @@
             <div class="border border-accent/10 rounded-xs p-2 mb-2">
               <p class="text-xs text-muted mb-1">进度</p>
               <div v-if="selectedActiveQuest.type !== 'delivery'" class="flex items-center space-x-2">
-                <div class="flex-1 h-1.5 bg-bg rounded-xs border border-accent/10">
+                <div class="flex-1 h-1.5 bg-[var(--color-bg)] rounded-xs border border-accent/10">
                   <div
                     class="h-full rounded-xs bg-accent transition-all"
                     :style="{

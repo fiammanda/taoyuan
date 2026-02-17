@@ -49,11 +49,11 @@
         @click.self="selectedTool = null"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="selectedTool = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="selectedTool = null">
             <X :size="14" />
           </button>
 
-          <p class="text-sm mb-2" :class="isUpgrading(selectedTool) ? 'text-accent' : 'text-text'">
+          <p class="text-sm mb-2" :class="isUpgrading(selectedTool) ? 'text-accent' : 'text-[var(--color-text)] '">
             {{ TOOL_NAMES[selectedTool] }}
           </p>
 
@@ -83,7 +83,7 @@
             </div>
             <div v-if="isUpgrading(selectedTool)" class="flex items-center space-x-2 mt-1.5">
               <span class="text-xs text-muted shrink-0">进度</span>
-              <div class="flex-1 h-1 bg-bg rounded-xs border border-accent/10">
+              <div class="flex-1 h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
                 <div
                   class="h-full rounded-xs bg-accent transition-all"
                   :style="{ width: ((2 - inventoryStore.pendingUpgrade!.daysRemaining) / 2) * 100 + '%' }"

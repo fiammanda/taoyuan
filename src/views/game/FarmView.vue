@@ -34,7 +34,7 @@
         @click.self="showBatchActions = false"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="showBatchActions = false">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="showBatchActions = false">
             <X :size="14" />
           </button>
           <p class="text-accent text-sm mb-2">一键操作</p>
@@ -148,7 +148,7 @@
     <Transition name="panel-fade">
       <div v-if="activePlot" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4" @click.self="activePlotId = null">
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="activePlotId = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="activePlotId = null">
             <X :size="14" />
           </button>
           <p class="text-accent text-sm mb-2">地块 #{{ activePlot.id + 1 }}</p>
@@ -182,7 +182,7 @@
           <!-- 生长进度条 -->
           <div v-if="activePlot.cropId && activePlot.state !== 'harvestable'" class="flex items-center space-x-2 mb-2">
             <span class="text-xs text-muted shrink-0">生长</span>
-            <div class="flex-1 h-1 bg-bg rounded-xs border border-accent/10">
+            <div class="flex-1 h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
               <div
                 class="h-full rounded-xs bg-success transition-all"
                 :style="{ width: Math.floor((activePlot.growthDays / (Number(plotCropGrowthDays) || 1)) * 100) + '%' }"
@@ -208,7 +208,7 @@
             <Button v-if="canWater" class="w-full justify-center shrink-0" :icon-size="12" :icon="Droplets" @click="doWater">浇水</Button>
             <Button
               v-if="activePlot.infested"
-              class="w-full justify-center shrink-0 !bg-danger !text-text"
+              class="w-full justify-center shrink-0 !bg-danger !text-[var(--color-text)] "
               :icon-size="12"
               :icon="Bug"
               @click="doCurePest"
@@ -316,7 +316,7 @@
         @click.self="showBatchPlant = false"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="showBatchPlant = false">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="showBatchPlant = false">
             <X :size="14" />
           </button>
           <p class="text-accent text-sm mb-2">一键种植</p>
@@ -350,7 +350,7 @@
         @click.self="showBatchFertilize = false"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="showBatchFertilize = false">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="showBatchFertilize = false">
             <X :size="14" />
           </button>
           <p class="text-accent text-sm mb-2">一键施肥</p>
@@ -411,7 +411,7 @@
         @click.self="showShippingBox = false"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="showShippingBox = false">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="showShippingBox = false">
             <X :size="14" />
           </button>
           <div class="flex items-center space-x-1.5 text-sm text-accent mb-1">
@@ -512,7 +512,7 @@
           </div>
           <template v-if="!tree.mature">
             <div class="flex items-center space-x-2 mb-1.5">
-              <div class="flex-1 h-1 bg-bg rounded-xs border border-accent/10">
+              <div class="flex-1 h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
                 <div
                   class="h-full rounded-xs bg-success transition-all"
                   :style="{ width: Math.floor((tree.growthDays / 28) * 100) + '%' }"
@@ -553,18 +553,18 @@
         @click.self="chopFruitTreeTarget = null"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="chopFruitTreeTarget = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="chopFruitTreeTarget = null">
             <X :size="14" />
           </button>
           <p class="text-accent text-sm mb-2">砍伐果树</p>
-          <p class="text-xs text-text mb-3">
+          <p class="text-xs text-[var(--color-text)]  mb-3">
             确定要砍掉
             <span class="text-accent">{{ getTreeName(chopFruitTreeTarget.type) }}</span>
             吗？砍伐后不可恢复。
           </p>
           <div class="flex space-x-2">
             <Button class="flex-1" @click="chopFruitTreeTarget = null">取消</Button>
-            <Button class="flex-1 !bg-danger !text-text" :icon-size="12" :icon="Axe" @click="confirmChopFruitTree">确认砍伐</Button>
+            <Button class="flex-1 !bg-danger !text-[var(--color-text)] " :icon-size="12" :icon="Axe" @click="confirmChopFruitTree">确认砍伐</Button>
           </div>
         </div>
       </div>
@@ -578,11 +578,11 @@
         @click.self="chopWildTreeTarget = null"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="chopWildTreeTarget = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="chopWildTreeTarget = null">
             <X :size="14" />
           </button>
           <p class="text-accent text-sm mb-2">伐木</p>
-          <p class="text-xs text-text mb-2">
+          <p class="text-xs text-[var(--color-text)]  mb-2">
             确定要对
             <span class="text-accent">{{ getWildTreeName(chopWildTreeTarget.type) }}</span>
             伐木吗？
@@ -594,7 +594,7 @@
             <Button class="flex-1" @click="chopWildTreeTarget = null">取消</Button>
             <Button
               class="flex-1"
-              :class="chopWildTreeTarget.chopCount >= 2 ? '!bg-danger !text-text' : '!bg-accent !text-bg'"
+              :class="chopWildTreeTarget.chopCount >= 2 ? '!bg-danger !text-[var(--color-text)] ' : '!bg-accent !text-bg'"
               :icon-size="12"
               :icon="Axe"
               @click="confirmChopWildTree"
@@ -631,7 +631,7 @@
           <!-- 第二行：进度/详情 + 操作按钮 -->
           <template v-if="!tree.mature">
             <div class="flex items-center space-x-2 mb-1.5">
-              <div class="flex-1 h-1 bg-bg rounded-xs border border-accent/10">
+              <div class="flex-1 h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
                 <div
                   class="h-full rounded-xs bg-success transition-all"
                   :style="{ width: Math.floor((tree.growthDays / (getWildTreeDef(tree.type)?.growthDays ?? 28)) * 100) + '%' }"
@@ -644,7 +644,7 @@
           </template>
           <template v-else-if="tree.hasTapper">
             <div class="flex items-center space-x-2 mb-1.5">
-              <div class="flex-1 h-1 bg-bg rounded-xs border border-accent/10">
+              <div class="flex-1 h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
                 <div
                   class="h-full rounded-xs transition-all"
                   :class="tree.tapReady ? 'bg-accent' : 'bg-success'"
@@ -717,7 +717,7 @@
         @click.self="showGreenhouseModal = false"
       >
         <div class="game-panel max-w-sm w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="showGreenhouseModal = false">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="showGreenhouseModal = false">
             <X :size="14" />
           </button>
           <div class="flex items-center space-x-1.5 text-sm text-accent mb-1">
@@ -769,7 +769,7 @@
         @click.self="showGhUpgradeModal = false"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="showGhUpgradeModal = false">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="showGhUpgradeModal = false">
             <X :size="14" />
           </button>
           <p class="text-accent text-sm mb-2">{{ nextGhUpgrade.name }}</p>
@@ -804,7 +804,7 @@
         @click.self="activeGhPlotId = null"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="activeGhPlotId = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="activeGhPlotId = null">
             <X :size="14" />
           </button>
           <p class="text-accent text-sm mb-2">温室地块 #{{ activeGhPlot.id + 1 }}</p>
@@ -821,7 +821,7 @@
               </div>
               <div v-if="activeGhPlot.cropId && activeGhPlot.state !== 'harvestable'" class="flex items-center space-x-2">
                 <span class="text-xs text-muted shrink-0">生长</span>
-                <div class="flex-1 h-1 bg-bg rounded-xs border border-accent/10">
+                <div class="flex-1 h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
                   <div
                     class="h-full rounded-xs bg-success transition-all"
                     :style="{ width: Math.floor((activeGhPlot.growthDays / (Number(ghPlotCropGrowthDays) || 1)) * 100) + '%' }"

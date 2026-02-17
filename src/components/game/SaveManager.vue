@@ -1,7 +1,7 @@
 <template>
   <div class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4" @click.self="$emit('close')">
     <div class="game-panel w-full max-w-md text-center relative max-h-[80vh] flex flex-col">
-      <button class="absolute top-2 right-2 text-muted hover:text-text" @click="$emit('close')">
+      <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="$emit('close')">
         <X :size="14" />
       </button>
       <p class="text-accent text-sm mb-4">—— 存档管理 ——</p>

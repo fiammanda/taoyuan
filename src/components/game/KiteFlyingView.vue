@@ -36,7 +36,7 @@
       </div>
 
       <!-- 风筝位置条 -->
-      <div class="relative h-10 bg-bg border border-accent/20 mb-3">
+      <div class="relative h-10 bg-[var(--color-bg)] border border-accent/20 mb-3">
         <!-- 安全区域 (中间36%) -->
         <div class="absolute top-0 bottom-0 left-[32%] w-[36%] bg-success/10 border-x border-success/30" />
         <!-- 中心线 -->

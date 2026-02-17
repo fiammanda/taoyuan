@@ -20,7 +20,7 @@ import { useBreedingStore } from './useBreedingStore'
 import { addLog } from '@/composables/useGameLog'
 
 /** 最大放置机器数 */
-const MAX_MACHINES = 15
+const MAX_MACHINES = 30
 
 export const useProcessingStore = defineStore('processing', () => {
   const inventoryStore = useInventoryStore()

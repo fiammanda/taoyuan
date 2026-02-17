@@ -152,7 +152,7 @@
         <!-- 阶段进度条 -->
         <div class="flex items-center space-x-1 mb-1.5">
           <span class="text-[10px] text-muted w-8 shrink-0">进度</span>
-          <div class="flex-1 h-1.5 bg-bg rounded-xs border border-accent/10">
+          <div class="flex-1 h-1.5 bg-[var(--color-bg)] rounded-xs border border-accent/10">
             <div
               class="h-full rounded-xs bg-success transition-all"
               :style="{ width: Math.floor((npcStore.pregnancy.daysInStage / npcStore.pregnancy.stageDays) * 100) + '%' }"
@@ -163,7 +163,7 @@
         <!-- 安产率条 -->
         <div class="flex items-center space-x-1 mb-2">
           <span class="text-[10px] text-muted w-8 shrink-0">安产</span>
-          <div class="flex-1 h-1.5 bg-bg rounded-xs border border-accent/10">
+          <div class="flex-1 h-1.5 bg-[var(--color-bg)] rounded-xs border border-accent/10">
             <div
               class="h-full rounded-xs transition-all"
               :class="npcStore.pregnancy.careScore >= 70 ? 'bg-success' : npcStore.pregnancy.careScore >= 40 ? 'bg-accent' : 'bg-danger'"
@@ -293,7 +293,7 @@
           </div>
           <div class="flex items-center space-x-1">
             <span class="text-[10px] text-muted w-6">陈酿</span>
-            <div class="flex-1 h-1.5 bg-bg rounded-xs border border-accent/10">
+            <div class="flex-1 h-1.5 bg-[var(--color-bg)] rounded-xs border border-accent/10">
               <div
                 class="h-full rounded-xs bg-accent transition-all"
                 :style="{ width: Math.min(100, Math.floor((slot.daysAging / 14) * 100)) + '%' }"
@@ -320,7 +320,7 @@
         @click.self="showUpgradeModal = false"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="showUpgradeModal = false">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="showUpgradeModal = false">
             <X :size="14" />
           </button>
 
@@ -369,7 +369,7 @@
         @click.self="showGreenhouseModal = false"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="showGreenhouseModal = false">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="showGreenhouseModal = false">
             <X :size="14" />
           </button>
 
@@ -483,7 +483,7 @@
         @click.self="showWarehouseUnlockModal = false"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="showWarehouseUnlockModal = false">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="showWarehouseUnlockModal = false">
             <X :size="14" />
           </button>
 

@@ -57,7 +57,7 @@
                 </div>
                 <span class="text-xs text-muted">{{ slot.daysProcessed }}/{{ slot.totalDays }}天</span>
               </div>
-              <div class="h-1 bg-bg rounded-xs border border-accent/10">
+              <div class="h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
                 <div
                   class="h-full rounded-xs bg-accent transition-all"
                   :style="{ width: (slot.daysProcessed / slot.totalDays) * 100 + '%' }"
@@ -160,7 +160,7 @@
       <div class="mt-3 border border-accent/20 rounded-xs p-2">
         <div class="flex items-center space-x-2 text-xs mb-1.5">
           <span class="text-xs text-muted shrink-0">完成度</span>
-          <div class="flex-1 h-1 bg-bg rounded-xs border border-accent/10">
+          <div class="flex-1 h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
             <div class="h-full bg-accent rounded-xs transition-all" :style="{ width: completionPercent + '%' }" />
           </div>
           <span class="text-xs text-accent whitespace-nowrap">{{ totalDiscovered }}/{{ HYBRID_DEFS.length }}</span>
@@ -182,7 +182,7 @@
         @click.self="showCraftModal = false"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="showCraftModal = false">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="showCraftModal = false">
             <X :size="14" />
           </button>
 
@@ -227,7 +227,7 @@
     <Transition name="panel-fade">
       <div v-if="detailSeed" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4" @click.self="detailSeed = null">
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="detailSeed = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="detailSeed = null">
             <X :size="14" />
           </button>
 
@@ -241,7 +241,7 @@
           <div class="flex flex-col space-y-1 mb-3">
             <div v-for="attr in seedAttributes" :key="attr.key" class="flex items-center space-x-2">
               <span class="text-xs text-muted w-10 shrink-0">{{ attr.label }}</span>
-              <div class="flex-1 h-1.5 bg-bg rounded-xs border border-accent/10">
+              <div class="flex-1 h-1.5 bg-[var(--color-bg)] rounded-xs border border-accent/10">
                 <div class="h-full rounded-xs transition-all" :class="attr.barClass" :style="{ width: attr.value + '%' }" />
               </div>
               <span class="text-xs w-6 text-right">{{ attr.value }}</span>
@@ -264,7 +264,7 @@
         @click.self="activeHybrid = null"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="activeHybrid = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="activeHybrid = null">
             <X :size="14" />
           </button>
 
@@ -328,7 +328,7 @@
         @click.self="cancelBreedingSelect"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="cancelBreedingSelect">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="cancelBreedingSelect">
             <X :size="14" />
           </button>
 

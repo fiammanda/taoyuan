@@ -736,7 +736,7 @@
       >
         <!-- 购买弹窗 -->
         <div v-if="buyModalData" class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="shopModal = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="shopModal = null">
             <X :size="14" />
           </button>
           <p class="text-sm text-accent mb-2 pr-6">{{ buyModalData.name }}</p>
@@ -824,7 +824,7 @@
 
         <!-- 出售弹窗 -->
         <div v-else-if="sellModalData && sellModalItem && sellModalDef" class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="shopModal = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="shopModal = null">
             <X :size="14" />
           </button>
           <p class="text-sm mb-2 pr-6" :class="qualityTextClass(sellModalItem.quality, 'text-accent')">

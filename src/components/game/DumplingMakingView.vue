@@ -26,7 +26,7 @@
       </div>
 
       <!-- 倒计时条 -->
-      <div class="h-1 bg-bg border border-accent/20 mb-3">
+      <div class="h-1 bg-[var(--color-bg)] border border-accent/20 mb-3">
         <div
           class="h-full transition-all duration-1000 ease-linear"
           :class="timeLeft <= 5 ? 'bg-danger/60' : 'bg-accent/60'"

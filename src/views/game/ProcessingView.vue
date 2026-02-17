@@ -81,7 +81,7 @@
               <span class="text-muted">{{ getRecipeName(slot.recipeId) }}</span>
               <span class="text-muted">{{ slot.daysProcessed }}/{{ slot.totalDays }}天</span>
             </div>
-            <div class="h-1 bg-bg rounded-xs border border-accent/10 mb-1.5">
+            <div class="h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10 mb-1.5">
               <div
                 class="h-full bg-accent rounded-xs transition-all"
                 :style="{ width: Math.floor((slot.daysProcessed / slot.totalDays) * 100) + '%' }"
@@ -104,7 +104,7 @@
     <Transition name="panel-fade">
       <div v-if="craftModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4" @click.self="craftModal = null">
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="craftModal = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="craftModal = null">
             <X :size="14" />
           </button>
 

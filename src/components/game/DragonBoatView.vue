@@ -37,7 +37,7 @@
             <span class="text-xs text-muted flex-1 text-right">{{ boat.progress }}m</span>
           </div>
           <!-- 赛道条 -->
-          <div class="h-5 bg-bg border relative overflow-hidden" :class="i === 0 ? 'border-accent/40' : 'border-accent/15'">
+          <div class="h-5 bg-[var(--color-bg)] border relative overflow-hidden" :class="i === 0 ? 'border-accent/40' : 'border-accent/15'">
             <!-- 终点线 -->
             <div class="absolute top-0 bottom-0 right-0 w-px border-r border-dashed border-accent/30" />
             <!-- 进度 -->

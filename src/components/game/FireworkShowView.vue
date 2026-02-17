@@ -44,7 +44,7 @@
           <p class="text-xs text-muted">{{ playerInput.length }} / {{ sequence.length }}</p>
           <p class="text-xs" :class="recallTimeLeft <= 3 ? 'text-danger time-pulse' : 'text-accent'">{{ recallTimeLeft }}s</p>
         </div>
-        <div class="h-1 bg-bg border border-accent/20">
+        <div class="h-1 bg-[var(--color-bg)] border border-accent/20">
           <div
             class="h-full transition-all duration-1000 ease-linear"
             :class="recallTimeLeft <= 3 ? 'bg-danger/60' : 'bg-accent/60'"

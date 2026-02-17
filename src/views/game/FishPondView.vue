@@ -49,7 +49,7 @@
           <div class="border border-accent/20 rounded-xs px-3 py-2">
             <div class="flex items-center space-x-2 mb-1.5">
               <span class="text-xs text-muted shrink-0">水质</span>
-              <div class="flex-1 h-1 bg-bg rounded-xs border border-accent/10">
+              <div class="flex-1 h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
                 <div
                   class="h-full rounded-xs transition-all"
                   :class="waterQualityColor"
@@ -115,7 +115,7 @@
                   <Waves v-if="fish.mature && !fish.sick" :size="12" class="text-success" />
                   <HeartPulse v-else-if="fish.sick" :size="12" class="text-danger" />
                   <Fish v-else :size="12" class="text-muted/40" />
-                  <span class="text-xs" :class="fish.sick ? 'text-danger' : fish.mature ? 'text-text' : 'text-muted'">
+                  <span class="text-xs" :class="fish.sick ? 'text-danger' : fish.mature ? 'text-[var(--color-text)] ' : 'text-muted'">
                     {{ fish.name }}
                   </span>
                   <span v-if="fish.sick" class="text-[10px] text-danger">[病]</span>
@@ -165,7 +165,7 @@
               </div>
               <span class="text-xs text-muted">{{ fishPondStore.pond.breeding.daysLeft }}/{{ breedingTotalDays }}天</span>
             </div>
-            <div class="h-1 bg-bg rounded-xs border border-accent/10">
+            <div class="h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
               <div class="h-full rounded-xs bg-accent transition-all" :style="{ width: breedingProgress + '%' }" />
             </div>
             <p class="text-[10px] text-muted mt-1">品种：{{ getPondableFishName(fishPondStore.pond.breeding.fishId) }}</p>
@@ -238,7 +238,7 @@
         <div class="mt-3 border border-accent/20 rounded-xs p-2">
           <div class="flex items-center space-x-2 text-xs mb-1.5">
             <span class="text-xs text-muted shrink-0">完成度</span>
-            <div class="flex-1 h-1 bg-bg rounded-xs border border-accent/10">
+            <div class="flex-1 h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
               <div class="h-full bg-accent rounded-xs transition-all" :style="{ width: completionPercent + '%' }" />
             </div>
             <span class="text-xs text-accent whitespace-nowrap">{{ fishPondStore.discoveredBreeds.size }}/{{ totalBreedCount }}</span>
@@ -257,7 +257,7 @@
     <Transition name="panel-fade">
       <div v-if="detailFish" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4" @click.self="detailFish = null">
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="detailFish = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="detailFish = null">
             <X :size="14" />
           </button>
 
@@ -274,7 +274,7 @@
           <div class="flex flex-col space-y-1 mb-3">
             <div v-for="attr in fishAttributes" :key="attr.key" class="flex items-center space-x-2">
               <span class="text-xs text-muted w-10 shrink-0">{{ attr.label }}</span>
-              <div class="flex-1 h-1.5 bg-bg rounded-xs border border-accent/10">
+              <div class="flex-1 h-1.5 bg-[var(--color-bg)] rounded-xs border border-accent/10">
                 <div class="h-full rounded-xs transition-all" :class="attr.barClass" :style="{ width: attr.value + '%' }" />
               </div>
               <span class="text-xs w-6 text-right">{{ attr.value }}</span>
@@ -304,7 +304,7 @@
     <Transition name="panel-fade">
       <div v-if="pondModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4" @click.self="pondModal = null">
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="pondModal = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="pondModal = null">
             <X :size="14" />
           </button>
 

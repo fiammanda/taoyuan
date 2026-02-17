@@ -37,7 +37,7 @@
         @click.self="selectedItem = null"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="selectedItem = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="selectedItem = null">
             <X :size="14" />
           </button>
           <p class="text-sm mb-2" :class="walletStore.has(selectedItem.id) ? 'text-accent' : 'text-muted'">

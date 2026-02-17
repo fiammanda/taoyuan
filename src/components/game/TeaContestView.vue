@@ -49,7 +49,7 @@
       <p class="text-xs text-accent text-center mb-2">{{ currentStepDef.label }} — {{ currentStepDef.hint }}</p>
 
       <!-- 填充条 -->
-      <div class="relative h-10 bg-bg border border-accent/20 mb-3">
+      <div class="relative h-10 bg-[var(--color-bg)] border border-accent/20 mb-3">
         <!-- 目标标记 -->
         <div
           class="absolute top-0 bottom-0 w-6 border-x border-success/50 bg-success/15"

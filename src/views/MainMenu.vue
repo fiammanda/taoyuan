@@ -75,7 +75,7 @@
     <Transition name="panel-fade">
       <div v-if="showAbout" class="fixed inset-0 z-50 flex items-center justify-center bg-bg/80" @click.self="showAbout = false">
         <div class="game-panel w-full max-w-md mx-4 text-center relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="showAbout = false">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="showAbout = false">
             <X :size="14" />
           </button>
           <h2 class="text-accent text-lg">关于{{ pkg.title }}</h2>
@@ -110,7 +110,7 @@
     <Transition name="panel-fade">
       <div v-if="showCharCreate && !showFarmSelect" class="fixed inset-0 z-50 flex items-center justify-center bg-bg/80">
         <div class="game-panel w-full max-w-xs mx-4 relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="handleBackToMenu">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="handleBackToMenu">
             <X :size="14" />
           </button>
           <p class="text-accent text-sm mb-4 text-center">创建你的角色</p>
@@ -123,7 +123,7 @@
                 type="text"
                 maxlength="4"
                 placeholder="请输入你的名字"
-                class="w-full px-3 py-2 bg-bg border border-accent/30 rounded-xs text-sm focus:border-accent outline-none"
+                class="w-full px-3 py-2 bg-[var(--color-bg)] border border-accent/30 rounded-xs text-sm focus:border-accent outline-none"
               />
             </div>
             <!-- 性别选择 -->
@@ -159,7 +159,7 @@
     <Transition name="panel-fade">
       <div v-if="showFarmSelect" class="fixed inset-0 z-50 flex items-center justify-center bg-bg/80 p-4">
         <div class="game-panel w-full max-w-xl max-h-[80vh] flex flex-col relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text z-10" @click="handleBackToCharCreate">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)]  z-10" @click="handleBackToCharCreate">
             <X :size="14" />
           </button>
           <p class="text-accent text-sm mb-3 text-center shrink-0">选择你的田庄类型</p>
@@ -190,7 +190,7 @@
             @click.self="showFarmConfirm = false"
           >
             <div class="game-panel w-full max-w-xs mx-4 text-center relative">
-              <button class="absolute top-2 right-2 text-muted hover:text-text" @click="showFarmConfirm = false">
+              <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="showFarmConfirm = false">
                 <X :size="14" />
               </button>
               <p class="text-accent text-sm mb-3">—— {{ selectedFarmDef?.name }} ——</p>
@@ -220,7 +220,7 @@
                 type="text"
                 maxlength="4"
                 placeholder="请输入你的名字"
-                class="w-full px-3 py-2 bg-bg border border-accent/30 rounded-xs text-sm focus:border-accent outline-none"
+                class="w-full px-3 py-2 bg-[var(--color-bg)] border border-accent/30 rounded-xs text-sm focus:border-accent outline-none"
               />
             </div>
             <div>
@@ -280,21 +280,21 @@
           </h2>
           <div class="flex-1 overflow-y-auto text-xs text-muted space-y-2 mb-4 pr-1">
             <p>欢迎来到桃源乡！在开始游戏之前，请阅读以下隐私协议：</p>
-            <p class="text-text">1. 数据存储</p>
+            <p class="text-[var(--color-text)] ">1. 数据存储</p>
             <p>本游戏的存档、设置等数据保存在您的浏览器本地存储（localStorage）中。存档数据不会上传至服务器。</p>
-            <p class="text-text">2. 流量统计</p>
+            <p class="text-[var(--color-text)] ">2. 流量统计</p>
             <p>
               本游戏使用第三方统计服务收集匿名访问数据（如页面浏览量、访问时间、设备类型、浏览器信息等），用于分析游戏使用情况和改进体验。这些数据不包含您的个人身份信息。
             </p>
-            <p class="text-text">3. 网络通信</p>
+            <p class="text-[var(--color-text)] ">3. 网络通信</p>
             <p>除流量统计外，游戏核心功能均在本地运行，不会将您的游戏存档或操作数据发送至任何服务器。</p>
-            <p class="text-text">4. 数据安全</p>
+            <p class="text-[var(--color-text)] ">4. 数据安全</p>
             <p>清除浏览器数据或更换设备可能导致存档丢失，建议定期使用导出功能备份存档。</p>
-            <p class="text-text">5. 第三方服务</p>
+            <p class="text-[var(--color-text)] ">5. 第三方服务</p>
             <p>
               本游戏使用的第三方统计服务有其独立的隐私政策，我们不对其数据处理方式负责。游戏中的外部链接指向的第三方网站亦不受本协议约束。
             </p>
-            <p class="text-text">6. 协议变更</p>
+            <p class="text-[var(--color-text)] ">6. 协议变更</p>
             <p>本协议可能随版本更新而调整，届时将在游戏内重新提示。继续使用即视为同意最新版本的协议。</p>
           </div>
           <div class="flex space-x-3 justify-center">

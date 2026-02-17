@@ -20,7 +20,7 @@
         <!-- 体力 -->
         <div class="flex items-center space-x-2">
           <span class="text-xs text-muted shrink-0">体力</span>
-          <div class="flex-1 h-1 bg-bg rounded-xs border border-accent/10">
+          <div class="flex-1 h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
             <div
               class="h-full rounded-xs transition-all"
               :class="playerStore.staminaPercent > 35 ? 'bg-success' : 'bg-danger'"
@@ -32,7 +32,7 @@
         <!-- 生命 -->
         <div class="flex items-center space-x-2">
           <span class="text-xs text-muted shrink-0">生命</span>
-          <div class="flex-1 h-1 bg-bg rounded-xs border border-accent/10">
+          <div class="flex-1 h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
             <div
               class="h-full rounded-xs transition-all"
               :class="playerStore.getHpPercent() > 25 ? 'bg-success' : 'bg-danger'"
@@ -99,7 +99,7 @@
     <Transition name="panel-fade">
       <div v-if="activeSlot" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4" @click.self="activeSlot = null">
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="activeSlot = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="activeSlot = null">
             <X :size="14" />
           </button>
 

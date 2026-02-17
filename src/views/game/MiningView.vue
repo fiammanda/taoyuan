@@ -49,7 +49,7 @@
         <div class="flex items-center justify-between border border-accent/10 rounded-xs px-3 py-1.5">
           <span class="text-xs">HP</span>
           <div class="flex items-center space-x-2">
-            <div class="w-20 h-1.5 bg-bg rounded-xs border border-accent/10">
+            <div class="w-20 h-1.5 bg-[var(--color-bg)] rounded-xs border border-accent/10">
               <div
                 class="h-full rounded-xs transition-all"
                 :class="playerStore.getIsLowHp() ? 'bg-danger' : 'bg-success'"
@@ -122,7 +122,7 @@
               :class="zone.isCurrentZone ? 'border-accent/40' : 'border-accent/10'"
             >
               <div class="flex justify-between items-center text-xs mb-1">
-                <span :class="zone.isCurrentZone ? 'text-accent' : zone.reached ? 'text-text' : 'text-muted/40'">
+                <span :class="zone.isCurrentZone ? 'text-accent' : zone.reached ? 'text-[var(--color-text)] ' : 'text-muted/40'">
                   {{ zone.name }}
                   <span class="text-muted ml-1">{{ zone.start }}-{{ zone.end }}层</span>
                 </span>
@@ -149,7 +149,7 @@
         @click.self="showElevatorModal = false"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="showElevatorModal = false">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="showElevatorModal = false">
             <X :size="14" />
           </button>
 
@@ -316,7 +316,7 @@
 
           <!-- 探索日志 -->
           <div class="text-xs text-muted space-y-0.5 max-h-24 overflow-y-auto">
-            <p v-for="(msg, i) in recentLog" :key="i" :class="{ 'text-text': i === recentLog.length - 1 }">{{ msg }}</p>
+            <p v-for="(msg, i) in recentLog" :key="i" :class="{ 'text-[var(--color-text)] ': i === recentLog.length - 1 }">{{ msg }}</p>
           </div>
         </div>
       </div>
@@ -458,7 +458,7 @@
             <p
               v-for="(msg, i) in miningStore.combatLog"
               :key="i"
-              :class="i < miningStore.combatLog.length - 1 ? 'text-muted' : 'text-text'"
+              :class="i < miningStore.combatLog.length - 1 ? 'text-muted' : 'text-[var(--color-text)] '"
             >
               {{ msg }}
             </p>
@@ -509,7 +509,7 @@
         @click.self="showPresetListModal = false"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="showPresetListModal = false">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="showPresetListModal = false">
             <X :size="14" />
           </button>
           <p class="text-sm text-accent mb-2">
@@ -556,7 +556,7 @@
         @click.self="showPresetDetailModal = false"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="showPresetDetailModal = false">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="showPresetDetailModal = false">
             <X :size="14" />
           </button>
           <p class="text-sm text-accent mb-2">{{ detailPreset.name }}</p>
@@ -624,7 +624,7 @@
         @click.self="showEquipPropertyModal = false"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="showEquipPropertyModal = false">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="showEquipPropertyModal = false">
             <X :size="14" />
           </button>
           <p class="text-[10px] text-muted mb-0.5">{{ equipPropertyInfo.category }}</p>

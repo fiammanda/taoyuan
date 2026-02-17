@@ -2,7 +2,7 @@
   <Transition name="panel-fade">
     <div v-if="open" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4" @click.self="$emit('close')">
       <div class="game-panel w-full max-w-xs text-center relative">
-        <button class="absolute top-2 right-2 text-muted hover:text-text" @click="$emit('close')">
+        <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="$emit('close')">
           <X :size="14" />
         </button>
         <p class="text-accent text-sm mb-3">—— 设置 ——</p>
@@ -13,7 +13,7 @@
             v-for="tab in SETTINGS_TABS"
             :key="tab.key"
             class="text-xs py-1 px-3 border rounded-xs transition-colors"
-            :class="activeTab === tab.key ? 'border-accent bg-accent/20 text-accent' : 'border-accent/20 text-muted hover:text-text'"
+            :class="activeTab === tab.key ? 'border-accent bg-accent/20 text-accent' : 'border-accent/20 text-muted hover:text-[var(--color-text)] '"
             @click="activeTab = tab.key"
           >
             <component :is="tab.icon" :size="12" class="inline-block align-[-2px] mr-1" />

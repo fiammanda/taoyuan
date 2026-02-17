@@ -26,7 +26,7 @@
             <Zap :size="12" class="inline" />
             {{ playerStore.stamina }}/{{ playerStore.maxStamina }}
           </span>
-          <div class="w-14 md:w-20 h-2 bg-bg rounded-xs border border-accent/20">
+          <div class="w-14 md:w-20 h-2 bg-[var(--color-bg)] rounded-xs border border-accent/20">
             <div
               class="h-full rounded-xs transition-all duration-300"
               :class="staminaBarColor"
@@ -40,7 +40,7 @@
             <Heart :size="12" class="inline" />
             {{ playerStore.hp }}/{{ playerStore.getMaxHp() }}
           </span>
-          <div class="w-12 md:w-16 h-2 bg-bg rounded-xs border border-accent/20">
+          <div class="w-12 md:w-16 h-2 bg-[var(--color-bg)] rounded-xs border border-accent/20">
             <div
               class="h-full rounded-xs transition-all duration-300"
               :class="hpBarColor"
@@ -51,7 +51,7 @@
         <!-- 剩余时间 -->
         <div class="flex items-center space-x-1">
           <Clock :size="12" class="tinline" />
-          <div class="w-12 md:w-16 h-2 bg-bg rounded-xs border border-accent/20">
+          <div class="w-12 md:w-16 h-2 bg-[var(--color-bg)] rounded-xs border border-accent/20">
             <div class="h-full rounded-xs transition-all duration-300" :class="timeBarColor" :style="{ width: timePercent + '%' }" />
           </div>
         </div>

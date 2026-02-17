@@ -18,7 +18,7 @@
       <Button class="flex-1 justify-center" :class="{ '!bg-accent !text-bg': tab === 'tools' }" @click="tab = 'tools'">装备</Button>
       <Button
         class="flex-1 justify-center"
-        :class="{ '!bg-danger !text-text': tab === 'temp', 'text-danger': tab !== 'temp' && inventoryStore.tempItems.length > 0 }"
+        :class="{ '!bg-danger !text-[var(--color-text)] ': tab === 'temp', 'text-danger': tab !== 'temp' && inventoryStore.tempItems.length > 0 }"
         @click="tab = 'temp'"
       >
         临时{{ inventoryStore.tempItems.length > 0 ? `(${inventoryStore.tempItems.length})` : '' }}
@@ -157,7 +157,7 @@
             </p>
           </div>
           <!-- 拥有的帽子列表 -->
-          <div class="max-h-40 overflow-y-auto flex flex-col space-y-1">
+          <div class="overflow-y-auto flex flex-col space-y-1">
             <div
               v-for="(hat, idx) in inventoryStore.ownedHats"
               :key="idx"
@@ -196,7 +196,7 @@
             </p>
           </div>
           <!-- 拥有的鞋子列表 -->
-          <div class="max-h-40 overflow-y-auto flex flex-col space-y-1">
+          <div class="overflow-y-auto flex flex-col space-y-1">
             <div
               v-for="(shoe, idx) in inventoryStore.ownedShoes"
               :key="idx"
@@ -243,7 +243,7 @@
             </div>
           </div>
           <!-- 拥有的戒指列表 -->
-          <div class="max-h-40 overflow-y-auto flex flex-col space-y-1">
+          <div class="overflow-y-auto flex flex-col space-y-1">
             <div
               v-for="(ring, idx) in inventoryStore.ownedRings"
               :key="idx"
@@ -302,7 +302,7 @@
         @click.self="showPresetModal = false"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="showPresetModal = false">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="showPresetModal = false">
             <X :size="14" />
           </button>
           <p class="text-sm text-accent mb-2">装备方案</p>
@@ -317,7 +317,7 @@
                 <template v-if="renamingPresetId === preset.id">
                   <input
                     v-model="renameValue"
-                    class="bg-transparent border border-accent/30 rounded-xs px-1 py-0.5 text-xs text-text w-full mr-2 outline-none"
+                    class="bg-transparent border border-accent/30 rounded-xs px-1 py-0.5 text-xs text-[var(--color-text)]  w-full mr-2 outline-none"
                     @keyup.enter="confirmRename(preset.id)"
                     @blur="confirmRename(preset.id)"
                   />
@@ -348,7 +348,7 @@
             <p class="text-xs text-muted mt-1">暂无方案</p>
             <p class="text-[10px] text-muted/60 mt-0.5">创建方案后可快速切换装备配置</p>
           </div>
-          <Button class="w-full justify-center" :disabled="inventoryStore.equipmentPresets.length >= 3" @click="handleCreatePreset">
+          <Button class="w-full justify-center" :disabled="inventoryStore.equipmentPresets.length >= 10" @click="handleCreatePreset">
             新建方案
           </Button>
         </div>
@@ -363,7 +363,7 @@
         @click.self="showFilterModal = false"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="showFilterModal = false">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="showFilterModal = false">
             <X :size="14" />
           </button>
           <p class="text-sm text-accent mb-2">物品筛选</p>
@@ -395,7 +395,7 @@
         @click.self="activeTempIdx = null"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="activeTempIdx = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="activeTempIdx = null">
             <X :size="14" />
           </button>
           <p
@@ -453,7 +453,7 @@
     <Transition name="panel-fade">
       <div v-if="activeItem" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4" @click.self="activeItemKey = null">
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="activeItemKey = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="activeItemKey = null">
             <X :size="14" />
           </button>
 
@@ -544,7 +544,7 @@
         @click.self="activeWeaponIdx = null"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="activeWeaponIdx = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="activeWeaponIdx = null">
             <X :size="14" />
           </button>
           <p class="text-sm text-accent mb-2">{{ activeWeaponName }}</p>
@@ -600,7 +600,7 @@
         @click.self="activeRingIdx = null"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="activeRingIdx = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="activeRingIdx = null">
             <X :size="14" />
           </button>
           <p class="text-sm text-accent mb-2">{{ activeRingDef.name }}</p>
@@ -642,7 +642,7 @@
         @click.self="activeHatIdx = null"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="activeHatIdx = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="activeHatIdx = null">
             <X :size="14" />
           </button>
           <p class="text-sm text-accent mb-2">{{ activeHatDef.name }}</p>
@@ -679,7 +679,7 @@
         @click.self="activeShoeIdx = null"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="activeShoeIdx = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="activeShoeIdx = null">
             <X :size="14" />
           </button>
           <p class="text-sm text-accent mb-2">{{ activeShoeDef.name }}</p>

@@ -64,7 +64,7 @@
         @click.self="activeCollectionId = null"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="activeCollectionId = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="activeCollectionId = null">
             <X :size="14" />
           </button>
 
@@ -150,7 +150,7 @@
         @click.self="activeAchievement = null"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="activeAchievement = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="activeAchievement = null">
             <X :size="14" />
           </button>
 
@@ -158,7 +158,7 @@
           <div class="flex items-center space-x-1.5 mb-2">
             <CircleCheck v-if="isCompleted(activeAchievement.id)" :size="14" class="text-success shrink-0" />
             <Circle v-else :size="14" class="text-muted/40 shrink-0" />
-            <span class="text-sm" :class="isCompleted(activeAchievement.id) ? 'text-success' : 'text-text'">
+            <span class="text-sm" :class="isCompleted(activeAchievement.id) ? 'text-success' : 'text-[var(--color-text)] '">
               {{ activeAchievement.name }}
             </span>
           </div>
@@ -172,11 +172,11 @@
           <div class="border border-accent/10 rounded-xs p-2 mb-2">
             <div class="flex items-center justify-between mb-1">
               <span class="text-xs text-muted">进度</span>
-              <span class="text-xs" :class="isCompleted(activeAchievement.id) ? 'text-success' : 'text-text'">
+              <span class="text-xs" :class="isCompleted(activeAchievement.id) ? 'text-success' : 'text-[var(--color-text)] '">
                 {{ getProgressText(activeAchievement) }}
               </span>
             </div>
-            <div class="h-1.5 bg-bg rounded-xs border border-accent/10">
+            <div class="h-1.5 bg-[var(--color-bg)] rounded-xs border border-accent/10">
               <div
                 class="h-full rounded-xs transition-all"
                 :class="isCompleted(activeAchievement.id) ? 'bg-success' : 'bg-accent'"
@@ -190,7 +190,7 @@
             <p class="text-xs text-muted mb-1">奖励</p>
             <div class="flex flex-wrap space-x-3">
               <span v-if="activeAchievement.reward.money" class="text-xs text-accent">{{ activeAchievement.reward.money }}文</span>
-              <span v-for="ri in activeAchievement.reward.items ?? []" :key="ri.itemId" class="text-xs text-text">
+              <span v-for="ri in activeAchievement.reward.items ?? []" :key="ri.itemId" class="text-xs text-[var(--color-text)] ">
                 {{ getItemName(ri.itemId) }}×{{ ri.quantity }}
               </span>
             </div>
@@ -234,7 +234,7 @@
         @click.self="activeBundle = null"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="activeBundle = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="activeBundle = null">
             <X :size="14" />
           </button>
 
@@ -323,7 +323,7 @@
         @click.self="activeShippingId = null"
       >
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="activeShippingId = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="activeShippingId = null">
             <X :size="14" />
           </button>
 
@@ -392,7 +392,7 @@
     <Transition name="panel-fade">
       <div v-if="activeNote" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4" @click.self="activeNote = null">
         <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-text" @click="activeNote = null">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="activeNote = null">
             <X :size="14" />
           </button>
 
@@ -423,7 +423,7 @@
     <div class="mt-3 border border-accent/20 rounded-xs p-2">
       <div class="flex items-center space-x-2 text-xs mb-1.5">
         <span class="text-xs text-muted shrink-0">完成度</span>
-        <div class="flex-1 h-1 bg-bg rounded-xs border border-accent/10">
+        <div class="flex-1 h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
           <div class="h-full bg-accent rounded-xs transition-all" :style="{ width: achievementStore.perfectionPercent + '%' }" />
         </div>
         <span class="text-xs text-accent whitespace-nowrap">{{ achievementStore.perfectionPercent }}%</span>
