@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+equipmentPresetsimport { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import type { InventoryItem, Quality, Tool, ToolType, ToolTier, OwnedWeapon, OwnedRing, RingEffectType, OwnedHat, OwnedShoe } from '@/types'
 
@@ -16,7 +16,7 @@ import { showFloat } from '@/composables/useGameLog'
 import { getItemById } from '@/data/items'
 import { getWeaponById, getEnchantmentById, getWeaponSellPrice } from '@/data/weapons'
 import { getRingById } from '@/data/rings'
-import { getHatById } from '@/data/hats'
+import { getHatById } fromequipmentPresets '@/data/hats'
 import { getShoeById } from '@/data/shoes'
 import { EQUIPMENT_SETS } from '@/data/equipmentSets'
 import { usePlayerStore } from './usePlayerStore'
@@ -745,7 +745,7 @@ export const useInventoryStore = defineStore('inventory', () => {
 
   /** 创建空方案 */
   const createEquipmentPreset = (name: string): boolean => {
-    if (equipmentPresets.value.length >= 3) return false
+    if (equipmentPresets.value.length >= 10) return false
     equipmentPresets.value.push({
       id: Date.now().toString(),
       name,

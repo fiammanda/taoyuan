@@ -5,7 +5,7 @@ const table = Object.fromEntries(
     "桃源村", "商圈", 
     "万物铺", "铁匠铺", "镖局", "渔具铺", "药铺", "绸缎庄", 
     "工坊", "灶台", "博物馆", 
-    "竹林", "清溪"
+    "竹林", "清溪", "矿洞"
   ].map((i) => [i, document.createDocumentFragment()])
 );
 
@@ -100,6 +100,18 @@ DATA.SHOP_ITEMS = {
     { itemId: "gold_bar", name: "金锭", price: 1200, description: "冶炼好的金锭" },
     { itemId: "charcoal", name: "木炭", price: 100, description: "烧制的木炭" },
     ...DATA.CRAFTABLE_RINGS.map((item) => ({
+      name: item.name,
+      price: item.sellPrice,
+      recipe: item.recipe.map(i => `${term.get(i.itemId)}×${i.quantity}`).join(" "),
+      description: item.effects.map(i => `${DATA.EFFECTS[i.type]}${i.value}`).join(" ")
+    })),
+    ...DATA.CRAFTABLE_HATS.map((item) => ({
+      name: item.name,
+      price: item.sellPrice,
+      recipe: item.recipe.map(i => `${term.get(i.itemId)}×${i.quantity}`).join(" "),
+      description: item.effects.map(i => `${DATA.EFFECTS[i.type]}${i.value}`).join(" ")
+    })),
+    ...DATA.CRAFTABLE_SHOES.map((item) => ({
       name: item.name,
       price: item.sellPrice,
       recipe: item.recipe.map(i => `${term.get(i.itemId)}×${i.quantity}`).join(" "),
@@ -427,6 +439,27 @@ DATA.FISH.forEach(({ name, season, weather, difficulty, sellPrice, description, 
   );
 });
 
+Object.values(DATA.ZONE_NAMES).forEach((zone, i) => {
+  const monsters = Object.values(DATA.MONSTERS);
+  const _1 = monsters[i * 2];
+  const _2 = monsters[i * 2 + 1];
+  const _3 = DATA.BOSS_MONSTERS[i * 20 + 20];
+  [_1, _2, _3].forEach(({ name, hp, attack, defense, expReward, drops, description }, j) => {
+    table.矿洞.append(
+      Object.assign(document.createElement("li"), {
+        innerHTML: `
+          <span>${name}${j > 1 ? "⚔" : ""}</span>
+          <span>${zone.slice(0, 2)}</span>
+          <span class="cell-r">${hp}</span>
+          <span class="cell-r">${attack}</span>
+          <span class="cell-r">${defense}</span>
+          <span class="cell-r">${expReward}</span>
+          <span>${drops.map(({ itemId, chance }) => `${(chance * 100).toFixed()}%${term.get(itemId)}`).join(" ")}</span>
+        `
+      })
+    );
+  });
+});
 
 
 

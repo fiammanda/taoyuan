@@ -253,6 +253,12 @@ section a:hover {
 #table-清溪 > li {
   grid-template-columns: 4em 4em 4em 2em 18em 2em 2em 2em 2em;
 }
+#矿洞 li {
+  grid-template-columns: 3em 2em 2em 2em 2em;
+}
+#table-矿洞 li {
+  grid-template-columns: 5em 2em 2em 2em 2em 2em 11em;
+}
 
 
 @font-face {
