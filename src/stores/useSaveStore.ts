@@ -28,7 +28,7 @@ import { useHanhaiStore } from './useHanhaiStore'
 import { useFishPondStore } from './useFishPondStore'
 
 const SAVE_KEY_PREFIX = 'taoyuanxiang_save_'
-const MAX_SLOTS = 3
+const MAX_SLOTS = 5
 const ENCRYPTION_KEY = 'taoyuanxiang_2024_secret'
 const SAVE_FILE_EXT = '.tyx'
 
