@@ -394,7 +394,7 @@
               >
                 <span class="text-xs">
                   <Swords :size="12" class="inline" />
-                  攻击
+                  攻击 (A)
                 </span>
                 <span class="text-[10px] text-muted">{{ weaponAttack }}攻击力</span>
               </div>
@@ -405,7 +405,7 @@
               >
                 <span class="text-xs">
                   <Shield :size="12" class="inline" />
-                  防御
+                  防御 (D)
                 </span>
                 <span class="text-[10px] text-muted">减免伤害</span>
               </div>
@@ -420,7 +420,7 @@
               >
                 <span class="text-xs" :class="miningStore.combatIsBoss ? 'text-muted' : 'text-danger'">
                   <MoveRight :size="12" class="inline" />
-                  {{ miningStore.combatIsBoss ? '无法' : '逃跑' }}
+                  {{ miningStore.combatIsBoss ? '无法' : '逃跑 (F)' }}
                 </span>
                 <span v-if="miningStore.combatIsBoss" class="text-[10px] text-muted/40">BOSS战</span>
               </div>
@@ -647,7 +647,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, computed } from 'vue'
+  import { ref, computed, onMounted, onUnmounted } from 'vue'
   import {
     Mountain,
     Pickaxe,
@@ -1270,6 +1270,26 @@
     }
     showEquipPropertyModal.value = true
   }
+  
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (combatAnimLock.value) return
+    if (e.key === 'a' || e.key === 'A') {
+      handleCombat('attack')
+    }
+    if (e.key === 'd' || e.key === 'D') {
+      handleCombat('defend')
+    }
+    if (e.key === 'f' || e.key === 'F') {
+      if (!miningStore.combatIsBoss) handleCombat('flee')
+    }
+  }
+
+  onMounted(() => {
+    window.addEventListener('keydown', handleKeyDown)
+  })
+  onUnmounted(() => {
+    window.removeEventListener('keydown', handleKeyDown)
+  })
 </script>
 
 <style scoped>

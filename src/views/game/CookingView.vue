@@ -10,7 +10,12 @@
         class="game-panel flex flex-col md:flex-row md:items-center md:justify-between space-y-2"
       >
         <div>
-          <p class="text-sm">{{ recipe.name }}</p>
+          <p class="text-sm" :data-id="recipe.id">
+            {{ recipe.name }}
+            <LockKeyholeOpen :size="14" class="inline"
+              v-if="!shopStore.shippedItems.includes(`food_${recipe.id}`)"
+            />
+          </p>
           <p class="text-xs text-muted">
             材料：
             <template v-for="(ing, idx) in recipe.ingredients" :key="ing.itemId">
@@ -43,8 +48,8 @@
 </template>
 
 <script setup lang="ts">
-  import { UtensilsCrossed, Zap } from 'lucide-vue-next'
-  import { useCookingStore, useInventoryStore, useGameStore } from '@/stores'
+  import { UtensilsCrossed, Zap, LockKeyholeOpen } from 'lucide-vue-next'
+  import { useCookingStore, useInventoryStore, useGameStore, useShopStore } from '@/stores'
   import { getItemById } from '@/data'
   import { ACTION_TIME_COSTS } from '@/data/timeConstants'
   import { sfxClick } from '@/composables/useAudio'
@@ -52,8 +57,9 @@
   import { handleEndDay } from '@/composables/useEndDay'
   import Button from '@/components/game/Button.vue'
 
-  const cookingStore = useCookingStore()
   const inventoryStore = useInventoryStore()
+  const cookingStore = useCookingStore()
+  const shopStore = useShopStore()
   const gameStore = useGameStore()
 
   const handleCook = (recipeId: string) => {

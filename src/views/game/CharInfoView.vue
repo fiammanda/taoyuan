@@ -564,7 +564,7 @@
     mineralogist: '宝石学家',
     warrior: '武者',
     brute: '蛮力者',
-    acrobat: '杂技师',
+    acrobat: '影舞者',
     tank: '重甲者'
   }
 

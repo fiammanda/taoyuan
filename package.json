@@ -9,6 +9,7 @@
   "main": "dist-electron/main.js",
   "scripts": {
     "dev": "vite",
+    "preview": "vite preview",
     "build": "vite build",
     "check": "vue-tsc -b",
     "lint": "eslint src --ext .ts,.vue",

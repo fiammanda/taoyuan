@@ -66,6 +66,13 @@
                 :disabled="recipe.inputItemId !== null && !inventoryStore.hasItem(recipe.inputItemId, recipe.inputQuantity)"
                 @click="handleStartProcessing(idx, recipe.id)"
               >
+                <LockKeyholeOpen
+                  :size="12"
+                  :class="{
+                    invisible: shopStore.shippedItems.includes(getRecipeOutputId(recipe.id))
+                  }"
+                  class="inline"
+                />
                 {{ recipe.name }}
                 <span v-if="recipe.inputItemId" class="text-muted">
                   ({{ getItemName(recipe.inputItemId) }} {{ inventoryStore.getItemCount(recipe.inputItemId) }}/{{ recipe.inputQuantity }})
@@ -79,6 +86,9 @@
           <div v-else-if="!slot.ready">
             <div class="flex items-center justify-between text-xs mb-1">
               <span class="text-muted">{{ getRecipeName(slot.recipeId) }}</span>
+              <LockKeyholeOpen :size="12" class="ml-1 mr-auto text-muted"
+                v-if="!shopStore.shippedItems.includes(getRecipeOutputId(slot.recipeId))"
+              />
               <span class="text-muted">{{ slot.daysProcessed }}/{{ slot.totalDays }}天</span>
             </div>
             <div class="h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10 mb-1.5">
@@ -147,10 +157,10 @@
 
 <script setup lang="ts">
   import { ref, computed } from 'vue'
-  import { Hammer, Trash2, Package, Boxes, X } from 'lucide-vue-next'
+  import { Hammer, Trash2, Package, Boxes, X, LockKeyholeOpen } from 'lucide-vue-next'
   import Button from '@/components/game/Button.vue'
   import type { MachineType } from '@/types'
-  import { useProcessingStore, useInventoryStore, usePlayerStore, useGameStore, useFarmStore } from '@/stores'
+  import { useProcessingStore, useInventoryStore, usePlayerStore, useGameStore, useFarmStore, useShopStore } from '@/stores'
   import {
     PROCESSING_MACHINES,
     SPRINKLERS,
@@ -175,6 +185,7 @@
   const playerStore = usePlayerStore()
   const gameStore = useGameStore()
   const farmStore = useFarmStore()
+  const shopStore = useShopStore()
 
   // === 制造弹窗 ===
 
@@ -345,6 +356,12 @@
     const recipe = getProcessingRecipeById(recipeId)
     if (!recipe) return recipeId
     return getItemById(recipe.outputItemId)?.name ?? recipe.name
+  }
+
+  const getRecipeOutputId = (recipeId: string): string => {
+    const recipe = getProcessingRecipeById(recipeId)
+    if (!recipe) return recipeId
+    return recipe.outputItemId ?? recipeId
   }
 
   // === 制造处理 ===

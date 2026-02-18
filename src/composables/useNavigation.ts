@@ -115,11 +115,11 @@ export const navigateToPanel = (panelKey: PanelKey) => {
   // UI 面板（无地点）暂停时钟，游戏面板恢复
   const { pauseClock, resumeClock } = useGameClock()
   const targetGroup = TAB_TO_LOCATION_GROUP[panelKey]
-  if (targetGroup === null || targetGroup === undefined) {
+  //if (targetGroup === null || targetGroup === undefined) {
     pauseClock()
-  } else {
-    resumeClock()
-  }
+  //} else {
+  //  resumeClock()
+  //}
 }
 
 export const useNavigation = () => {

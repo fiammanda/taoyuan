@@ -479,6 +479,9 @@
                     {{ item.def?.name }}
                   </span>
                   <span class="text-muted text-xs ml-1">×{{ item.quantity }}</span>
+                  <LockKeyholeOpen :size="12" class="inline ml-1 text-muted"
+                    v-if="['crop', 'fish', 'animal_product', 'processed', 'fruit', 'ore', 'gem', 'material', 'misc', 'food', 'gift'].includes(item.def.category) && !shopStore.shippedItems.includes(item.itemId)"
+                  />
                 </div>
                 <div class="flex space-x-1">
                   <Button @click="handleAddToBox(item.itemId, 1, item.quality)">放入1</Button>
@@ -898,7 +901,8 @@
     Bird,
     Zap,
     Square,
-    Flower2
+    Flower2,
+    LockKeyholeOpen
   } from 'lucide-vue-next'
   import Button from '@/components/game/Button.vue'
   import {

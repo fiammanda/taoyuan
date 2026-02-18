@@ -52,7 +52,6 @@ export const useGameClock = () => {
   /** 启动实时时钟 */
   const startClock = () => {
     if (timerId) return
-    isPaused.value = false
     timerId = setInterval(tick, TICK_MS)
   }
 

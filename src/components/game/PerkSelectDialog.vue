@@ -116,12 +116,12 @@
     },
     combat: {
       fighter: [
-        { id: 'warrior', name: '武者', description: '+40最大生命值' },
+        { id: 'acrobat', name: '影舞者', description: '25%概率闪避反击' },
         { id: 'brute', name: '蛮力者', description: '攻击伤害+25%' }
       ],
       defender: [
-        { id: 'acrobat', name: '杂技师', description: '25%概率闪避反击' },
-        { id: 'tank', name: '重甲者', description: '防御时伤害减少70%' }
+        { id: 'tank', name: '重甲者', description: '防御时伤害减少70%' },
+        { id: 'warrior', name: '武者', description: '+40最大生命值' }
       ]
     }
   }

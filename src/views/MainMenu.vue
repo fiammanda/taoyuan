@@ -86,22 +86,14 @@
               <p class="text-accent">V{{ pkg.version }}-modified</p>
             </div>
             <div class="border border-accent/20 rounded-xs p-3">
-              <p class="text-muted text-xs mb-1">修改内容</p>
-              <p class="text-accent">延长通知显示时间</p>
-              <p class="text-accent">降低部分行动时长</p>
-              <p class="text-accent">增加背包仓库空间</p>
-              <p class="text-accent">增加稀有鱼概率</p>
-              <p class="text-accent">丰富性向选择</p>
-            </div>
-            <div class="border border-accent/20 rounded-xs p-3">
               <p class="text-muted text-xs mb-1">相关链接</p>
               <a href="https://taoyuan.wenzi.games" target="_blank" rel="noopener" class="text-accent break-all">原作地址</a>
               |
-              <a :href="`https://github.com/fiammanda/${pkg.name}`" target="_blank" rel="noopener" class="text-accent break-all">本作仓库</a>
+              <a :href="`https://github.com/fiammanda/${pkg.name}/blob/main/MODIFICATIONS.md`" target="_blank" rel="noopener" class="text-accent break-all">本作仓库</a>
               |
               <a href="/help/" target="_blank" rel="noopener" class="text-accent break-all">攻略指南</a>
               |
-              <a href="/save/" target="_blank" rel="noopener" class="text-accent break-all">存档修改</a>
+              <a href="/save/" target="_blank" rel="noopener" class="text-accent break-all">存档编辑</a>
             </div>
           </div>
         </div>
