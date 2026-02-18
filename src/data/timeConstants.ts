@@ -98,7 +98,7 @@ export const ACTION_TIME_COSTS = {
   aging: 0.08, //0.17,
   plantTree: 0.25, //0.5,
   // 工具升级
-  toolUpgrade: 1,
+  toolUpgrade: 0, //1,
   // 批量农场操作
   batchWater: 0.17,
   batchTill: 0.25,

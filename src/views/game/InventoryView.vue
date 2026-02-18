@@ -336,8 +336,8 @@
                   使用
                 </Button>
                 <Button class="py-0 px-1.5 flex-1 justify-center" @click="handleSaveToPreset(preset.id)">保存</Button>
-                <Button class="py-0 px-1.5" @click="startRename(preset)">改名</Button>
-                <Button class="py-0 px-1.5 text-danger" :disabled="activePresetId === preset.id" @click="handleDeletePreset(preset.id)">
+                <Button class="py-0 px-1.5 flex-1" @click="startRename(preset)">改名</Button>
+                <Button class="py-0 px-1.5 flex-1 text-danger" :disabled="activePresetId === preset.id" @click="handleDeletePreset(preset.id)">
                   删除
                 </Button>
               </div>

@@ -27,26 +27,26 @@ export const MUSEUM_ITEMS: MuseumItemDef[] = [
   { id: 'iridium_bar', name: '铱锭', category: 'bar', sourceHint: '熔炉冶炼铱矿' },
 
   // ===== 化石 (8) =====
-  { id: 'trilobite_fossil', name: '三叶虫化石', category: 'fossil', sourceHint: '矿洞浅矿/冰霜区宝箱' },
-  { id: 'amber', name: '琥珀', category: 'fossil', sourceHint: '矿洞幽境区掉落' },
-  { id: 'ammonite_fossil', name: '菊石化石', category: 'fossil', sourceHint: '矿洞熔岩/水晶区宝箱' },
+  { id: 'trilobite_fossil', name: '三叶虫化石', category: 'fossil', sourceHint: '矿洞浅矿/冰霜层宝箱' },
+  { id: 'amber', name: '琥珀', category: 'fossil', sourceHint: '矿洞幽境层掉落' },
+  { id: 'ammonite_fossil', name: '菊石化石', category: 'fossil', sourceHint: '矿洞熔岩/水晶层宝箱' },
   { id: 'fern_fossil', name: '蕨叶化石', category: 'fossil', sourceHint: '竹林稀有采集' },
-  { id: 'shell_fossil', name: '螺壳化石', category: 'fossil', sourceHint: '矿洞浅矿/冰霜区宝箱' },
-  { id: 'bone_fragment', name: '骨骸碎片', category: 'fossil', sourceHint: '深层怪物稀有掉落' },
+  { id: 'shell_fossil', name: '螺壳化石', category: 'fossil', sourceHint: '矿洞浅矿/冰霜层宝箱' },
+  { id: 'bone_fragment', name: '骨骸碎片', category: 'fossil', sourceHint: '矿洞深层怪物稀有掉落' },
   { id: 'petrified_wood', name: '石化木', category: 'fossil', sourceHint: '竹林稀有采集' },
-  { id: 'dragon_tooth', name: '龙牙化石', category: 'fossil', sourceHint: '深渊区宝箱或骨龙掉落' },
+  { id: 'dragon_tooth', name: '龙牙化石', category: 'fossil', sourceHint: '矿洞深渊层宝箱或骨龙掉落' },
 
   // ===== 古物 (10) =====
   { id: 'ancient_pottery', name: '古陶片', category: 'artifact', sourceHint: '竹林稀有采集' },
-  { id: 'jade_disc', name: '玉璧残片', category: 'artifact', sourceHint: '水晶层宝箱' },
-  { id: 'bronze_mirror', name: '铜镜', category: 'artifact', sourceHint: '熔岩层宝箱' },
-  { id: 'ancient_coin', name: '远古铜钱', category: 'artifact', sourceHint: '矿洞暗河层掉落' },
-  { id: 'oracle_bone', name: '甲骨片', category: 'artifact', sourceHint: '暗影层宝箱' },
-  { id: 'jade_pendant', name: '玉佩', category: 'artifact', sourceHint: '水晶层掉落' },
-  { id: 'ancient_seed', name: '远古种子', category: 'artifact', sourceHint: '深层宝箱极稀有' },
+  { id: 'jade_disc', name: '玉璧残片', category: 'artifact', sourceHint: '矿洞水晶层宝箱' },
+  { id: 'bronze_mirror', name: '铜镜', category: 'artifact', sourceHint: '矿洞熔岩层宝箱' },
+  { id: 'ancient_coin', name: '远古铜钱', category: 'artifact', sourceHint: '矿洞幽境层掉落' },
+  { id: 'oracle_bone', name: '甲骨片', category: 'artifact', sourceHint: '矿洞暗影层宝箱' },
+  { id: 'jade_pendant', name: '玉佩', category: 'artifact', sourceHint: '矿洞水晶层掉落' },
+  { id: 'ancient_seed', name: '远古种子', category: 'artifact', sourceHint: '矿洞深层宝箱极稀有' },
   { id: 'bamboo_scroll', name: '竹简', category: 'artifact', sourceHint: '竹林稀有采集' },
   { id: 'stone_axe_head', name: '石斧头', category: 'artifact', sourceHint: '竹林稀有采集' },
-  { id: 'painted_pottery', name: '彩陶碎片', category: 'artifact', sourceHint: '熔岩层宝箱' }
+  { id: 'painted_pottery', name: '彩陶碎片', category: 'artifact', sourceHint: '矿洞熔岩层宝箱' }
 ]
 
 /** 博物馆分类标签 */
