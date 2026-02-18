@@ -87,8 +87,10 @@
             </div>
             <div class="border border-accent/20 rounded-xs p-3">
               <p class="text-muted text-xs mb-1">修改内容</p>
-              <p class="text-accent">增加背包仓库空间</p>
+              <p class="text-accent">延长通知显示时间</p>
               <p class="text-accent">降低部分行动时长</p>
+              <p class="text-accent">增加背包仓库空间</p>
+              <p class="text-accent">增加稀有鱼概率</p>
               <p class="text-accent">丰富性向选择</p>
             </div>
             <div class="border border-accent/20 rounded-xs p-3">

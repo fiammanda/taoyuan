@@ -63,16 +63,16 @@ export const addLog = (msg: string) => {
 export const showFloat = (text: string, color: FloatColor = 'accent') => {
   switch (color) {
     case 'danger':
-      Qmsg.error(text, { timeout: 1500 })
+      Qmsg.error(text, { timeout: 5000 })
       break
     case 'success':
-      Qmsg.success(text, { timeout: 1500 })
+      Qmsg.success(text, { timeout: 5000 })
       break
     case 'accent':
-      Qmsg.warning(text, { timeout: 1500 })
+      Qmsg.warning(text, { timeout: 5000 })
       break
     case 'water':
-      Qmsg.info(text, { timeout: 1500 })
+      Qmsg.info(text, { timeout: 5000 })
       break
   }
 }

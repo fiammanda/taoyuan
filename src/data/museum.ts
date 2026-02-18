@@ -27,14 +27,14 @@ export const MUSEUM_ITEMS: MuseumItemDef[] = [
   { id: 'iridium_bar', name: '铱锭', category: 'bar', sourceHint: '熔炉冶炼铱矿' },
 
   // ===== 化石 (8) =====
-  { id: 'trilobite_fossil', name: '三叶虫化石', category: 'fossil', sourceHint: '矿洞浅层/冰霜层宝箱' },
-  { id: 'amber', name: '琥珀', category: 'fossil', sourceHint: '矿洞暗河层掉落' },
-  { id: 'ammonite_fossil', name: '菊石化石', category: 'fossil', sourceHint: '矿洞熔岩/水晶层宝箱' },
+  { id: 'trilobite_fossil', name: '三叶虫化石', category: 'fossil', sourceHint: '矿洞浅矿/冰霜区宝箱' },
+  { id: 'amber', name: '琥珀', category: 'fossil', sourceHint: '矿洞幽境区掉落' },
+  { id: 'ammonite_fossil', name: '菊石化石', category: 'fossil', sourceHint: '矿洞熔岩/水晶区宝箱' },
   { id: 'fern_fossil', name: '蕨叶化石', category: 'fossil', sourceHint: '竹林稀有采集' },
-  { id: 'shell_fossil', name: '螺壳化石', category: 'fossil', sourceHint: '矿洞浅层/冰霜层宝箱' },
+  { id: 'shell_fossil', name: '螺壳化石', category: 'fossil', sourceHint: '矿洞浅矿/冰霜区宝箱' },
   { id: 'bone_fragment', name: '骨骸碎片', category: 'fossil', sourceHint: '深层怪物稀有掉落' },
   { id: 'petrified_wood', name: '石化木', category: 'fossil', sourceHint: '竹林稀有采集' },
-  { id: 'dragon_tooth', name: '龙牙化石', category: 'fossil', sourceHint: '深渊层宝箱或骨龙掉落' },
+  { id: 'dragon_tooth', name: '龙牙化石', category: 'fossil', sourceHint: '深渊区宝箱或骨龙掉落' },
 
   // ===== 古物 (10) =====
   { id: 'ancient_pottery', name: '古陶片', category: 'artifact', sourceHint: '竹林稀有采集' },
