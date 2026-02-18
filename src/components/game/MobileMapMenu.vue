@@ -23,53 +23,24 @@
 
         <div class="map-path">···</div>
 
-        <!-- 野外 -->
-        <div class="flex space-x-2">
-          <div class="map-area flex-1">
-            <p class="map-area-title">村落</p>
-            <div class="map-area-grid">
-              <button
-                v-for="t in villageGroup"
-                :key="t.key"
-                class="map-loc"
-                :class="{ 'map-loc-active': current === t.key }"
-                @click="go(t.key)"
-              >
-                <component :is="t.icon" :size="18" />
-                <span>{{ t.label }}</span>
-              </button>
-            </div>
-          </div>
-          <div class="map-area flex-1">
-            <p class="map-area-title">野外</p>
-            <div class="map-area-grid">
-              <button
-                v-for="t in wildGroup"
-                :key="t.key"
-                class="map-loc"
-                :class="{ 'map-loc-active': current === t.key }"
-                @click="go(t.key)"
-              >
-                <component :is="t.icon" :size="18" />
-                <span>{{ t.label }}</span>
-              </button>
-            </div>
+        <!-- 村落 -->
+        <div class="map-area">
+          <p class="map-area-title">村落</p>
+          <div class="map-area-grid">
+            <button v-for="t in villageGroup" :key="t.key" class="map-loc" :class="{ 'map-loc-active': current === t.key }" @click="go(t.key)">
+              <component :is="t.icon" :size="18" />
+              <span>{{ t.label }}</span>
+            </button>
           </div>
         </div>
 
         <div class="map-path">···</div>
 
-        <!-- 工坊 -->
+        <!-- 野外 -->
         <div class="map-area">
-          <p class="map-area-title">工坊</p>
+          <p class="map-area-title">野外</p>
           <div class="map-area-grid">
-            <button
-              v-for="t in craftGroup"
-              :key="t.key"
-              class="map-loc"
-              :class="{ 'map-loc-active': current === t.key }"
-              @click="go(t.key)"
-            >
+            <button v-for="t in wildGroup" :key="t.key" class="map-loc" :class="{ 'map-loc-active': current === t.key }" @click="go(t.key)">
               <component :is="t.icon" :size="18" />
               <span>{{ t.label }}</span>
             </button>
@@ -116,10 +87,10 @@
 
   const pick = (keys: PanelKey[]) => keys.map(k => tabMap.value.get(k)!).filter(Boolean)
 
-  const farmGroup = computed(() => pick(['farm', 'animal', 'home', 'breeding', 'fishpond']))
-  const villageGroup = computed(() => pick(['village', 'shop', 'museum', 'guild']))
+  const farmGroup = computed(() => pick(['farm', 'animal', 'home', 'breeding', 'fishpond', 'workshop']))
+  const villageGroup = computed(() => pick(['village', 'shop', 'upgrade', 'cooking', 'museum', 'guild']))
   const wildGroup = computed(() => pick(['forage', 'fishing', 'mining', 'hanhai']))
-  const craftGroup = computed(() => pick(['cooking', 'workshop', 'upgrade']))
+  //const craftGroup = computed(() => pick([]))
   const personalGroup = computed(() => pick(['charinfo', 'inventory', 'skills', 'achievement', 'wallet', 'quest']))
 
   const go = (key: PanelKey) => {

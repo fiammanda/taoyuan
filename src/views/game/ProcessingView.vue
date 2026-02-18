@@ -69,7 +69,7 @@
                 <LockKeyholeOpen
                   :size="12"
                   :class="{
-                    invisible: slot.machineType !== 'seed_maker' && shopStore.shippedItems.includes(getRecipeOutputId(recipe.id))
+                    invisible: slot.machineType === 'seed_maker' || shopStore.shippedItems.includes(getRecipeOutputId(recipe.id))
                   }"
                   class="inline"
                 />
