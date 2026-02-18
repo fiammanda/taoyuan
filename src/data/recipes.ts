@@ -31,7 +31,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 30,
       healthRestore: 15,
-      buff: { type: 'fishing', value: 1, description: '钓鱼技能+1（当天）' }
+      buff: { type: 'fishing', value: 1, description: '当天钓鱼技能+1' }
     },
     unlockSource: '秋月好感「相识」',
     description: '鲜香可口的红烧鲤鱼。'
@@ -57,7 +57,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 20,
       healthRestore: 5,
-      buff: { type: 'giftBonus', value: 2, description: '送礼好感×2（当天）' }
+      buff: { type: 'giftBonus', value: 2, description: '当天送礼好感×2' }
     },
     unlockSource: '柳娘好感「相识」',
     description: '精致的桂花糕，送礼极佳。'
@@ -72,7 +72,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 25,
       healthRestore: 25,
-      buff: { type: 'mining', value: 20, description: '挖矿体力消耗-20%（当天）' }
+      buff: { type: 'mining', value: 20, description: '当天挖矿体力消耗-20%' }
     },
     unlockSource: '阿石好感「相识」',
     description: '实打实的矿工饭。'
@@ -88,7 +88,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 50,
       healthRestore: 40,
-      buff: { type: 'defense', value: 20, description: '受到伤害-20%（当天）' }
+      buff: { type: 'defense', value: 20, description: '当天受到伤害-20%' }
     },
     unlockSource: '烹饪等级4',
     requiredSkill: { type: 'farming', level: 4 },
@@ -104,7 +104,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 35,
       healthRestore: 15,
-      buff: { type: 'fishing', value: 2, description: '钓鱼技能+2（当天）' }
+      buff: { type: 'fishing', value: 2, description: '当天钓鱼技能+2' }
     },
     unlockSource: '钓鱼等级3',
     requiredSkill: { type: 'fishing', level: 3 },
@@ -131,7 +131,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 20,
       healthRestore: 10,
-      buff: { type: 'speed', value: 15, description: '行动速度+15%（当天）' }
+      buff: { type: 'speed', value: 15, description: '当天行动速度+15%' }
     },
     unlockSource: '初始自带',
     description: '驱寒暖胃的姜汤。'
@@ -158,7 +158,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 25,
       healthRestore: 10,
-      buff: { type: 'giftBonus', value: 2, description: '送礼好感×2（当天）' }
+      buff: { type: 'giftBonus', value: 2, description: '当天送礼好感×2' }
     },
     unlockSource: '烹饪等级3',
     requiredSkill: { type: 'farming', level: 3 },
@@ -187,7 +187,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 35,
       healthRestore: 30,
-      buff: { type: 'mining', value: 25, description: '挖矿体力消耗-25%（当天）' }
+      buff: { type: 'mining', value: 25, description: '当天挖矿体力消耗-25%' }
     },
     unlockSource: '挖矿等级4',
     requiredSkill: { type: 'mining', level: 4 },
@@ -222,7 +222,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 45,
       healthRestore: 20,
-      buff: { type: 'luck', value: 15, description: '幸运+15%（当天）' }
+      buff: { type: 'luck', value: 15, description: '当天幸运+15%' }
     },
     unlockSource: '烹饪等级5',
     requiredSkill: { type: 'farming', level: 5 },
@@ -250,7 +250,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 60,
       healthRestore: 30,
-      buff: { type: 'farming', value: 20, description: '农耕体力消耗-20%（当天）' }
+      buff: { type: 'farming', value: 20, description: '当天农耕体力消耗-20%' }
     },
     unlockSource: '采集等级5',
     requiredSkill: { type: 'foraging', level: 5 },
@@ -277,7 +277,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 35,
       healthRestore: 15,
-      buff: { type: 'luck', value: 10, description: '幸运+10%（当天）' }
+      buff: { type: 'luck', value: 10, description: '当天幸运+10%' }
     },
     unlockSource: '烹饪等级3',
     requiredSkill: { type: 'farming', level: 3 },
@@ -374,7 +374,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 20,
       healthRestore: 5,
-      buff: { type: 'luck', value: 10, description: '幸运+10%（当天）' }
+      buff: { type: 'luck', value: 10, description: '当天幸运+10%' }
     },
     unlockSource: '小满好感「相识」',
     description: '芬芳甜蜜的桂花甜茶。'
@@ -402,7 +402,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 40,
       healthRestore: 20,
-      buff: { type: 'fishing', value: 2, description: '钓鱼技能+2（当天）' }
+      buff: { type: 'fishing', value: 2, description: '当天钓鱼技能+2' }
     },
     unlockSource: '秋月好感「相知」',
     description: '秋月独创的枫叶烤鱼法。'
@@ -428,7 +428,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 30,
       healthRestore: 15,
-      buff: { type: 'giftBonus', value: 2, description: '送礼好感×2（当天）' }
+      buff: { type: 'giftBonus', value: 2, description: '当天送礼好感×2' }
     },
     unlockSource: '柳娘好感「相知」',
     description: '柳娘精心制作的绣囊糕。'
@@ -444,7 +444,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 45,
       healthRestore: 35,
-      buff: { type: 'mining', value: 30, description: '挖矿体力消耗-30%（当天）' }
+      buff: { type: 'mining', value: 30, description: '当天挖矿体力消耗-30%' }
     },
     unlockSource: '阿石好感「相知」',
     description: '阿石在矿洞深处发明的炖菜。'
@@ -459,7 +459,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 25,
       healthRestore: 10,
-      buff: { type: 'speed', value: 20, description: '行动速度+20%（当天）' }
+      buff: { type: 'speed', value: 20, description: '当天行动速度+20%' }
     },
     unlockSource: '小满好感「相知」',
     description: '小满用林中野果做的果酱。'
@@ -478,7 +478,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 70,
       healthRestore: 40,
-      buff: { type: 'farming', value: 25, description: '农耕体力消耗-25%（当天）' }
+      buff: { type: 'farming', value: 25, description: '当天农耕体力消耗-25%' }
     },
     unlockSource: '陈伯好感「挚友」',
     description: '陈伯压箱底的农家大菜。'
@@ -494,7 +494,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 60,
       healthRestore: 30,
-      buff: { type: 'luck', value: 20, description: '幸运+20%（当天）' }
+      buff: { type: 'luck', value: 20, description: '当天幸运+20%' }
     },
     unlockSource: '秋月好感「挚友」',
     description: '秋月为挚友备的秋夜佳宴。'
@@ -522,7 +522,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 40,
       healthRestore: 20,
-      buff: { type: 'giftBonus', value: 3, description: '送礼好感×3（当天）' }
+      buff: { type: 'giftBonus', value: 3, description: '当天送礼好感×3' }
     },
     unlockSource: '柳娘好感「挚友」',
     description: '柳娘专为有情人做的鸳鸯酥。'
@@ -538,7 +538,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 60,
       healthRestore: 50,
-      buff: { type: 'defense', value: 25, description: '受到伤害-25%（当天）' }
+      buff: { type: 'defense', value: 25, description: '当天受到伤害-25%' }
     },
     unlockSource: '阿石好感「挚友」',
     description: '阿石独创的锻造师能量餐。'
@@ -553,7 +553,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 50,
       healthRestore: 25,
-      buff: { type: 'luck', value: 25, description: '幸运+25%（当天）' }
+      buff: { type: 'luck', value: 25, description: '当天幸运+25%' }
     },
     unlockSource: '小满好感「挚友」',
     description: '小满用灵果酿的幸运酒。'
@@ -572,7 +572,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 50,
       healthRestore: 25,
-      buff: { type: 'giftBonus', value: 3, description: '送礼好感×3（当天）' }
+      buff: { type: 'giftBonus', value: 3, description: '当天送礼好感×3' }
     },
     unlockSource: '与柳娘结婚后',
     description: '柳娘婚后传授的凤凰糕秘方。'
@@ -588,7 +588,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 60,
       healthRestore: 50,
-      buff: { type: 'mining', value: 35, description: '挖矿体力消耗-35%（当天）' }
+      buff: { type: 'mining', value: 35, description: '当天挖矿体力消耗-35%' }
     },
     unlockSource: '与阿石结婚后',
     description: '阿石婚后教你的熔岩铁锅料理。'
@@ -603,7 +603,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 50,
       healthRestore: 20,
-      buff: { type: 'fishing', value: 3, description: '钓鱼技能+3（当天）' }
+      buff: { type: 'fishing', value: 3, description: '当天钓鱼技能+3' }
     },
     unlockSource: '与秋月结婚后',
     description: '秋月婚后分享的月下刺身。'
@@ -619,7 +619,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 55,
       healthRestore: 30,
-      buff: { type: 'giftBonus', value: 2, description: '送礼好感×2（当天）' }
+      buff: { type: 'giftBonus', value: 2, description: '当天送礼好感×2' }
     },
     unlockSource: '与春兰结婚后',
     description: '春兰婚后传授的茶宴配方，以茶入馔。'
@@ -634,7 +634,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 65,
       healthRestore: 35,
-      buff: { type: 'luck', value: 3, description: '幸运+3（当天）' }
+      buff: { type: 'luck', value: 3, description: '当天幸运+3' }
     },
     unlockSource: '与雪芹结婚后',
     description: '雪芹婚后分享的画室私房羹汤。'
@@ -650,7 +650,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 45,
       healthRestore: 20,
-      buff: { type: 'giftBonus', value: 2, description: '送礼好感×2（当天）' }
+      buff: { type: 'giftBonus', value: 2, description: '当天送礼好感×2' }
     },
     unlockSource: '与素素结婚后',
     description: '素素婚后教你包的精致饺子，形如锦囊。'
@@ -666,7 +666,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 70,
       healthRestore: 40,
-      buff: { type: 'farming', value: 30, description: '农作体力消耗-30%（当天）' }
+      buff: { type: 'farming', value: 30, description: '当天农作体力消耗-30%' }
     },
     unlockSource: '与红豆结婚后',
     description: '红豆婚后传授的酒香名菜。'
@@ -682,7 +682,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 50,
       healthRestore: 30,
-      buff: { type: 'speed', value: 2, description: '移动速度+2（当天）' }
+      buff: { type: 'speed', value: 2, description: '当天移动速度+2' }
     },
     unlockSource: '与丹青结婚后',
     description: '丹青婚后按古方熬煮的养心粥。'
@@ -698,7 +698,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 80,
       healthRestore: 50,
-      buff: { type: 'mining', value: 40, description: '挖矿体力消耗-40%（当天）' }
+      buff: { type: 'mining', value: 40, description: '当天挖矿体力消耗-40%' }
     },
     unlockSource: '与阿铁结婚后',
     description: '阿铁婚后做的粗犷炖菜，量大管饱。'
@@ -714,7 +714,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 60,
       healthRestore: 45,
-      buff: { type: 'defense', value: 3, description: '防御+3（当天）' }
+      buff: { type: 'defense', value: 3, description: '当天防御+3' }
     },
     unlockSource: '与云飞结婚后',
     description: '云飞婚后教你的山野烤法。'
@@ -730,7 +730,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 55,
       healthRestore: 35,
-      buff: { type: 'farming', value: 25, description: '农作体力消耗-25%（当天）' }
+      buff: { type: 'farming', value: 25, description: '当天农作体力消耗-25%' }
     },
     unlockSource: '与大牛结婚后',
     description: '大牛婚后常做的香浓奶汤。'
@@ -746,7 +746,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 40,
       healthRestore: 20,
-      buff: { type: 'luck', value: 2, description: '幸运+2（当天）' }
+      buff: { type: 'luck', value: 2, description: '当天幸运+2' }
     },
     unlockSource: '与墨白结婚后',
     description: '墨白婚后常在月下泡的清淡茶饭。'
@@ -763,7 +763,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 35,
       healthRestore: 15,
-      buff: { type: 'farming', value: 15, description: '农耕体力消耗-15%（当天）' }
+      buff: { type: 'farming', value: 15, description: '当天农耕体力消耗-15%' }
     },
     unlockSource: '农耕等级6',
     requiredSkill: { type: 'farming', level: 6 },
@@ -780,7 +780,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 45,
       healthRestore: 20,
-      buff: { type: 'farming', value: 20, description: '农耕体力消耗-20%（当天）' }
+      buff: { type: 'farming', value: 20, description: '当天农耕体力消耗-20%' }
     },
     unlockSource: '农耕等级7',
     requiredSkill: { type: 'farming', level: 7 },
@@ -798,7 +798,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 70,
       healthRestore: 35,
-      buff: { type: 'farming', value: 30, description: '农耕体力消耗-30%（当天）' }
+      buff: { type: 'farming', value: 30, description: '当天农耕体力消耗-30%' }
     },
     unlockSource: '农耕等级9',
     requiredSkill: { type: 'farming', level: 9 },
@@ -816,7 +816,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 35,
       healthRestore: 15,
-      buff: { type: 'fishing', value: 1, description: '钓鱼技能+1（当天）' }
+      buff: { type: 'fishing', value: 1, description: '当天钓鱼技能+1' }
     },
     unlockSource: '钓鱼等级4',
     requiredSkill: { type: 'fishing', level: 4 },
@@ -833,7 +833,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 45,
       healthRestore: 20,
-      buff: { type: 'fishing', value: 2, description: '钓鱼技能+2（当天）' }
+      buff: { type: 'fishing', value: 2, description: '当天钓鱼技能+2' }
     },
     unlockSource: '钓鱼等级5',
     requiredSkill: { type: 'fishing', level: 5 },
@@ -849,7 +849,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 50,
       healthRestore: 25,
-      buff: { type: 'luck', value: 15, description: '幸运+15%（当天）' }
+      buff: { type: 'luck', value: 15, description: '当天幸运+15%' }
     },
     unlockSource: '钓鱼等级6',
     requiredSkill: { type: 'fishing', level: 6 },
@@ -866,7 +866,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 55,
       healthRestore: 30,
-      buff: { type: 'fishing', value: 3, description: '钓鱼技能+3（当天）' }
+      buff: { type: 'fishing', value: 3, description: '当天钓鱼技能+3' }
     },
     unlockSource: '钓鱼等级7',
     requiredSkill: { type: 'fishing', level: 7 },
@@ -882,7 +882,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 70,
       healthRestore: 35,
-      buff: { type: 'fishing', value: 4, description: '钓鱼技能+4（当天）' }
+      buff: { type: 'fishing', value: 4, description: '当天钓鱼技能+4' }
     },
     unlockSource: '钓鱼等级8',
     requiredSkill: { type: 'fishing', level: 8 },
@@ -913,7 +913,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 40,
       healthRestore: 25,
-      buff: { type: 'mining', value: 25, description: '挖矿体力消耗-25%（当天）' }
+      buff: { type: 'mining', value: 25, description: '当天挖矿体力消耗-25%' }
     },
     unlockSource: '采矿等级5',
     requiredSkill: { type: 'mining', level: 5 },
@@ -930,7 +930,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 50,
       healthRestore: 35,
-      buff: { type: 'defense', value: 20, description: '受到伤害-20%（当天）' }
+      buff: { type: 'defense', value: 20, description: '当天受到伤害-20%' }
     },
     unlockSource: '采矿等级6',
     requiredSkill: { type: 'mining', level: 6 },
@@ -946,7 +946,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 55,
       healthRestore: 30,
-      buff: { type: 'mining', value: 30, description: '挖矿体力消耗-30%（当天）' }
+      buff: { type: 'mining', value: 30, description: '当天挖矿体力消耗-30%' }
     },
     unlockSource: '采矿等级7',
     requiredSkill: { type: 'mining', level: 7 },
@@ -963,7 +963,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 70,
       healthRestore: 40,
-      buff: { type: 'mining', value: 35, description: '挖矿体力消耗-35%（当天）' }
+      buff: { type: 'mining', value: 35, description: '当天挖矿体力消耗-35%' }
     },
     unlockSource: '采矿等级8',
     requiredSkill: { type: 'mining', level: 8 },
@@ -993,7 +993,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 35,
       healthRestore: 20,
-      buff: { type: 'speed', value: 15, description: '行动速度+15%（当天）' }
+      buff: { type: 'speed', value: 15, description: '当天行动速度+15%' }
     },
     unlockSource: '采集等级4',
     requiredSkill: { type: 'foraging', level: 4 },
@@ -1010,7 +1010,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 55,
       healthRestore: 30,
-      buff: { type: 'farming', value: 20, description: '农耕体力消耗-20%（当天）' }
+      buff: { type: 'farming', value: 20, description: '当天农耕体力消耗-20%' }
     },
     unlockSource: '采集等级7',
     requiredSkill: { type: 'foraging', level: 7 },
@@ -1027,7 +1027,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 80,
       healthRestore: 40,
-      buff: { type: 'luck', value: 25, description: '幸运+25%（当天）' }
+      buff: { type: 'luck', value: 25, description: '当天幸运+25%' }
     },
     unlockSource: '采集等级9',
     requiredSkill: { type: 'foraging', level: 9 },
@@ -1058,7 +1058,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 35,
       healthRestore: 30,
-      buff: { type: 'defense', value: 15, description: '受到伤害-15%（当天）' }
+      buff: { type: 'defense', value: 15, description: '当天受到伤害-15%' }
     },
     unlockSource: '战斗等级4',
     requiredSkill: { type: 'combat', level: 4 },
@@ -1075,7 +1075,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 40,
       healthRestore: 35,
-      buff: { type: 'defense', value: 20, description: '受到伤害-20%（当天）' }
+      buff: { type: 'defense', value: 20, description: '当天受到伤害-20%' }
     },
     unlockSource: '战斗等级5',
     requiredSkill: { type: 'combat', level: 5 },
@@ -1092,7 +1092,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 55,
       healthRestore: 40,
-      buff: { type: 'defense', value: 25, description: '受到伤害-25%（当天）' }
+      buff: { type: 'defense', value: 25, description: '当天受到伤害-25%' }
     },
     unlockSource: '战斗等级7',
     requiredSkill: { type: 'combat', level: 7 },
@@ -1109,7 +1109,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 70,
       healthRestore: 50,
-      buff: { type: 'defense', value: 30, description: '受到伤害-30%（当天）' }
+      buff: { type: 'defense', value: 30, description: '当天受到伤害-30%' }
     },
     unlockSource: '战斗等级9',
     requiredSkill: { type: 'combat', level: 9 },
@@ -1128,7 +1128,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 30,
       healthRestore: 15,
-      buff: { type: 'speed', value: 15, description: '行动速度+15%（当天）' }
+      buff: { type: 'speed', value: 15, description: '当天行动速度+15%' }
     },
     unlockSource: '春耕祭奖励',
     description: '春耕祭传统的春卷。'
@@ -1144,7 +1144,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 40,
       healthRestore: 20,
-      buff: { type: 'luck', value: 15, description: '幸运+15%（当天）' }
+      buff: { type: 'luck', value: 15, description: '当天幸运+15%' }
     },
     unlockSource: '荷灯节奖励',
     description: '荷灯节限定的荷灯糕。'
@@ -1161,7 +1161,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 50,
       healthRestore: 25,
-      buff: { type: 'farming', value: 20, description: '农耕体力消耗-20%（当天）' }
+      buff: { type: 'farming', value: 20, description: '当天农耕体力消耗-20%' }
     },
     unlockSource: '丰收宴奖励',
     description: '丰收宴上的传统大菜。'
@@ -1177,7 +1177,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 60,
       healthRestore: 30,
-      buff: { type: 'luck', value: 20, description: '幸运+20%（当天）' }
+      buff: { type: 'luck', value: 20, description: '当天幸运+20%' }
     },
     unlockSource: '除夕守岁奖励',
     description: '除夕夜包的幸运饺子。'
@@ -1194,7 +1194,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 40,
       healthRestore: 15,
-      buff: { type: 'farming', value: 10, description: '农耕体力消耗-10%（当天）' }
+      buff: { type: 'farming', value: 10, description: '当天农耕体力消耗-10%' }
     },
     unlockSource: '元日奖励',
     description: '「年年高」的吉祥年糕。'
@@ -1210,7 +1210,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 35,
       healthRestore: 10,
-      buff: { type: 'luck', value: 10, description: '幸运+10%（当天）' }
+      buff: { type: 'luck', value: 10, description: '当天幸运+10%' }
     },
     unlockSource: '花朝节奖励',
     description: '以鲜花入馅的精致糕点。'
@@ -1225,7 +1225,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 30,
       healthRestore: 10,
-      buff: { type: 'farming', value: 15, description: '农耕体力消耗-15%（当天）' }
+      buff: { type: 'farming', value: 15, description: '当天农耕体力消耗-15%' }
     },
     unlockSource: '上巳踏青奖励',
     description: '草药清香的踏青小食。'
@@ -1241,7 +1241,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 45,
       healthRestore: 20,
-      buff: { type: 'luck', value: 15, description: '幸运+15%（当天）' }
+      buff: { type: 'luck', value: 15, description: '当天幸运+15%' }
     },
     unlockSource: '中秋赏月奖励',
     description: '月圆之夜的莲蓉月饼。'
@@ -1271,7 +1271,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 35,
       healthRestore: 15,
-      buff: { type: 'speed', value: 10, description: '行动速度+10%（当天）' }
+      buff: { type: 'speed', value: 10, description: '当天行动速度+10%' }
     },
     unlockSource: '端午赛龙舟奖励',
     description: '竹叶清香的端午粽子。'
@@ -1287,7 +1287,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 30,
       healthRestore: 10,
-      buff: { type: 'fishing', value: 1, description: '钓鱼技能+1（当天）' }
+      buff: { type: 'fishing', value: 1, description: '当天钓鱼技能+1' }
     },
     unlockSource: '七夕猜灯谜奖励',
     description: '七夕乞巧的传统小点。'
@@ -1302,7 +1302,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 40,
       healthRestore: 20,
-      buff: { type: 'luck', value: 12, description: '幸运+12%（当天）' }
+      buff: { type: 'luck', value: 12, description: '当天幸运+12%' }
     },
     unlockSource: '重阳投壶奖励',
     description: '重阳佳节的菊花酿。'
@@ -1317,7 +1317,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 45,
       healthRestore: 20,
-      buff: { type: 'mining', value: 1, description: '矿工技能+1（当天）' }
+      buff: { type: 'mining', value: 1, description: '当天矿工技能+1' }
     },
     unlockSource: '冬至包饺子奖励',
     description: '冬至时节包的暖心饺子。'
@@ -1333,7 +1333,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 50,
       healthRestore: 25,
-      buff: { type: 'all_skills', value: 1, description: '全技能+1（当天）' }
+      buff: { type: 'all_skills', value: 1, description: '当天全技能+1' }
     },
     unlockSource: '年末烟花会奖励',
     description: '团团圆圆的花生汤圆。'
@@ -1348,7 +1348,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 35,
       healthRestore: 15,
-      buff: { type: 'all_skills', value: 1, description: '全技能+1（当天）' }
+      buff: { type: 'all_skills', value: 1, description: '当天全技能+1' }
     },
     unlockSource: '斗茶大会奖励',
     description: '斗茶会上的经典茶饮，清香沁脾。'
@@ -1364,7 +1364,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 35,
       healthRestore: 15,
-      buff: { type: 'speed', value: 12, description: '行动速度+12%（当天）' }
+      buff: { type: 'speed', value: 12, description: '当天行动速度+12%' }
     },
     unlockSource: '秋风筝会奖励',
     description: '风筝节上的应景糕点，形如纸鸢。'
@@ -1404,7 +1404,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 50,
       healthRestore: 30,
-      buff: { type: 'mining', value: 25, description: '挖矿体力消耗-25%（当天）' }
+      buff: { type: 'mining', value: 25, description: '当天挖矿体力消耗-25%' }
     },
     unlockSource: '成就：到达矿洞30层',
     description: '矿工荣耀的象征。'
@@ -1431,7 +1431,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 30,
       healthRestore: 15,
-      buff: { type: 'giftBonus', value: 2, description: '送礼好感×2（当天）' }
+      buff: { type: 'giftBonus', value: 2, description: '当天送礼好感×2' }
     },
     unlockSource: '成就：3位NPC达到相知',
     description: '社交达人的特调花茶。'
@@ -1447,7 +1447,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 45,
       healthRestore: 25,
-      buff: { type: 'fishing', value: 2, description: '钓鱼技能+2（当天）' }
+      buff: { type: 'fishing', value: 2, description: '当天钓鱼技能+2' }
     },
     unlockSource: '成就：钓到20条鱼',
     description: '渔夫才能拼出的海鲜拼盘。'
@@ -1462,7 +1462,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 80,
       healthRestore: 40,
-      buff: { type: 'fishing', value: 4, description: '钓鱼技能+4（当天）' }
+      buff: { type: 'fishing', value: 4, description: '当天钓鱼技能+4' }
     },
     unlockSource: '成就：钓到传说鱼',
     description: '用传说之鱼做的极品盛宴。'
@@ -1478,7 +1478,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 60,
       healthRestore: 35,
-      buff: { type: 'defense', value: 20, description: '受到伤害-20%（当天）' }
+      buff: { type: 'defense', value: 20, description: '当天受到伤害-20%' }
     },
     unlockSource: '成就：到达矿洞50层',
     description: '深渊探索者的秘制炖菜。'
@@ -1495,7 +1495,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 80,
       healthRestore: 40,
-      buff: { type: 'luck', value: 25, description: '幸运+25%（当天）' }
+      buff: { type: 'luck', value: 25, description: '当天幸运+25%' }
     },
     unlockSource: '成就：发现50种物品',
     description: '用珍稀食材做的收藏家宴。'
@@ -1534,7 +1534,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 60,
       healthRestore: 30,
-      buff: { type: 'farming', value: 1, description: '农耕技能+1（当天）' }
+      buff: { type: 'farming', value: 1, description: '当天农耕技能+1' }
     },
     unlockSource: '大牛好感「知己」',
     description: '奢侈的松露炒饭，香气四溢。'
@@ -1565,7 +1565,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 35,
       healthRestore: 15,
-      buff: { type: 'speed', value: 15, description: '行动速度+15%（当天）' }
+      buff: { type: 'speed', value: 15, description: '当天行动速度+15%' }
     },
     unlockSource: '陈伯好感「挚友」',
     description: '丝滑醇香的驼奶茶。'
@@ -1581,7 +1581,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 90,
       healthRestore: 50,
-      buff: { type: 'all_skills', value: 1, description: '全技能+1（当天）' }
+      buff: { type: 'all_skills', value: 1, description: '当天全技能+1' }
     },
     unlockSource: '结婚后解锁',
     description: '传说中的孔雀宴，尊贵无比。'
@@ -1597,7 +1597,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 60,
       healthRestore: 30,
-      buff: { type: 'mining', value: 2, description: '采矿技能+2（当天）' }
+      buff: { type: 'mining', value: 2, description: '当天采矿技能+2' }
     },
     unlockSource: '瀚海驿站购买香料后解锁',
     description: '西域风味的烤羊肉，香气扑鼻，力量倍增。'
@@ -1613,7 +1613,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 70,
       healthRestore: 35,
-      buff: { type: 'giftBonus', value: 3, description: '送礼好感×3（当天）' }
+      buff: { type: 'giftBonus', value: 3, description: '当天送礼好感×3' }
     },
     unlockSource: '瀚海驿站购买丝绸后解锁',
     description: '用丝绸包裹的精致饺子，配以西域香料，送礼佳品。'
@@ -1628,7 +1628,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 50,
       healthRestore: 40,
-      buff: { type: 'stamina', value: 30, description: '体力上限+30（当天）' }
+      buff: { type: 'stamina', value: 30, description: '当天体力上限+30' }
     },
     unlockSource: '收获仙人掌后解锁',
     description: '清凉解暑的仙人掌汤，沙漠旅人的续命良方。'
@@ -1643,7 +1643,7 @@ export const RECIPES: RecipeDef[] = [
     effect: {
       staminaRestore: 45,
       healthRestore: 20,
-      buff: { type: 'farming', value: 2, description: '种植技能+2（当天）' }
+      buff: { type: 'farming', value: 2, description: '当天种植技能+2' }
     },
     unlockSource: '收获红枣后解锁',
     description: '甜蜜软糯的枣糕，补气养血。'

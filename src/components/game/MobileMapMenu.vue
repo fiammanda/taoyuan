@@ -3,7 +3,7 @@
     <div v-if="open" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-3" @click.self="$emit('close')">
       <div class="map-container game-panel w-full max-w-sm md:max-w-150 max-h-[85vh] overflow-y-auto relative">
         <button
-          class="absolute top-4 right-4 px-2 py-1 text-xs transition-colors hover:border-accent/60 hover:bg-[var(--color-accent)] text-muted border border-accent/20"
+          class="absolute top-4 right-4 px-2 py-1 rounded-sm text-xs transition-colors hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)] text-muted border border-accent/20"
           @click="$emit('close')"
         >
           <X :size="14" />

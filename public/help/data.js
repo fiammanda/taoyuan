@@ -9096,7 +9096,7 @@
       id: "copper_sprinkler",
       name: "铜管洒水器",
       description: "自动灌溉周围8块地。",
-      range: 9,
+      range: 8,
       craftCost: [
         { itemId: "copper_bar", quantity: 3 },
         { itemId: "iron_bar", quantity: 1 }
@@ -9107,7 +9107,7 @@
       id: "gold_sprinkler",
       name: "金管洒水器",
       description: "自动灌溉周围5×5共24块地。",
-      range: 29,
+      range: 24,
       craftCost: [
         { itemId: "gold_bar", quantity: 2 },
         { itemId: "iron_bar", quantity: 2 },
@@ -13504,7 +13504,7 @@
     };
     const r = rewardTable[zone];
     const items = [{ itemId: ore, quantity: r.qty }];
-    if (Math.random() < 0.2) {
+    if (Math.random() < 0.25) {
       const ZONE_TREASURE_DROPS = {
         shallow: ["trilobite_fossil", "shell_fossil"],
         frost: ["trilobite_fossil", "shell_fossil"],
@@ -13929,7 +13929,7 @@
   var ZONE_NAMES = {
     shallow: "浅矿·土石洞穴",
     frost: "冰窟·冰霜暗河",
-    lava: "熔岩层·地火暗涌",
+    lava: "熔岩·地火暗涌",
     crystal: "晶窟·水晶迷宫",
     shadow: "幽境·暗影裂隙",
     abyss: "深渊·无底深渊"
@@ -17876,17 +17876,19 @@
     gift: 0,
     // 加工坊
     craftMachine: 0.17,
+    craftProduct: 0.08,
     startProcessing: 0,
     collectProduct: 0,
     craftSprinkler: 0.17,
     craftFertilizer: 0.17,
     craftJadeRing: 0.17,
     // 畜棚
-    feedAnimals: 0.25,
+    feedAnimals: 0.17,
     //0.5,
     petAnimal: 0.08,
     //0.17,
-    graze: 1,
+    graze: 0.5,
+    //1,
     // 农舍
     collectCave: 0.08,
     //0.17,
@@ -17895,7 +17897,8 @@
     plantTree: 0.25,
     //0.5,
     // 工具升级
-    toolUpgrade: 1,
+    toolUpgrade: 0,
+    //1,
     // 批量农场操作
     batchWater: 0.17,
     batchTill: 0.25,
@@ -24267,32 +24270,32 @@
     { id: "moonstone", name: "月光石", category: "gem", sourceHint: "矿洞水晶层" },
     { id: "obsidian", name: "黑曜石", category: "gem", sourceHint: "矿洞暗影层" },
     { id: "dragon_jade", name: "龙玉", category: "gem", sourceHint: "矿洞深渊层" },
-    { id: "prismatic_shard", name: "五彩碎片", category: "gem", sourceHint: "极其稀有，深层宝箱" },
+    { id: "prismatic_shard", name: "五彩碎片", category: "gem", sourceHint: "骷髅矿穴" },
     // ===== 金属锭 (4) =====
     { id: "copper_bar", name: "铜锭", category: "bar", sourceHint: "熔炉冶炼铜矿" },
     { id: "iron_bar", name: "铁锭", category: "bar", sourceHint: "熔炉冶炼铁矿" },
     { id: "gold_bar", name: "金锭", category: "bar", sourceHint: "熔炉冶炼金矿" },
     { id: "iridium_bar", name: "铱锭", category: "bar", sourceHint: "熔炉冶炼铱矿" },
     // ===== 化石 (8) =====
-    { id: "trilobite_fossil", name: "三叶虫化石", category: "fossil", sourceHint: "矿洞浅层/冰霜层宝箱" },
-    { id: "amber", name: "琥珀", category: "fossil", sourceHint: "矿洞暗河层掉落" },
-    { id: "ammonite_fossil", name: "菊石化石", category: "fossil", sourceHint: "矿洞熔岩/水晶层宝箱" },
-    { id: "fern_fossil", name: "蕨叶化石", category: "fossil", sourceHint: "竹林稀有采集" },
-    { id: "shell_fossil", name: "螺壳化石", category: "fossil", sourceHint: "矿洞浅层/冰霜层宝箱" },
-    { id: "bone_fragment", name: "骨骸碎片", category: "fossil", sourceHint: "深层怪物稀有掉落" },
     { id: "petrified_wood", name: "石化木", category: "fossil", sourceHint: "竹林稀有采集" },
-    { id: "dragon_tooth", name: "龙牙化石", category: "fossil", sourceHint: "深渊层宝箱或骨龙掉落" },
+    { id: "fern_fossil", name: "蕨叶化石", category: "fossil", sourceHint: "竹林稀有采集" },
+    { id: "trilobite_fossil", name: "三叶虫化石", category: "fossil", sourceHint: "矿洞浅矿/冰霜层宝箱" },
+    { id: "shell_fossil", name: "螺壳化石", category: "fossil", sourceHint: "矿洞浅矿/冰霜层宝箱" },
+    { id: "ammonite_fossil", name: "菊石化石", category: "fossil", sourceHint: "矿洞熔岩/水晶层宝箱" },
+    { id: "amber", name: "琥珀", category: "fossil", sourceHint: "矿洞幽境层掉落" },
+    { id: "bone_fragment", name: "骨骸碎片", category: "fossil", sourceHint: "矿洞深渊层怪物宝箱或掉落" },
+    { id: "dragon_tooth", name: "龙牙化石", category: "fossil", sourceHint: "矿洞深渊层宝箱或掉落" },
     // ===== 古物 (10) =====
-    { id: "ancient_pottery", name: "古陶片", category: "artifact", sourceHint: "竹林稀有采集" },
-    { id: "jade_disc", name: "玉璧残片", category: "artifact", sourceHint: "水晶层宝箱" },
-    { id: "bronze_mirror", name: "铜镜", category: "artifact", sourceHint: "熔岩层宝箱" },
-    { id: "ancient_coin", name: "远古铜钱", category: "artifact", sourceHint: "矿洞暗河层掉落" },
-    { id: "oracle_bone", name: "甲骨片", category: "artifact", sourceHint: "暗影层宝箱" },
-    { id: "jade_pendant", name: "玉佩", category: "artifact", sourceHint: "水晶层掉落" },
-    { id: "ancient_seed", name: "远古种子", category: "artifact", sourceHint: "深层宝箱极稀有" },
     { id: "bamboo_scroll", name: "竹简", category: "artifact", sourceHint: "竹林稀有采集" },
     { id: "stone_axe_head", name: "石斧头", category: "artifact", sourceHint: "竹林稀有采集" },
-    { id: "painted_pottery", name: "彩陶碎片", category: "artifact", sourceHint: "熔岩层宝箱" }
+    { id: "ancient_pottery", name: "古陶片", category: "artifact", sourceHint: "竹林稀有采集" },
+    { id: "painted_pottery", name: "彩陶碎片", category: "artifact", sourceHint: "矿洞熔岩层宝箱" },
+    { id: "bronze_mirror", name: "铜镜", category: "artifact", sourceHint: "矿洞熔岩层宝箱" },
+    { id: "jade_disc", name: "玉璧残片", category: "artifact", sourceHint: "矿洞晶窟层宝箱" },
+    { id: "jade_pendant", name: "玉佩", category: "artifact", sourceHint: "矿洞晶窟层掉落" },
+    { id: "oracle_bone", name: "甲骨片", category: "artifact", sourceHint: "矿洞幽境层宝箱" },
+    { id: "ancient_coin", name: "远古铜钱", category: "artifact", sourceHint: "矿洞幽境层宝箱" },
+    { id: "ancient_seed", name: "远古种子", category: "artifact", sourceHint: "矿洞深渊层宝箱" }
   ];
   var MUSEUM_CATEGORIES = [
     { key: "ore", label: "矿石" },

@@ -40,7 +40,7 @@
               />
               <div
                 v-if="menuOpen === info.slot"
-                class="absolute right-0 top-full mt-1 z-10 flex flex-col border border-accent/30 rounded-xs overflow-hidden w-30"
+                class="absolute right-0 top-full mt-1 z-10 flex flex-col rounded-xs overflow-hidden w-30"
               >
                 <Button
                   v-if="!isWebView"
@@ -54,7 +54,7 @@
                 <Button
                   :icon="Trash2"
                   :icon-size="12"
-                  class="btn-danger !rounded-none text-center justify-center text-sm"
+                  class="btn-danger border-t-0 !rounded-none text-center justify-center text-sm"
                   @click="handleDelete(info.slot)"
                 >
                   删除
@@ -84,7 +84,7 @@
             <p class="text-xs text-muted mb-4">此操作不可恢复。</p>
             <div class="flex space-x-3 justify-center">
               <Button @click="deleteTargetSlot = null">取消</Button>
-              <Button class="btn-danger" @click="confirmDelete">确认删除</Button>
+              <Button class="btn-danger" @click="confirmDelete">确认</Button>
             </div>
           </div>
         </div>

@@ -75,7 +75,7 @@ export const getTreasureRewards = (floor: number): { items: { itemId: string; qu
   const items: { itemId: string; quantity: number }[] = [{ itemId: ore, quantity: r.qty }]
 
   // 化石/古物掉落（20%概率，按区域抽取）
-  if (Math.random() < 0.5) {
+  if (Math.random() < 0.25) {
     const ZONE_TREASURE_DROPS: Record<string, string[]> = {
       shallow: ['trilobite_fossil', 'shell_fossil'],
       frost: ['trilobite_fossil', 'shell_fossil'],
@@ -544,7 +544,7 @@ export const getFloor = (floor: number): MineFloorDef | undefined => {
 export const ZONE_NAMES: Record<MineFloorDef['zone'], string> = {
   shallow: '浅矿·土石洞穴',
   frost: '冰窟·冰霜暗河',
-  lava: '熔岩层·地火暗涌',
+  lava: '熔岩·地火暗涌',
   crystal: '晶窟·水晶迷宫',
   shadow: '幽境·暗影裂隙',
   abyss: '深渊·无底深渊'

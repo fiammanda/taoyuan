@@ -42,7 +42,16 @@
             >
               <Button
                 v-if="!isWebView"
-                class="text-center !rounded-none justify-center !text-sm"
+                class="text-center !border-0 !rounded-none"
+                :icon="Copy"
+                :icon-size="12"
+                @click="handleExportSlot(info.slot, false)"
+              >
+                复制
+              </Button>
+              <Button
+                v-if="!isWebView"
+                class="text-center !border-0 !border-t !border-b !rounded-none"
                 :icon="Download"
                 :icon-size="12"
                 @click="handleExportSlot(info.slot)"
@@ -50,7 +59,7 @@
                 导出
               </Button>
               <Button
-                class="btn-danger !rounded-none text-center justify-center !text-sm"
+                class="btn-danger !border-0 !rounded-none"
                 :icon="Trash2"
                 :icon-size="12"
                 @click="handleDeleteSlot(info.slot)"
@@ -64,12 +73,35 @@
 
       <!-- 导入存档 -->
       <template v-if="!isWebView">
-        <Button class="text-center justify-center" :icon="Upload" @click="triggerImport">导入存档</Button>
-        <input ref="fileInputRef" type="file" accept=".tyx" class="hidden" @change="handleImportFile" />
+        <Button class="text-center justify-center" :icon="Upload" @click="showImportPanel = true">导入存档</Button>
       </template>
       <!-- 关于 -->
       <Button class="text-center justify-center text-muted" :icon="Info" @click="showAbout = true">关于游戏</Button>
     </div>
+
+    <!-- 导入弹窗 -->
+    <Transition name="panel-fade">
+      <div v-if="showImportPanel" class="fixed inset-0 z-50 flex items-center justify-center bg-bg/80" @click.self="showImportPanel = false">
+        <div class="game-panel w-full max-w-md mx-4 text-center relative">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="showImportPanel = false">
+            <X :size="14" />
+          </button>
+          <textarea
+            v-model="importText"
+            rows="6"
+            placeholder="粘贴存档数据"
+            class="mt-6 mb-3 p-2 w-full bg-[var(--color-bg)] rounded-xs border-0 outline-none text-xs font-[var(--font-game)] resize-none"
+          />
+          <div class="">
+            <Button class="text-center justify-center mr-3" :icon="FileText" @click="handleImportText">
+              读取文本
+            </Button>
+            <Button class="text-center justify-center" :icon="FileUp" @click="triggerImport">上传文件</Button>
+            <input ref="fileInputRef" type="file" accept=".tyx" class="hidden" @change="handleImportFile" />
+          </div>
+        </div>
+      </div>
+    </Transition>
 
     <!-- 关于弹窗 -->
     <Transition name="panel-fade">
@@ -302,7 +334,7 @@
 </template>
 
 <script setup lang="ts">
-  import { Play, FolderOpen, ArrowLeft, Trash2, Download, Upload, Info, Settings, ShieldCheck, X } from 'lucide-vue-next'
+  import { Play, FolderOpen, ArrowLeft, Trash2, FileText, Copy, Download, Upload, FileUp, Info, Settings, ShieldCheck, X } from 'lucide-vue-next'
   import Button from '@/components/game/Button.vue'
   import { ref, computed } from 'vue'
   import { useRouter } from 'vue-router'
@@ -335,6 +367,8 @@
   const showCharCreate = ref(false)
   const showFarmSelect = ref(false)
   const showIdentitySetup = ref(false)
+  const importText = ref('')
+  const showImportPanel = ref(false)
   const showAbout = ref(false)
   const slotMenuOpen = ref<number | null>(null)
   const selectedMap = ref<FarmMapType>('standard')
@@ -471,9 +505,11 @@
     }
   }
 
-  const handleExportSlot = (slot: number) => {
-    if (!saveStore.exportSave(slot)) {
-      showFloat('导出失败。', 'danger')
+  const handleExportSlot = (slot: number, download: boolean = true) => {
+    if (!saveStore.exportSave(slot, download)) {
+      showFloat(`${download ? '导出' : '复制'}失败。`, 'danger')
+    } else if (!download) {
+      showFloat('复制成功。', 'success')
     }
   }
 
@@ -483,23 +519,38 @@
     fileInputRef.value?.click()
   }
 
+  const importSave = (content: string) => {
+    // 找到第一个空槽位导入，没有则提示
+    const emptySlot = slots.value.find(s => !s.exists)
+    if (!emptySlot) {
+      showFloat('存档槽位已满，请先删除一个旧存档。')
+      return false
+    }
+    if (saveStore.importSave(emptySlot.slot, content)) {
+      refreshSlots()
+      showFloat(`已导入到存档 ${emptySlot.slot + 1}。`, 'success')
+      showImportPanel.value = false   // ⭐导入成功关闭弹窗
+      importText.value = ''
+      return true
+    }
+    showFloat('存档文件无效或已损坏。', 'danger')
+    return false
+  }
+
+  const handleImportText = () => {
+    const text = importText.value.trim()
+    importSave(text)
+    importText.value = ''
+  }
+
   const handleImportFile = (e: Event) => {
     const input = e.target as HTMLInputElement
     const file = input.files?.[0]
     if (!file) return
     const reader = new FileReader()
     reader.onload = () => {
-      const content = reader.result as string
-      // 找到第一个空槽位导入，没有则提示
-      const emptySlot = slots.value.find(s => !s.exists)
-      if (!emptySlot) {
-        showFloat('存档槽位已满，请先删除一个旧存档。')
-      } else if (saveStore.importSave(emptySlot.slot, content)) {
-        refreshSlots()
-        showFloat(`已导入到存档 ${emptySlot.slot + 1}。`, 'success')
-      } else {
-        showFloat('存档文件无效或已损坏。', 'danger')
-      }
+      const text = reader.result as string
+      importSave(text)
       input.value = ''
     }
     reader.readAsText(file)

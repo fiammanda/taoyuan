@@ -258,16 +258,21 @@ export const useSaveStore = defineStore('save', () => {
   }
 
   /** 导出存档为加密文件 */
-  const exportSave = (slot: number): boolean => {
+  const exportSave = async (slot: number, download: boolean = true): Promise<boolean> => {
     try {
       const raw = localStorage.getItem(`${SAVE_KEY_PREFIX}${slot}`)
       if (!raw) return false
-      const blob = new Blob([raw], { type: 'application/octet-stream' })
+
       const info = getSlots().find(s => s.slot === slot)
       const name = info?.exists
-        ? `桃源乡_存档${slot + 1}_第${info.year}年${SEASON_NAMES[info.season as keyof typeof SEASON_NAMES] ?? info.season}第${info.day}天`
-        : `桃源乡_存档${slot + 1}`
-      saveAs(blob, `${name}${SAVE_FILE_EXT}`)
+        ? `桃源乡存档_${info.playerName}_${info.year}年${SEASON_NAMES[info.season as keyof typeof SEASON_NAMES] ?? info.season}${info.day}日`
+        : `桃源乡存档`
+      if (download) {
+        const blob = new Blob([raw], { type: 'application/octet-stream' })
+        saveAs(blob, `${name}${SAVE_FILE_EXT}`)
+        return true
+      }
+      await navigator.clipboard.writeText(raw)
       return true
     } catch {
       return false

@@ -50,6 +50,7 @@ export const useMiningStore = defineStore('mining', () => {
   const playerStore = usePlayerStore()
   const inventoryStore = useInventoryStore()
   const skillStore = useSkillStore()
+  const cookingStore = useCookingStore()
 
   /** 当前进度（主矿洞） */
   const currentFloor = ref(1)
@@ -241,7 +242,6 @@ export const useMiningStore = defineStore('mining', () => {
 
     // 扣体力（1 点基础，受镐/技能/buff 减免）
     const pickaxeMultiplier = inventoryStore.getToolStaminaMultiplier('pickaxe')
-    const cookingStore = useCookingStore()
     const miningBuff = cookingStore.activeBuff?.type === 'mining' ? cookingStore.activeBuff.value / 100 : 0
     const walletStore = useWalletStore()
     const walletMiningReduction = walletStore.getMiningStaminaReduction()
@@ -324,7 +324,7 @@ export const useMiningStore = defineStore('mining', () => {
     skillStore.addExp('mining', Math.floor(5 * hilltopXpBonus))
 
     tile.state = 'collected'
-    return { success: true, message: `挖到了${quantity}个矿石！(-${staminaCost}体力)`, startsCombat: false }
+    return { success: true, message: `挖到了${quantity}个${getItemById(oreId)!.name}！(-${staminaCost}体力)`, startsCombat: false }
   }
 
   /** 处理怪物格子 */
@@ -683,6 +683,7 @@ export const useMiningStore = defineStore('mining', () => {
 
     combatRound.value++
     const monster = combatMonster.value
+    const killed = useGuildStore().monsterKills[monster.id] ?? 0
 
     // BOSS 战不可逃跑
     if (action === 'flee') {
@@ -703,7 +704,6 @@ export const useMiningStore = defineStore('mining', () => {
 
     if (action === 'defend') {
       // 防御减少受到的伤害（重甲者专精：70%减伤，默认60%）
-      const cookingStore = useCookingStore()
       const defenseReduction = cookingStore.activeBuff?.type === 'defense' ? cookingStore.activeBuff.value / 100 : 0
       const tankReduction = skillStore.getSkill('combat').perk10 === 'tank' ? 0.7 : 0.6
       // 坚韧附魔
@@ -733,7 +733,6 @@ export const useMiningStore = defineStore('mining', () => {
     }
 
     // === 攻击 ===
-    const cookingStore = useCookingStore()
     const owned = inventoryStore.getEquippedWeapon()
     const weaponDef = getWeaponById(owned.defId)
     const enchant = owned.enchantmentId ? getEnchantmentById(owned.enchantmentId) : null
@@ -765,11 +764,11 @@ export const useMiningStore = defineStore('mining', () => {
       const bonusDamage = Math.max(1, Math.floor(damageToMonster * 0.5))
       combatMonsterHp.value -= bonusDamage
       extraDamage = bonusDamage
-      msg += ` 追加攻击！额外造成${bonusDamage}点伤害！`
+      msg += `追加攻击！额外造成${bonusDamage}点伤害！`
     }
 
     // 锤眩晕判定（20%概率跳过怪物反击）
-    const isStunned = weaponDef?.type === 'club' && Math.random() < 0.2
+    const isStunned = weaponDef?.type === 'club' && Math.random() < 0.2 + Math.min(0.8, killed / 1000)
 
     // 吸血（附魔 + 戒指叠加）
     const ringVampiric = inventoryStore.getRingEffectValue('vampiric')
@@ -778,7 +777,7 @@ export const useMiningStore = defineStore('mining', () => {
       const healAmount = Math.floor((totalDamageDealt + extraDamage) * totalVampiric)
       if (healAmount > 0) {
         playerStore.restoreHealth(healAmount)
-        msg += ` 吸血回复${healAmount}HP！`
+        msg += `吸血回复${healAmount}HP！`
       }
     }
 
@@ -788,14 +787,14 @@ export const useMiningStore = defineStore('mining', () => {
     }
 
     if (isStunned) {
-      msg += ` ${monster.name}被震晕了！`
+      msg += `${monster.name}被震晕了！`
       combatLog.value.push(msg)
       return { message: msg, combatOver: false, won: false }
     }
 
     // 杂技师专精：25% 概率闪避反击
-    if (skillStore.getSkill('combat').perk10 === 'acrobat' && Math.random() < 0.25) {
-      msg += ` 你灵巧地闪避了${monster.name}的反击！`
+    if (skillStore.getSkill('combat').perk10 === 'acrobat' && Math.random() < 0.25 + Math.min(0.75, killed / 1000)) {
+      msg += `你灵巧地闪避了${monster.name}的反击！`
       combatLog.value.push(msg)
       return { message: msg, combatOver: false, won: false }
     }
@@ -810,7 +809,7 @@ export const useMiningStore = defineStore('mining', () => {
       Math.floor(monster.attack * (1 - fighterReduction) * (1 - defenseReduction) * sturdyReduction * (1 - ringDefenseBonus))
     )
     playerStore.takeDamage(monsterDamage)
-    msg += ` ${monster.name}反击，你受到${monsterDamage}点伤害。`
+    msg += `${monster.name}反击，你受到${monsterDamage}点伤害。`
     combatLog.value.push(msg)
 
     if (playerStore.hp <= 0) {
@@ -984,7 +983,7 @@ export const useMiningStore = defineStore('mining', () => {
     }
 
     msg += ` ${monster.name}被击败了！(+${monster.expReward}经验)`
-    if (drops.length > 0) msg += ` 掉落了物品。`
+    if (drops.length > 0) msg += ` 掉落了${drops.map(d => getItemById(d)!.name).join("、")}。`
     combatLog.value.push(msg)
 
     // === 更新格子状态 ===
@@ -1198,33 +1197,27 @@ export const useMiningStore = defineStore('mining', () => {
 
     const hpFull = playerStore.hp >= playerStore.getMaxHp()
     const staminaFull = playerStore.stamina >= playerStore.maxStamina
-    const hasHpRestore = def.healthRestore && def.healthRestore > 0
-    const hasStaminaRestore = def.staminaRestore && def.staminaRestore > 0
-
-    if (hasHpRestore && !hasStaminaRestore && hpFull) {
-      return { success: false, message: '生命值已满。' }
-    }
-    if (hasStaminaRestore && !hasHpRestore && staminaFull) {
-      return { success: false, message: '体力已满。' }
-    }
-    if (hpFull && staminaFull && (hasHpRestore || hasStaminaRestore)) {
-      return { success: false, message: '体力和生命值都已满。' }
+    if (staminaFull && hpFull) {
+      return { success: false, message: '体力和生命值都已满，不需要食用。' }
     }
 
     if (!inventoryStore.removeItem(itemId)) return { success: false, message: `没有${def.name}。` }
 
-    const parts: string[] = []
-    if (hasHpRestore) {
-      const restore = def.healthRestore! >= 999 ? playerStore.getMaxHp() : def.healthRestore!
-      playerStore.restoreHealth(restore)
-      parts.push(`恢复${def.healthRestore! >= 999 ? '全部' : def.healthRestore}HP`)
-    }
-    if (hasStaminaRestore) {
-      playerStore.restoreStamina(def.staminaRestore!)
-      parts.push(`恢复${def.staminaRestore}体力`)
+    if (itemId.startsWith('food_')) {
+      return cookingStore.eat(itemId.slice(5))
     }
 
-    const msg = `使用了${def.name}，${parts.join('和')}！`
+    const alchemistBonus = skillStore.getSkill('foraging').perk10 === 'alchemist' ? 1.5 : 1.0
+    const staminaRestore = Math.floor(def.staminaRestore! * alchemistBonus)
+    playerStore.restoreStamina(staminaRestore)
+    let msg = `食用了${def.name}，恢复${staminaRestore}体力`
+    if (def.healthRestore) {
+      const healthRestore = Math.floor(def.healthRestore * alchemistBonus)
+      playerStore.restoreHealth(healthRestore)
+      msg += `、${healthRestore}生命值`
+    }
+    msg += '。'
+
     if (inCombat.value) combatLog.value.push(msg)
     return { success: true, message: msg }
   }
