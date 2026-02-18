@@ -75,7 +75,7 @@ export const getTreasureRewards = (floor: number): { items: { itemId: string; qu
   const items: { itemId: string; quantity: number }[] = [{ itemId: ore, quantity: r.qty }]
 
   // 化石/古物掉落（20%概率，按区域抽取）
-  if (Math.random() < 0.2) {
+  if (Math.random() < 0.5) {
     const ZONE_TREASURE_DROPS: Record<string, string[]> = {
       shallow: ['trilobite_fossil', 'shell_fossil'],
       frost: ['trilobite_fossil', 'shell_fossil'],

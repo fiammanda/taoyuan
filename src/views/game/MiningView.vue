@@ -214,6 +214,7 @@
               <span v-if="currentFloorSpecial === 'dark'" class="text-muted ml-1">暗河层</span>
               <span v-if="currentFloorSpecial === 'boss'" class="text-danger ml-1">BOSS层</span>
             </p>
+            <Button class="py-0 px-1 ml-auto mr-2" :icon="revealTiles ? Eye : EyeOff" :icon-size="12" @click="revealTiles = !revealTiles" />
             <Button class="py-0 px-1" :icon="X" :icon-size="12" @click="handleLeave" />
           </div>
 
@@ -662,7 +663,9 @@
     Map,
     Backpack,
     Lock,
-    BookMarked
+    BookMarked,
+    EyeOff,
+    Eye
   } from 'lucide-vue-next'
   import Button from '@/components/game/Button.vue'
   import { useMiningStore, useGameStore, usePlayerStore, useInventoryStore, useSkillStore } from '@/stores'
@@ -687,6 +690,7 @@
   const { startBattleBgm, resumeNormalBgm } = useAudio()
   const exploreLog = ref<string[]>([])
 
+  const revealTiles = ref(false)
   const showMapModal = ref(false)
   const showElevatorModal = ref(false)
 
@@ -925,7 +929,9 @@
 
   /** 格子图标 */
   const getTileIcon = (tile: MineTile): string => {
-    if (tile.state === 'hidden') return '?'
+    if (tile.state === 'hidden' && !revealTiles.value) {
+      return '?'
+    }
     switch (tile.type) {
       case 'empty':
         return '\u00B7'
@@ -1294,7 +1300,6 @@
 
 <style scoped>
   /* === 战斗动画 === */
-
   @keyframes combat-shake {
     0%,
     100% {

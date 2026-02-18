@@ -274,7 +274,7 @@
     pauseClock()
     handleEndDay()
     switchToSeasonalBgm()
-    resumeClock()
+    //resumeClock()
   }
 </script>
 

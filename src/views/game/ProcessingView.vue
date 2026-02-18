@@ -69,7 +69,7 @@
                 <LockKeyholeOpen
                   :size="12"
                   :class="{
-                    invisible: slot.machineType === 'seed_maker' || shopStore.shippedItems.includes(getRecipeOutputId(recipe.id))
+                    invisible: ['seed_maker', 'worm_bin'].includes(slot.machineType) || shopStore.shippedItems.includes(getRecipeOutputId(recipe.id))
                   }"
                   class="inline"
                 />
@@ -86,8 +86,12 @@
           <div v-else-if="!slot.ready">
             <div class="flex items-center justify-between text-xs mb-1">
               <span class="text-muted">{{ getRecipeName(slot.recipeId) }}</span>
-              <LockKeyholeOpen :size="12" class="ml-1 mr-auto text-muted"
-                v-if="!shopStore.shippedItems.includes(getRecipeOutputId(slot.recipeId))"
+              <LockKeyholeOpen
+                :size="12"
+                :class="{
+                  invisible: ['seed_maker', 'worm_bin'].includes(slot.machineType) || shopStore.shippedItems.includes(getRecipeOutputId(slot.recipeId))
+                }"
+                class="ml-1 mr-auto text-muted"
               />
               <span class="text-muted">{{ slot.daysProcessed }}/{{ slot.totalDays }}天</span>
             </div>
