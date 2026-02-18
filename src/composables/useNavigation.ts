@@ -1,11 +1,11 @@
 import type { Component } from 'vue'
 import router from '@/router'
 import { useGameStore } from '@/stores'
-import { isShopOpen, TAB_TO_LOCATION_GROUP } from '@/data/timeConstants'
+import { isShopOpen/*, TAB_TO_LOCATION_GROUP*/ } from '@/data/timeConstants'
 import { addLog } from './useGameLog'
 import { handleEndDay } from './useEndDay'
 import { sfxClick, useAudio } from './useAudio'
-import { useGameClock } from './useGameClock'
+//import { useGameClock } from './useGameClock'
 import {
   Wheat,
   Egg,
@@ -113,13 +113,15 @@ export const navigateToPanel = (panelKey: PanelKey) => {
   void router.push({ name: panelKey })
 
   // UI 面板（无地点）暂停时钟，游戏面板恢复
+  /*
   const { pauseClock, resumeClock } = useGameClock()
   const targetGroup = TAB_TO_LOCATION_GROUP[panelKey]
-  //if (targetGroup === null || targetGroup === undefined) {
+  if (targetGroup === null || targetGroup === undefined) {
     pauseClock()
-  //} else {
-  //  resumeClock()
-  //}
+  } else {
+    resumeClock()
+  }
+  */
 }
 
 export const useNavigation = () => {

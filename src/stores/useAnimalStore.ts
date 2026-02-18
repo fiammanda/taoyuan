@@ -180,6 +180,30 @@ export const useAnimalStore = defineStore('animal', () => {
     return true
   }
 
+  /** 抚摸所有动物 */
+  const petAll = (): { pettedCount: number; petPetted: boolean } => {
+    const skillStore = useSkillStore()
+
+    let pettedCount = 0
+    const coopmasterBonus = skillStore.getSkill('farming').perk10 === 'coopmaster' ? 1.5 : 1.0
+    for (const animal of animals.value) {
+      if (!animal.wasPetted) {
+        animal.wasPetted = true
+        animal.friendship = Math.min(1000, animal.friendship + Math.floor(5 * coopmasterBonus))
+        pettedCount++
+      }
+    }
+
+    let petPetted = false
+    if (pet.value && !pet.value.wasPetted) {
+      pet.value.wasPetted = true
+      pet.value.friendship = Math.min(1000, pet.value.friendship + 5)
+      petPetted = true
+    }
+
+    return { pettedCount, petPetted }
+  }
+
   // ============================================================
   // 孵化器
   // ============================================================
@@ -682,6 +706,7 @@ export const useAnimalStore = defineStore('animal', () => {
     dailyBarnIncubatorUpdate,
     adoptPet,
     petThePet,
+    petAll,
     dailyPetUpdate,
     grazeAnimals,
     dailyUpdate,

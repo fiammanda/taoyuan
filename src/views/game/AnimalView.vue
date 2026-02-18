@@ -11,8 +11,11 @@
       <template v-if="animalStore.pet">
         <div class="flex items-center justify-between mb-1">
           <span class="text-xs text-accent">{{ animalStore.pet.type === 'cat' ? '猫' : '狗' }} — {{ animalStore.pet.name }}</span>
-          <Button class="py-0 px-1" :icon="Hand" :disabled="animalStore.pet.wasPetted" @click="handlePetThePet">
+          <Button class="py-0 px-1 ml-auto mr-2" :icon="Hand" :disabled="animalStore.pet.wasPetted" @click="handlePetThePet">
             {{ animalStore.pet.wasPetted ? '已摸' : '抚摸' }}
+          </Button>
+          <Button class="py-0 px-1" :icon="Hand" :disabled="allAnimalsPetted" @click="handlePetAll">
+            {{ allAnimalsPetted ? '已经抚摸全部' : '抚摸全部' }}
           </Button>
         </div>
         <div class="flex items-center space-x-1">
@@ -54,7 +57,7 @@
               正在孵化：{{ getAnimalName(animalStore.incubating.animalType) }}（剩余{{ animalStore.incubating.daysLeft }}天）
             </p>
           </div>
-          <div v-else-if="coopIncubatableEggs.length > 0" class="flex flex-col space-y-1">
+          <div v-else-if="coopIncubatableEggs.length > 0" class="flex flex-col space-y-1 max-h-40 overflow-y-auto">
             <div
               v-for="eggItem in coopIncubatableEggs"
               :key="eggItem.itemId"
@@ -303,7 +306,7 @@
             :class="unfedCount > 0 ? 'cursor-pointer hover:bg-accent/5' : 'opacity-50'"
             @click="unfedCount > 0 && handleFeedAll()"
           >
-            <span class="text-xs">喂食全部</span>
+            <span class="text-xs">喂食全部动物</span>
             <span class="text-xs text-muted">需{{ selectedFeedName }}&times;{{ unfedCount }}</span>
           </div>
           <div
@@ -821,6 +824,26 @@
     } else {
       addLog('今天已经抚摸过了。')
     }
+  }
+
+  const allAnimalsPetted = ref(false)
+
+  const handlePetAll = () => {
+    const { pettedCount, petPetted } = animalStore.petAll()
+    if (!pettedCount && !petPetted) {
+      addLog(`${animalStore.pet?.name ?? '宠物'}和其它动物已经抚摸过了。`)
+    } else {
+      let log = [
+        petPetted ? `${animalStore.pet?.name ?? '宠物'}` : '',
+        pettedCount > 0 ? `${pettedCount}只动物` : ''
+      ]
+      addLog(`抚摸了${log.filter(Boolean).join('和')}，友好度提升了。`)
+      let multiplier = (pettedCount + (petPetted ? 1 : 0) > 2) ? 2 : 1
+      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.petAnimal * multiplier)
+      if (tr.message) addLog(tr.message)
+      if (tr.passedOut) handleEndDay()
+    }
+    allAnimalsPetted.value = true
   }
 
   const handleStartIncubation = (itemId: string) => {

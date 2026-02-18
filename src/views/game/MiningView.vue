@@ -1272,7 +1272,7 @@
   }
   
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (combatAnimLock.value) return
+    if (!miningStore.inCombat || !miningStore.combatMonster || combatAnimLock.value|| showCombatItems.value) return
     if (e.key === 'a' || e.key === 'A') {
       handleCombat('attack')
     }
