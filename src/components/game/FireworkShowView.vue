@@ -85,7 +85,7 @@
           <div v-if="wrongFlash === i - 1" class="wrong-flash-bg absolute inset-0 bg-danger/20" />
 
           <!-- 位置编号 -->
-          <span class="text-xs relative z-10" :class="phase === 'repeating' ? 'text-accent/50' : 'text-accent/20'">{{ i }}</span>
+          <span class="text-xs relative z-10" :class="phase === 'repeating' ? 'text-[var(--text-accent)]' : 'text-[var(--text-accent)]'">{{ i }}</span>
         </button>
       </div>
     </div>

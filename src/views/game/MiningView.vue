@@ -207,12 +207,15 @@
           <div class="flex items-center justify-between mb-2">
             <p class="text-sm text-accent">
               第{{ activeFloorNum }}层
-              <span v-if="!miningStore.isInSkullCavern" class="text-muted">{{ zoneName }}</span>
-              <span v-if="currentFloorSpecial === 'mushroom'" class="text-success ml-1">蘑菇洞穴</span>
-              <span v-if="currentFloorSpecial === 'treasure'" class="text-accent ml-1">宝箱层</span>
-              <span v-if="currentFloorSpecial === 'infested'" class="text-danger ml-1">感染层</span>
-              <span v-if="currentFloorSpecial === 'dark'" class="text-muted ml-1">暗河层</span>
-              <span v-if="currentFloorSpecial === 'boss'" class="text-danger ml-1">BOSS层</span>
+              <span v-if="miningStore.isInSkullCavern">骷髅矿穴</span>
+              <template v-else>
+                <span class="text-muted">{{ zoneName }}</span>
+                <span v-if="currentFloorSpecial === 'mushroom'" class="text-success ml-1">蘑菇洞穴</span>
+                <span v-if="currentFloorSpecial === 'treasure'" class="text-accent ml-1">宝箱层</span>
+                <span v-if="currentFloorSpecial === 'infested'" class="text-danger ml-1">感染层</span>
+                <span v-if="currentFloorSpecial === 'dark'" class="text-muted ml-1">暗河层</span>
+                <span v-if="currentFloorSpecial === 'boss'" class="text-danger ml-1">BOSS层</span>
+              </template>
             </p>
             <Button class="py-0 px-1 ml-auto mr-2" :icon="revealTiles ? Eye : EyeOff" :icon-size="12" @click="revealTiles = !revealTiles" />
             <Button class="py-0 px-1" :icon="X" :icon-size="12" @click="handleLeave" />
@@ -881,12 +884,12 @@
   const elevatorZones = computed(() => {
     const allSafePoints = miningStore.getUnlockedSafePoints().filter(sp => sp < miningStore.safePointFloor)
     const zones = [
-      { name: '浅矿', min: 0, max: 20 },
-      { name: '冰窟', min: 21, max: 40 },
-      { name: '熔岩', min: 41, max: 60 },
-      { name: '晶窟', min: 61, max: 80 },
-      { name: '幽境', min: 81, max: 100 },
-      { name: '深渊', min: 101, max: 120 }
+      { name: '浅矿', min: 0, max: 19 },
+      { name: '冰窟', min: 20, max: 39 },
+      { name: '熔岩', min: 40, max: 59 },
+      { name: '晶窟', min: 60, max: 79 },
+      { name: '幽境', min: 80, max: 99 },
+      { name: '深渊', min: 100, max: 119 }
     ]
     return zones
       .map(z => ({

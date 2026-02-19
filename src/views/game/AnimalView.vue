@@ -826,7 +826,11 @@
     }
   }
 
-  const allAnimalsPetted = ref(false)
+  const allAnimalsPetted = computed(() => {
+    const allPetted = animalStore.animals.every(a => a.wasPetted)
+    const petPetted = animalStore.pet?.wasPetted ?? true
+    return allPetted && petPetted
+  })
 
   const handlePetAll = () => {
     const { pettedCount, petPetted } = animalStore.petAll()
@@ -838,12 +842,11 @@
         pettedCount > 0 ? `${pettedCount}只动物` : ''
       ]
       addLog(`抚摸了${log.filter(Boolean).join('和')}，友好度提升了。`)
-      let multiplier = (pettedCount + (petPetted ? 1 : 0) > 2) ? 2 : 1
+      let multiplier = Math.ceil((pettedCount + (petPetted ? 1 : 0)) / 2)
       const tr = gameStore.advanceTime(ACTION_TIME_COSTS.petAnimal * multiplier)
       if (tr.message) addLog(tr.message)
       if (tr.passedOut) handleEndDay()
     }
-    allAnimalsPetted.value = true
   }
 
   const handleStartIncubation = (itemId: string) => {
