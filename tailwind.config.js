@@ -13,9 +13,9 @@ export default {
         water: '#4c6e8a',
         earth: '#8b6914',
         muted: '#6b7280',
-        'quality-fine': '#d4976a',
-        'quality-excellent': '#a8c4d4',
-        'quality-supreme': '#ffd700'
+        'quality-fine': '#3c9',
+        'quality-excellent': '#39c',
+        'quality-supreme': '#93c'
       },
       fontFamily: {
         game: ['zpix', 'monospace']

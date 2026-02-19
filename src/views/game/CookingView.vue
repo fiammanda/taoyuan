@@ -12,7 +12,7 @@
         <div>
           <p class="text-sm" :data-id="recipe.id">
             {{ recipe.name }}
-            <LockKeyholeOpen :size="14" class="inline"
+            <LockKeyholeOpen :size="13" class="inline text-muted"
               v-if="!shopStore.shippedItems.includes(`food_${recipe.id}`)"
             />
           </p>

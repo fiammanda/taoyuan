@@ -443,10 +443,10 @@
     legendary: '传说'
   }
   const DIFFICULTY_COLORS: Record<string, string> = {
-    easy: 'text-success',
-    normal: 'text-muted',
-    hard: 'text-danger',
-    legendary: 'text-accent'
+    easy: 'text-muted',
+    normal: 'text-quality-fine', //'text-success',
+    hard: 'text-quality-excellent', //'text-accent',
+    legendary: 'text-quality-supreme', //'text-danger'
   }
 
   const SEASON_LABEL: Record<string, string> = { spring: '春', summer: '夏', autumn: '秋', winter: '冬' }
