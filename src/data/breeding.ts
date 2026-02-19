@@ -4,19 +4,19 @@ import { getCropById } from './crops'
 // === 常量 ===
 
 /** 种子箱最大容量 */
-export const MAX_BREEDING_BOX = 30
+export const MAX_BREEDING_BOX = 100 //30
 
 /** 育种加工天数 */
-export const BREEDING_DAYS = 2
+export const BREEDING_DAYS = 1 //2
 
 /** 属性上限 */
 export const STAT_CAP = 100
 
 /** 基础波动幅度 */
-export const BASE_MUTATION_MAGNITUDE = 8
+export const BASE_MUTATION_MAGNITUDE = 10
 
 /** 每代稳定度增长 */
-export const GENERATIONAL_STABILITY_GAIN = 3
+export const GENERATIONAL_STABILITY_GAIN = 5
 
 /** 稳定度上限 */
 export const MAX_STABILITY = 95
@@ -39,7 +39,7 @@ export const BREEDING_STATION_COST = {
 }
 
 /** 育种台最大数量 */
-export const MAX_BREEDING_STATIONS = 3
+export const MAX_BREEDING_STATIONS = 5
 
 // === 辅助函数 ===
 

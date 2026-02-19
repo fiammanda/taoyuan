@@ -31,9 +31,9 @@ export const POND_UPGRADE_COSTS: Record<2 | 3, { money: number; materials: { ite
 // === 容量 ===
 
 export const POND_CAPACITY: Record<PondLevel, number> = {
-  1: 5,
-  2: 10,
-  3: 20
+  1: 10,
+  2: 40,
+  3: 100
 }
 
 // === 水质参数 ===
@@ -60,7 +60,7 @@ export const FEED_WATER_RESTORE = 10
 export const PURIFIER_WATER_RESTORE = 30
 
 /** 繁殖周期（天） */
-export const FISH_BREEDING_DAYS = 3
+export const FISH_BREEDING_DAYS = 1 //3
 
 /** 遗传常量 */
 export const GENETICS_FLUCTUATION_BASE = 15
