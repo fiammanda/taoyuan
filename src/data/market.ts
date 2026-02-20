@@ -28,13 +28,20 @@ const SEASON_COEFFICIENTS: Record<MarketCategory, [number, number, number, numbe
 
 /** 供需阈值：7天累计出货量 */
 const SUPPLY_THRESHOLDS: Record<MarketCategory, { low: number; mid: number; high: number }> = {
-  crop: { low: 20, mid: 50, high: 100 },
-  fish: { low: 10, mid: 25, high: 50 },
-  animal_product: { low: 10, mid: 25, high: 50 },
-  processed: { low: 5, mid: 15, high: 30 },
-  fruit: { low: 10, mid: 25, high: 50 },
-  ore: { low: 15, mid: 40, high: 80 },
-  gem: { low: 3, mid: 8, high: 15 }
+  crop: { low: 50, mid: 100, high: 200 },
+  //crop: { low: 20, mid: 50, high: 100 },
+  fish: { low: 50, mid: 100, high: 200 },
+  //fish: { low: 10, mid: 25, high: 50 },
+  animal_product: { low: 50, mid: 100, high: 200 },
+  //animal_product: { low: 10, mid: 25, high: 50 },
+  processed: { low: 50, mid: 100, high: 200 },
+  //processed: { low: 5, mid: 15, high: 30 },
+  fruit: { low: 25, mid: 50, high: 100 },
+  //fruit: { low: 10, mid: 25, high: 50 },
+  ore: { low: 50, mid: 100, high: 200 },
+  //ore: { low: 15, mid: 40, high: 80 },
+  gem: { low: 25, mid: 50, high: 100 }
+  //gem: { low: 3, mid: 8, high: 15 }
 }
 
 export const TREND_NAMES: Record<MarketTrend, string> = {

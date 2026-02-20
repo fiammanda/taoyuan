@@ -26,7 +26,7 @@ const INITIAL_CAPACITY = 50 //24
 const MAX_CAPACITY = 500 //60
 const EXPAND_STEP = 50
 const TEMP_CAPACITY = 50 //10
-const MAX_STACK = 999
+const MAX_STACK = 9999
 
 export const useInventoryStore = defineStore('inventory', () => {
   const items = ref<InventoryItem[]>([])

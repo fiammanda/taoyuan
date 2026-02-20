@@ -103,9 +103,9 @@ export const useSkillStore = defineStore('skill', () => {
     const level = skill.level + levelBonus
     const roll = Math.random()
 
-    if (level >= 9 && roll < 0.05) return 'supreme'
-    if (level >= 6 && roll < 0.12) return 'excellent'
-    if (level >= 3 && roll < 0.25) return 'fine'
+    if (level >= 9 && roll < 0.1) return 'supreme'
+    if (level >= 6 && roll < 0.2) return 'excellent'
+    if (level >= 3 && roll < 0.4) return 'fine'
     return 'normal'
   }
 

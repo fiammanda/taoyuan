@@ -219,13 +219,14 @@ export const useFishPondStore = defineStore('fishPond', () => {
 
     const inherit = (va: number, vb: number, min: number, max: number): number => {
       const avg = (va + vb) / 2
-      const fluctuation = (Math.random() - 0.5) * 2 * fluctuationRange
+      const fluctuation = (Math.random() - 0.5 + (pond.value.waterQuality - 40) / 400) * 2 * fluctuationRange
       let val = avg + fluctuation
 
       // 变异
       if (Math.random() < avgMutRate / 100) {
         const jump = POND_MUTATION_JUMP_MIN + Math.random() * (POND_MUTATION_JUMP_MAX - POND_MUTATION_JUMP_MIN)
-        val += Math.random() < 0.5 ? jump : -jump
+        val += jump * (Math.random() - 0.5 + (pond.value.waterQuality - 40) / 400) * 2
+        //val += Math.random() < 0.5 ? jump : -jump
       }
 
       return clamp(Math.round(val), min, max)
@@ -244,8 +245,8 @@ export const useFishPondStore = defineStore('fishPond', () => {
 
   const _getProductQuality = (qualityGene: number): Quality => {
     const roll = Math.random() * 100
-    if (qualityGene >= 75 && roll < qualityGene - 50) return 'supreme'
-    if (qualityGene >= 50 && roll < qualityGene - 25) return 'excellent'
+    if (qualityGene >= 75 && roll < qualityGene) return 'supreme'
+    if (qualityGene >= 50 && roll < qualityGene) return 'excellent'
     if (qualityGene >= 25 && roll < qualityGene) return 'fine'
     return 'normal'
   }

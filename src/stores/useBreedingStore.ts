@@ -80,9 +80,9 @@ export const useBreedingStore = defineStore('breeding', () => {
     const genetics: SeedGenetics = {
       ...base,
       id: generateGeneticsId(),
-      sweetness: clampStat(base.sweetness + Math.round((Math.random() - 0.5) * 10)),
-      yield: clampStat(base.yield + Math.round((Math.random() - 0.5) * 10)),
-      resistance: clampStat(base.resistance + Math.round((Math.random() - 0.5) * 10))
+      sweetness: clampStat(base.sweetness + Math.round((Math.random() - 0.4) * 10)),
+      yield: clampStat(base.yield + Math.round((Math.random() - 0.4) * 10)),
+      resistance: clampStat(base.resistance + Math.round((Math.random() - 0.4) * 10))
     }
 
     addToBox(genetics)
@@ -197,7 +197,7 @@ export const useBreedingStore = defineStore('breeding', () => {
     const fluctuationScale = (avgMutationRate / 50) * (1 - avgStability / 100)
 
     const fluctuate = (): number => {
-      return Math.round((Math.random() - 0.5) * 2 * BASE_MUTATION_MAGNITUDE * fluctuationScale)
+      return Math.round((Math.random() - 0.3) * 2 * BASE_MUTATION_MAGNITUDE * fluctuationScale)
     }
 
     let sweetness = clampStat(Math.round((a.sweetness + b.sweetness) / 2) + fluctuate())
@@ -207,7 +207,7 @@ export const useBreedingStore = defineStore('breeding', () => {
 
     // 变异事件
     if (Math.random() < avgMutationRate / 100) {
-      const mutateCount = Math.random() < 0.5 ? 1 : 2
+      const mutateCount = Math.ceil(Math.random() * 2.5) //Math.random() < 0.5 ? 1 : 2
       const stats: ('sweetness' | 'yield' | 'resistance')[] = ['sweetness', 'yield', 'resistance']
       const shuffled = stats.sort(() => Math.random() - 0.5)
       const current = { sweetness, yield: yieldVal, resistance }
@@ -215,8 +215,8 @@ export const useBreedingStore = defineStore('breeding', () => {
       for (let i = 0; i < mutateCount; i++) {
         const stat = shuffled[i]!
         const jump = MUTATION_JUMP_MIN + Math.round(Math.random() * (MUTATION_JUMP_MAX - MUTATION_JUMP_MIN))
-        const direction = Math.random() < 0.5 ? 1 : -1
-        current[stat] = clampStat(current[stat] + jump * direction)
+        //const direction = Math.random() < 0.5 ? 1 : -1
+        current[stat] = clampStat(current[stat] + jump * (Math.random() - 0.48))
       }
 
       sweetness = current.sweetness
@@ -278,7 +278,7 @@ export const useBreedingStore = defineStore('breeding', () => {
       const fluctuationScale = (avgMutationRate / 50) * (1 - avgStability / 100)
 
       const fluctuate = (): number => {
-        return Math.round((Math.random() - 0.5) * 2 * BASE_MUTATION_MAGNITUDE * fluctuationScale)
+        return Math.round((Math.random() - 0.4) * 2.5 * BASE_MUTATION_MAGNITUDE * fluctuationScale)
       }
 
       const result: SeedGenetics = {
