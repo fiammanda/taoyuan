@@ -24,6 +24,9 @@ export const useAchievementStore = defineStore('achievement', () => {
   /** 已发现的物品ID集合 */
   const discoveredItems = ref<string[]>([])
 
+  /** 已收藏的物品ID集合 */
+  const collectedItems = ref<string[]>([])
+
   /** 物品发现时间记录 { itemId: "第X年 春 第Y天" } */
   const discoveryTimes = ref<Record<string, string>>({})
 
@@ -51,6 +54,25 @@ export const useAchievementStore = defineStore('achievement', () => {
   })
 
   const discoveredCount = computed(() => discoveredItems.value.length)
+
+  // === 物品收藏 ===
+
+  const isCollected = (itemId: string): boolean => {
+    return collectedItems.value.includes(itemId)
+  }
+
+  const collectItem = (itemId: string): boolean => {
+    if (isCollected(itemId)) return false
+    collectedItems.value.push(itemId)
+    return true
+  }
+
+  const retrieveItem = (itemId: string): boolean => {
+    const index = collectedItems.value.indexOf(itemId)
+    if (index === -1) return false
+    collectedItems.value.splice(index, 1)
+    return true
+  }
 
   // === 物品发现 ===
 
@@ -334,6 +356,7 @@ export const useAchievementStore = defineStore('achievement', () => {
     return {
       discoveredItems: discoveredItems.value,
       discoveryTimes: discoveryTimes.value,
+      collectedItems: collectedItems.value,
       completedAchievements: completedAchievements.value,
       bundleSubmissions: bundleSubmissions.value,
       completedBundles: completedBundles.value,
@@ -344,6 +367,7 @@ export const useAchievementStore = defineStore('achievement', () => {
   const deserialize = (data: ReturnType<typeof serialize>) => {
     discoveredItems.value = data.discoveredItems ?? []
     discoveryTimes.value = data.discoveryTimes ?? {}
+    collectedItems.value = data?.collectedItems ?? []
     completedAchievements.value = data.completedAchievements ?? []
     bundleSubmissions.value = data.bundleSubmissions ?? {}
     completedBundles.value = data.completedBundles ?? []
@@ -391,6 +415,10 @@ export const useAchievementStore = defineStore('achievement', () => {
   }
 
   return {
+    collectedItems,
+    isCollected,
+    collectItem,
+    retrieveItem,
     discoveredItems,
     discoveryTimes,
     completedAchievements,

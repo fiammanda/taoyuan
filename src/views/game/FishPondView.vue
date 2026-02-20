@@ -85,6 +85,45 @@
           </div>
         </div>
 
+        <!-- 繁殖 -->
+        <div class="mb-3">
+          <p class="text-xs text-muted mb-1.5">— 繁殖 —</p>
+          <!-- 繁殖中 -->
+          <div v-if="fishPondStore.pond.breeding" class="border border-accent/20 rounded-xs px-3 py-2">
+            <div class="flex items-center justify-between mb-1">
+              <div class="flex items-center space-x-1.5">
+                <Heart :size="12" class="text-accent" />
+                <span class="text-xs text-accent">繁殖中</span>
+              </div>
+              <span class="text-xs text-muted">{{ fishPondStore.pond.breeding.daysLeft }}/{{ breedingTotalDays }}天</span>
+            </div>
+            <div class="h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
+              <div class="h-full rounded-xs bg-accent transition-all" :style="{ width: breedingProgress + '%' }" />
+            </div>
+            <p class="text-[10px] text-muted mt-1">品种：{{ getPondableFishName(fishPondStore.pond.breeding.fishId) }}</p>
+          </div>
+          <!-- 已选择一条 -->
+          <div v-else-if="selectedBreedingFish" class="border border-accent/20 rounded-xs px-3 py-2">
+            <div class="flex items-center justify-between mb-1">
+              <div class="flex items-center space-x-1.5">
+                <Heart :size="12" class="text-muted/40" />
+                <span class="text-xs">
+                  已选：{{ selectedBreedingFish.name }}
+                  <span class="text-accent">{{ '★'.repeat(fishPondStore.getGeneticStarRating(selectedBreedingFish.genetics)) }}</span>
+                </span>
+              </div>
+              <Button @click="selectedBreedingFish = null">取消</Button>
+            </div>
+            <p class="text-[10px] text-muted">请从鱼列表中点击同种成熟鱼进行配对</p>
+          </div>
+          <!-- 空状态 -->
+          <div v-else class="border border-accent/10 rounded-xs py-6 flex flex-col items-center space-y-2">
+            <Heart :size="32" class="text-muted/30" />
+            <p class="text-xs text-muted">选择两条同种成熟鱼开始繁殖</p>
+            <p class="text-xs text-muted/60">需要鱼塘有空余容量</p>
+          </div>
+        </div>
+
         <!-- 塘中鱼类 -->
         <div class="mb-3">
           <p class="text-xs text-muted mb-1.5">— 塘中鱼类 —</p>
@@ -150,45 +189,6 @@
             <Package :size="32" class="text-muted/30" />
             <p class="text-xs text-muted">背包中没有可养殖的鱼</p>
             <p class="text-xs text-muted/60">在清溪钓鱼后可放入鱼塘养殖</p>
-          </div>
-        </div>
-
-        <!-- 繁殖 -->
-        <div class="mb-3">
-          <p class="text-xs text-muted mb-1.5">— 繁殖 —</p>
-          <!-- 繁殖中 -->
-          <div v-if="fishPondStore.pond.breeding" class="border border-accent/20 rounded-xs px-3 py-2">
-            <div class="flex items-center justify-between mb-1">
-              <div class="flex items-center space-x-1.5">
-                <Heart :size="12" class="text-accent" />
-                <span class="text-xs text-accent">繁殖中</span>
-              </div>
-              <span class="text-xs text-muted">{{ fishPondStore.pond.breeding.daysLeft }}/{{ breedingTotalDays }}天</span>
-            </div>
-            <div class="h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
-              <div class="h-full rounded-xs bg-accent transition-all" :style="{ width: breedingProgress + '%' }" />
-            </div>
-            <p class="text-[10px] text-muted mt-1">品种：{{ getPondableFishName(fishPondStore.pond.breeding.fishId) }}</p>
-          </div>
-          <!-- 已选择一条 -->
-          <div v-else-if="selectedBreedingFish" class="border border-accent/20 rounded-xs px-3 py-2">
-            <div class="flex items-center justify-between mb-1">
-              <div class="flex items-center space-x-1.5">
-                <Heart :size="12" class="text-muted/40" />
-                <span class="text-xs">
-                  已选：{{ selectedBreedingFish.name }}
-                  <span class="text-accent">{{ '★'.repeat(fishPondStore.getGeneticStarRating(selectedBreedingFish.genetics)) }}</span>
-                </span>
-              </div>
-              <Button @click="selectedBreedingFish = null">取消</Button>
-            </div>
-            <p class="text-[10px] text-muted">请从鱼列表中点击同种成熟鱼进行配对</p>
-          </div>
-          <!-- 空状态 -->
-          <div v-else class="border border-accent/10 rounded-xs py-6 flex flex-col items-center space-y-2">
-            <Heart :size="32" class="text-muted/30" />
-            <p class="text-xs text-muted">选择两条同种成熟鱼开始繁殖</p>
-            <p class="text-xs text-muted/60">需要鱼塘有空余容量</p>
           </div>
         </div>
       </template>

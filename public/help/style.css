@@ -75,6 +75,8 @@ nav {
   justify-content: space-between;
   font: .75rem/1 "Zpix", "Source Han Sans SC", "Noto Sans SC", sans-serif;
   z-index: 1;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 nav div {
   width: 3.5rem;

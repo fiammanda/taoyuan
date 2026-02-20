@@ -498,205 +498,6 @@
       </div>
     </Transition>
 
-    <!-- 果树区 -->
-    <div class="mt-3 border border-accent/20 rounded-xs p-3">
-      <div class="flex items-center justify-between mb-2">
-        <div class="flex items-center space-x-1.5 text-sm text-accent">
-          <TreeDeciduous :size="14" />
-          <span>果树</span>
-        </div>
-        <span class="text-xs text-muted">{{ farmStore.fruitTrees.length }}/{{ MAX_FRUIT_TREES }}</span>
-      </div>
-      <div v-if="farmStore.fruitTrees.length > 0" class="flex flex-col space-y-1.5 mb-2">
-        <div v-for="tree in farmStore.fruitTrees" :key="tree.id" class="border border-accent/10 rounded-xs px-3 py-2">
-          <div class="flex items-center justify-between mb-1">
-            <span class="text-xs font-bold" :class="tree.mature ? 'text-accent' : 'text-muted'">{{ getTreeName(tree.type) }}</span>
-            <span v-if="tree.mature" class="text-[10px] text-muted">{{ tree.yearAge }}年</span>
-          </div>
-          <template v-if="!tree.mature">
-            <div class="flex items-center space-x-2 mb-1.5">
-              <div class="flex-1 h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
-                <div
-                  class="h-full rounded-xs bg-success transition-all"
-                  :style="{ width: Math.floor((tree.growthDays / 28) * 100) + '%' }"
-                />
-              </div>
-              <span class="text-[10px] text-muted whitespace-nowrap">{{ tree.growthDays }}/28天</span>
-            </div>
-            <div class="flex justify-end">
-              <Button :icon-size="12" :icon="Axe" @click.stop="chopFruitTreeTarget = { id: tree.id, type: tree.type }">砍伐</Button>
-            </div>
-          </template>
-          <template v-else>
-            <div class="flex items-center justify-between">
-              <span v-if="tree.todayFruit" class="text-[10px] text-accent">今日已结果</span>
-              <span v-else class="text-[10px] text-success">{{ getTreeFruitSeason(tree.type) }}产果</span>
-              <Button :icon-size="12" :icon="Axe" @click.stop="chopFruitTreeTarget = { id: tree.id, type: tree.type }">砍伐</Button>
-            </div>
-          </template>
-        </div>
-      </div>
-      <div v-else class="flex flex-col items-center justify-center py-4 text-muted mb-2">
-        <TreeDeciduous :size="32" class="text-muted/30" />
-        <p class="text-xs mt-2">暂无果树</p>
-        <p class="text-[10px] text-muted/60 mt-0.5">可在商店购买树苗种植</p>
-      </div>
-      <div v-if="plantableSaplings.length > 0 && farmStore.fruitTrees.length < MAX_FRUIT_TREES" class="flex space-x-1.5 flex-wrap">
-        <Button v-for="s in plantableSaplings" :key="s.saplingId" :icon-size="12" :icon="TreePine" @click="handlePlantTree(s.type)">
-          种{{ s.name }} (×{{ s.count }})
-        </Button>
-      </div>
-    </div>
-
-    <!-- 砍伐果树确认弹窗 -->
-    <Transition name="panel-fade">
-      <div
-        v-if="chopFruitTreeTarget"
-        class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4"
-        @click.self="chopFruitTreeTarget = null"
-      >
-        <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="chopFruitTreeTarget = null">
-            <X :size="14" />
-          </button>
-          <p class="text-accent text-sm mb-2">砍伐果树</p>
-          <p class="text-xs text-[var(--color-text)]  mb-3">
-            确定要砍掉
-            <span class="text-accent">{{ getTreeName(chopFruitTreeTarget.type) }}</span>
-            吗？砍伐后不可恢复。
-          </p>
-          <div class="flex space-x-2">
-            <Button class="flex-1" @click="chopFruitTreeTarget = null">取消</Button>
-            <Button class="flex-1 !bg-danger !text-[var(--color-text)] " :icon-size="12" :icon="Axe" @click="confirmChopFruitTree">确认砍伐</Button>
-          </div>
-        </div>
-      </div>
-    </Transition>
-
-    <!-- 野树伐木确认弹窗 -->
-    <Transition name="panel-fade">
-      <div
-        v-if="chopWildTreeTarget"
-        class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4"
-        @click.self="chopWildTreeTarget = null"
-      >
-        <div class="game-panel max-w-xs w-full relative">
-          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="chopWildTreeTarget = null">
-            <X :size="14" />
-          </button>
-          <p class="text-accent text-sm mb-2">伐木</p>
-          <p class="text-xs text-[var(--color-text)]  mb-2">
-            确定要对
-            <span class="text-accent">{{ getWildTreeName(chopWildTreeTarget.type) }}</span>
-            伐木吗？
-          </p>
-          <p class="text-xs text-danger mb-3">
-            已伐木 {{ chopWildTreeTarget.chopCount }}/3 次，再伐 {{ 3 - chopWildTreeTarget.chopCount }} 次后树将消失。
-          </p>
-          <div class="flex space-x-2">
-            <Button class="flex-1" @click="chopWildTreeTarget = null">取消</Button>
-            <Button
-              class="flex-1"
-              :class="chopWildTreeTarget.chopCount >= 2 ? '!bg-danger !text-[var(--color-text)] ' : '!bg-accent !text-bg'"
-              :icon-size="12"
-              :icon="Axe"
-              @click="confirmChopWildTree"
-            >
-              {{ chopWildTreeTarget.chopCount >= 2 ? '确认' : '确认伐木' }}
-            </Button>
-          </div>
-        </div>
-      </div>
-    </Transition>
-
-    <!-- 野树区 -->
-    <div class="mt-3 border border-accent/20 rounded-xs p-3">
-      <div class="flex items-center justify-between mb-2">
-        <div class="flex items-center space-x-1.5 text-sm text-accent">
-          <TreePine :size="14" />
-          <span>野树</span>
-        </div>
-        <span class="text-xs text-muted">{{ farmStore.wildTrees.length }}/{{ MAX_WILD_TREES }}</span>
-      </div>
-      <div v-if="farmStore.wildTrees.length > 0" class="flex flex-col space-y-1.5 mb-2">
-        <div v-for="tree in farmStore.wildTrees" :key="tree.id" class="border border-accent/10 rounded-xs px-3 py-2">
-          <!-- 第一行：树名 + 状态标签 -->
-          <div class="flex items-center justify-between mb-1">
-            <div class="flex items-center space-x-1.5">
-              <span class="text-xs font-bold" :class="tree.mature ? 'text-accent' : 'text-muted'">{{ getWildTreeName(tree.type) }}</span>
-              <span v-if="tree.chopCount > 0" class="text-[10px] text-danger">伐{{ tree.chopCount }}/3</span>
-            </div>
-            <span v-if="!tree.mature" class="text-[10px] text-muted">生长中</span>
-            <span v-else-if="tree.hasTapper && tree.tapReady" class="text-[10px] text-accent">可收取</span>
-            <span v-else-if="tree.hasTapper" class="text-[10px] text-muted">采脂中</span>
-            <span v-else class="text-[10px] text-success">已成熟</span>
-          </div>
-          <!-- 第二行：进度/详情 + 操作按钮 -->
-          <template v-if="!tree.mature">
-            <div class="flex items-center space-x-2 mb-1.5">
-              <div class="flex-1 h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
-                <div
-                  class="h-full rounded-xs bg-success transition-all"
-                  :style="{ width: Math.floor((tree.growthDays / (getWildTreeDef(tree.type)?.growthDays ?? 28)) * 100) + '%' }"
-                />
-              </div>
-              <span class="text-[10px] text-muted whitespace-nowrap">
-                {{ tree.growthDays }}/{{ getWildTreeDef(tree.type)?.growthDays ?? '?' }}天
-              </span>
-            </div>
-          </template>
-          <template v-else-if="tree.hasTapper">
-            <div class="flex items-center space-x-2 mb-1.5">
-              <div class="flex-1 h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
-                <div
-                  class="h-full rounded-xs transition-all"
-                  :class="tree.tapReady ? 'bg-accent' : 'bg-success'"
-                  :style="{
-                    width: tree.tapReady
-                      ? '100%'
-                      : Math.floor((tree.tapDaysElapsed / (getWildTreeDef(tree.type)?.tapCycleDays ?? 7)) * 100) + '%'
-                  }"
-                />
-              </div>
-              <span class="text-[10px] text-muted whitespace-nowrap">
-                {{ tree.tapReady ? '已完成' : `${tree.tapDaysElapsed}/${getWildTreeDef(tree.type)?.tapCycleDays ?? '?'}天` }}
-              </span>
-            </div>
-          </template>
-          <div class="flex items-center justify-end space-x-1.5">
-            <Button
-              v-if="tree.mature && tree.hasTapper && tree.tapReady"
-              class="!bg-accent !text-bg"
-              :icon-size="12"
-              :icon="Gift"
-              @click.stop="handleCollectTapProduct(tree.id)"
-            >
-              收取
-            </Button>
-            <Button
-              v-if="tree.mature && !tree.hasTapper && hasTapper"
-              :icon-size="12"
-              :icon="Wrench"
-              @click.stop="handleAttachTapper(tree.id)"
-            >
-              装采脂器
-            </Button>
-            <span v-if="tree.mature && !tree.hasTapper && !hasTapper" class="text-[10px] text-muted">需制造采脂器</span>
-            <Button v-if="tree.mature" :icon-size="12" :icon="Axe" @click.stop="handleChopTree(tree.id)">伐木</Button>
-          </div>
-        </div>
-      </div>
-      <div v-else class="flex flex-col items-center justify-center py-4 text-muted mb-2">
-        <TreePine :size="32" class="text-muted/30" />
-        <p class="text-xs mt-2">暂无野树</p>
-        <p class="text-[10px] text-muted/60 mt-0.5">可使用野树种子种植</p>
-      </div>
-      <div v-if="plantableWildSeeds.length > 0 && farmStore.wildTrees.length < MAX_WILD_TREES" class="flex space-x-1.5 flex-wrap">
-        <Button v-for="s in plantableWildSeeds" :key="s.type" :icon-size="12" :icon="TreePine" @click="handlePlantWildTree(s.type)">
-          种{{ s.name }} (×{{ s.count }})
-        </Button>
-      </div>
-    </div>
 
     <!-- 温室入口 -->
     <div
@@ -868,6 +669,206 @@
             >
               收获
             </Button>
+          </div>
+        </div>
+      </div>
+    </Transition>
+
+    <!-- 野树区 -->
+    <div class="mt-3 border border-accent/20 rounded-xs p-3">
+      <div class="flex items-center justify-between mb-2">
+        <div class="flex items-center space-x-1.5 text-sm text-accent">
+          <TreePine :size="14" />
+          <span>野树</span>
+        </div>
+        <span class="text-xs text-muted">{{ farmStore.wildTrees.length }}/{{ MAX_WILD_TREES }}</span>
+      </div>
+      <div v-if="farmStore.wildTrees.length > 0" class="flex flex-col space-y-1.5 mb-2">
+        <div v-for="tree in farmStore.wildTrees" :key="tree.id" class="border border-accent/10 rounded-xs px-3 py-2">
+          <!-- 第一行：树名 + 状态标签 -->
+          <div class="flex items-center justify-between mb-1">
+            <div class="flex items-center space-x-1.5">
+              <span class="text-xs font-bold" :class="tree.mature ? 'text-accent' : 'text-muted'">{{ getWildTreeName(tree.type) }}</span>
+              <span v-if="tree.chopCount > 0" class="text-[10px] text-danger">伐{{ tree.chopCount }}/3</span>
+            </div>
+            <span v-if="!tree.mature" class="text-[10px] text-muted">生长中</span>
+            <span v-else-if="tree.hasTapper && tree.tapReady" class="text-[10px] text-accent">可收取</span>
+            <span v-else-if="tree.hasTapper" class="text-[10px] text-muted">采脂中</span>
+            <span v-else class="text-[10px] text-success">已成熟</span>
+          </div>
+          <!-- 第二行：进度/详情 + 操作按钮 -->
+          <template v-if="!tree.mature">
+            <div class="flex items-center space-x-2 mb-1.5">
+              <div class="flex-1 h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
+                <div
+                  class="h-full rounded-xs bg-success transition-all"
+                  :style="{ width: Math.floor((tree.growthDays / (getWildTreeDef(tree.type)?.growthDays ?? 28)) * 100) + '%' }"
+                />
+              </div>
+              <span class="text-[10px] text-muted whitespace-nowrap">
+                {{ tree.growthDays }}/{{ getWildTreeDef(tree.type)?.growthDays ?? '?' }}天
+              </span>
+            </div>
+          </template>
+          <template v-else-if="tree.hasTapper">
+            <div class="flex items-center space-x-2 mb-1.5">
+              <div class="flex-1 h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
+                <div
+                  class="h-full rounded-xs transition-all"
+                  :class="tree.tapReady ? 'bg-accent' : 'bg-success'"
+                  :style="{
+                    width: tree.tapReady
+                      ? '100%'
+                      : Math.floor((tree.tapDaysElapsed / (getWildTreeDef(tree.type)?.tapCycleDays ?? 7)) * 100) + '%'
+                  }"
+                />
+              </div>
+              <span class="text-[10px] text-muted whitespace-nowrap">
+                {{ tree.tapReady ? '已完成' : `${tree.tapDaysElapsed}/${getWildTreeDef(tree.type)?.tapCycleDays ?? '?'}天` }}
+              </span>
+            </div>
+          </template>
+          <div class="flex items-center justify-end space-x-1.5">
+            <Button
+              v-if="tree.mature && tree.hasTapper && tree.tapReady"
+              class="!bg-accent !text-bg"
+              :icon-size="12"
+              :icon="Gift"
+              @click.stop="handleCollectTapProduct(tree.id)"
+            >
+              收取
+            </Button>
+            <Button
+              v-if="tree.mature && !tree.hasTapper && hasTapper"
+              :icon-size="12"
+              :icon="Wrench"
+              @click.stop="handleAttachTapper(tree.id)"
+            >
+              装采脂器
+            </Button>
+            <span v-if="tree.mature && !tree.hasTapper && !hasTapper" class="text-[10px] text-muted">需制造采脂器</span>
+            <Button v-if="tree.mature" :icon-size="12" :icon="Axe" @click.stop="handleChopTree(tree.id)">伐木</Button>
+          </div>
+        </div>
+      </div>
+      <div v-else class="flex flex-col items-center justify-center py-4 text-muted mb-2">
+        <TreePine :size="32" class="text-muted/30" />
+        <p class="text-xs mt-2">暂无野树</p>
+        <p class="text-[10px] text-muted/60 mt-0.5">可使用野树种子种植</p>
+      </div>
+      <div v-if="plantableWildSeeds.length > 0 && farmStore.wildTrees.length < MAX_WILD_TREES" class="flex space-x-1.5 flex-wrap">
+        <Button v-for="s in plantableWildSeeds" :key="s.type" :icon-size="12" :icon="TreePine" @click="handlePlantWildTree(s.type)">
+          种{{ s.name }} (×{{ s.count }})
+        </Button>
+      </div>
+    </div>
+
+    <!-- 野树伐木确认弹窗 -->
+    <Transition name="panel-fade">
+      <div
+        v-if="chopWildTreeTarget"
+        class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4"
+        @click.self="chopWildTreeTarget = null"
+      >
+        <div class="game-panel max-w-xs w-full relative">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="chopWildTreeTarget = null">
+            <X :size="14" />
+          </button>
+          <p class="text-accent text-sm mb-2">伐木</p>
+          <p class="text-xs text-[var(--color-text)]  mb-2">
+            确定要对
+            <span class="text-accent">{{ getWildTreeName(chopWildTreeTarget.type) }}</span>
+            伐木吗？
+          </p>
+          <p class="text-xs text-danger mb-3">
+            已伐木 {{ chopWildTreeTarget.chopCount }}/3 次，再伐 {{ 3 - chopWildTreeTarget.chopCount }} 次后树将消失。
+          </p>
+          <div class="flex space-x-2">
+            <Button class="flex-1" @click="chopWildTreeTarget = null">取消</Button>
+            <Button
+              class="flex-1"
+              :class="chopWildTreeTarget.chopCount >= 2 ? '!bg-danger !text-[var(--color-text)] ' : '!bg-accent !text-bg'"
+              :icon-size="12"
+              :icon="Axe"
+              @click="confirmChopWildTree"
+            >
+              {{ chopWildTreeTarget.chopCount >= 2 ? '确认' : '确认伐木' }}
+            </Button>
+          </div>
+        </div>
+      </div>
+    </Transition>
+
+    <!-- 果树区 -->
+    <div class="mt-3 border border-accent/20 rounded-xs p-3">
+      <div class="flex items-center justify-between mb-2">
+        <div class="flex items-center space-x-1.5 text-sm text-accent">
+          <TreeDeciduous :size="14" />
+          <span>果树</span>
+        </div>
+        <span class="text-xs text-muted">{{ farmStore.fruitTrees.length }}/{{ MAX_FRUIT_TREES }}</span>
+      </div>
+      <div v-if="farmStore.fruitTrees.length > 0" class="flex flex-col space-y-1.5 mb-2">
+        <div v-for="tree in farmStore.fruitTrees" :key="tree.id" class="border border-accent/10 rounded-xs px-3 py-2">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs font-bold" :class="tree.mature ? 'text-accent' : 'text-muted'">{{ getTreeName(tree.type) }}</span>
+            <span v-if="tree.mature" class="text-[10px] text-muted">{{ tree.yearAge }}年</span>
+          </div>
+          <template v-if="!tree.mature">
+            <div class="flex items-center space-x-2 mb-1.5">
+              <div class="flex-1 h-1 bg-[var(--color-bg)] rounded-xs border border-accent/10">
+                <div
+                  class="h-full rounded-xs bg-success transition-all"
+                  :style="{ width: Math.floor((tree.growthDays / 28) * 100) + '%' }"
+                />
+              </div>
+              <span class="text-[10px] text-muted whitespace-nowrap">{{ tree.growthDays }}/28天</span>
+            </div>
+            <div class="flex justify-end">
+              <Button :icon-size="12" :icon="Axe" @click.stop="chopFruitTreeTarget = { id: tree.id, type: tree.type }">砍伐</Button>
+            </div>
+          </template>
+          <template v-else>
+            <div class="flex items-center justify-between">
+              <span v-if="tree.todayFruit" class="text-[10px] text-accent">今日已结果</span>
+              <span v-else class="text-[10px] text-success">{{ getTreeFruitSeason(tree.type) }}产果</span>
+              <Button :icon-size="12" :icon="Axe" @click.stop="chopFruitTreeTarget = { id: tree.id, type: tree.type }">砍伐</Button>
+            </div>
+          </template>
+        </div>
+      </div>
+      <div v-else class="flex flex-col items-center justify-center py-4 text-muted mb-2">
+        <TreeDeciduous :size="32" class="text-muted/30" />
+        <p class="text-xs mt-2">暂无果树</p>
+        <p class="text-[10px] text-muted/60 mt-0.5">可在商店购买树苗种植</p>
+      </div>
+      <div v-if="plantableSaplings.length > 0 && farmStore.fruitTrees.length < MAX_FRUIT_TREES" class="flex space-x-1.5 flex-wrap">
+        <Button v-for="s in plantableSaplings" :key="s.saplingId" :icon-size="12" :icon="TreePine" @click="handlePlantTree(s.type)">
+          种{{ s.name }} (×{{ s.count }})
+        </Button>
+      </div>
+    </div>
+
+    <!-- 砍伐果树确认弹窗 -->
+    <Transition name="panel-fade">
+      <div
+        v-if="chopFruitTreeTarget"
+        class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4"
+        @click.self="chopFruitTreeTarget = null"
+      >
+        <div class="game-panel max-w-xs w-full relative">
+          <button class="absolute top-2 right-2 text-muted hover:text-[var(--color-text)] " @click="chopFruitTreeTarget = null">
+            <X :size="14" />
+          </button>
+          <p class="text-accent text-sm mb-2">砍伐果树</p>
+          <p class="text-xs text-[var(--color-text)]  mb-3">
+            确定要砍掉
+            <span class="text-accent">{{ getTreeName(chopFruitTreeTarget.type) }}</span>
+            吗？砍伐后不可恢复。
+          </p>
+          <div class="flex space-x-2">
+            <Button class="flex-1" @click="chopFruitTreeTarget = null">取消</Button>
+            <Button class="flex-1 !bg-danger !text-[var(--color-text)] " :icon-size="12" :icon="Axe" @click="confirmChopFruitTree">确认砍伐</Button>
           </div>
         </div>
       </div>
@@ -1393,173 +1394,6 @@
     activePlotId.value = null
   }
 
-  // === 果树 ===
-
-  const getTreeName = (type: string): string => {
-    return FRUIT_TREE_DEFS.find(d => d.type === type)?.name ?? type
-  }
-
-  const getTreeFruitSeason = (type: string): string => {
-    const def = FRUIT_TREE_DEFS.find(d => d.type === type)
-    if (!def) return '?'
-    return SEASON_NAMES[def.fruitSeason as keyof typeof SEASON_NAMES]
-  }
-
-  const plantableSaplings = computed(() => {
-    return FRUIT_TREE_DEFS.filter(d => inventoryStore.hasItem(d.saplingId)).map(d => ({
-      type: d.type as FruitTreeType,
-      saplingId: d.saplingId,
-      name: d.name,
-      count: inventoryStore.getItemCount(d.saplingId)
-    }))
-  })
-
-  const plantableWildSeeds = computed(() => {
-    return WILD_TREE_DEFS.filter(d => inventoryStore.hasItem(d.seedItemId)).map(d => ({
-      type: d.type as WildTreeType,
-      seedItemId: d.seedItemId,
-      name: d.name,
-      count: inventoryStore.getItemCount(d.seedItemId)
-    }))
-  })
-
-  const hasTapper = computed(() => inventoryStore.getItemCount('tapper') > 0)
-
-  const handlePlantTree = (treeType: FruitTreeType) => {
-    const def = FRUIT_TREE_DEFS.find(d => d.type === treeType)
-    if (!def) return
-    if (!inventoryStore.removeItem(def.saplingId)) {
-      addLog('背包中没有该树苗。')
-      return
-    }
-    if (farmStore.plantFruitTree(treeType)) {
-      addLog(`种下了${def.name}苗，需28天成熟。`)
-      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.plantTree)
-      if (tr.message) addLog(tr.message)
-    } else {
-      inventoryStore.addItem(def.saplingId)
-      addLog(`果树位已满（最多${MAX_FRUIT_TREES}棵）。`)
-    }
-  }
-
-  const confirmChopFruitTree = () => {
-    const target = chopFruitTreeTarget.value
-    if (!target) return
-    chopFruitTreeTarget.value = null
-    if (gameStore.isPastBedtime) {
-      addLog('太晚了，没法砍伐了。')
-      return
-    }
-    if (!inventoryStore.isToolAvailable('axe')) {
-      addLog('斧头正在升级中，无法砍伐。')
-      return
-    }
-    const skillStore = useSkillStore()
-    const cost = Math.max(
-      1,
-      Math.floor(5 * inventoryStore.getToolStaminaMultiplier('axe') * (1 - skillStore.getStaminaReduction('foraging')))
-    )
-    if (!playerStore.consumeStamina(cost)) {
-      addLog('体力不足，无法砍伐。')
-      return
-    }
-    const treeName = getTreeName(target.type)
-    const woodQty = farmStore.removeFruitTree(target.id)
-    if (woodQty > 0) {
-      inventoryStore.addItem('wood', woodQty)
-      addLog(`砍掉了${treeName}，获得${woodQty}个木材。（体力-${cost}）`)
-      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.chopTree)
-      if (tr.message) addLog(tr.message)
-    }
-  }
-
-  // === 野树 ===
-
-  const getWildTreeName = (type: string): string => {
-    return getWildTreeDef(type)?.name ?? type
-  }
-
-  const handlePlantWildTree = (treeType: WildTreeType) => {
-    const def = WILD_TREE_DEFS.find(d => d.type === treeType)
-    if (!def) return
-    if (!inventoryStore.removeItem(def.seedItemId)) {
-      addLog('背包中没有该种子。')
-      return
-    }
-    if (farmStore.plantWildTree(treeType)) {
-      addLog(`种下了${def.name}，需${def.growthDays}天成熟。`)
-      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.plantTree)
-      if (tr.message) addLog(tr.message)
-    } else {
-      inventoryStore.addItem(def.seedItemId)
-      addLog(`野树位已满（最多${MAX_WILD_TREES}棵）。`)
-    }
-  }
-
-  const handleAttachTapper = (treeId: number) => {
-    if (!inventoryStore.removeItem('tapper')) {
-      addLog('背包中没有采脂器。')
-      return
-    }
-    if (farmStore.attachTapper(treeId)) {
-      addLog('安装了采脂器，将定期产出树脂。')
-    } else {
-      inventoryStore.addItem('tapper')
-      addLog('无法安装采脂器（需要已成熟且未装采脂器的野树）。')
-    }
-  }
-
-  const handleCollectTapProduct = (treeId: number) => {
-    const productId = farmStore.collectTapProduct(treeId)
-    if (productId) {
-      inventoryStore.addItem(productId)
-      const def = WILD_TREE_DEFS.find(d => d.tapProduct === productId)
-      addLog(`收取了${def?.tapProductName ?? productId}！`)
-    }
-  }
-
-  const handleChopTree = (treeId: number) => {
-    const tree = farmStore.wildTrees.find(t => t.id === treeId)
-    if (!tree) return
-    chopWildTreeTarget.value = { id: tree.id, type: tree.type, chopCount: tree.chopCount }
-  }
-
-  const confirmChopWildTree = () => {
-    const target = chopWildTreeTarget.value
-    if (!target) return
-    chopWildTreeTarget.value = null
-    if (gameStore.isPastBedtime) {
-      addLog('太晚了，没法伐木了。')
-      return
-    }
-    if (!inventoryStore.isToolAvailable('axe')) {
-      addLog('斧头正在升级中，无法伐木。')
-      return
-    }
-    const skillStore = useSkillStore()
-    const cost = Math.max(
-      1,
-      Math.floor(5 * inventoryStore.getToolStaminaMultiplier('axe') * (1 - skillStore.getStaminaReduction('foraging')))
-    )
-    if (!playerStore.consumeStamina(cost)) {
-      addLog('体力不足，无法伐木。')
-      return
-    }
-    const baseQty = 2
-    const hasLumberjack = skillStore.getSkill('foraging').perk5 === 'lumberjack' || skillStore.getSkill('foraging').perk10 === 'forester'
-    const qty = baseQty + (hasLumberjack ? 2 : Math.random() < 0.5 ? 1 : 0)
-    inventoryStore.addItem('wood', qty)
-    const { removed } = farmStore.chopWildTree(target.id)
-    const treeName = getWildTreeName(target.type)
-    if (removed) {
-      addLog(`伐木获得了${qty}个木材，${treeName}已被砍倒消失了。（体力-${cost}）`)
-    } else {
-      addLog(`伐木获得了${qty}个木材。（体力-${cost}）`)
-    }
-    const tr = gameStore.advanceTime(ACTION_TIME_COSTS.chopTree)
-    if (tr.message) addLog(tr.message)
-  }
-
   // === 温室 ===
 
   const showGreenhouse = computed(() => homeStore.greenhouseUnlocked)
@@ -1658,6 +1492,174 @@
     addLog(`温室已升级至${upgrade.name}！（${upgrade.plotCount}个地块）`)
     showGhUpgradeModal.value = false
   }
+
+  // === 野树 ===
+
+  const getWildTreeName = (type: string): string => {
+    return getWildTreeDef(type)?.name ?? type
+  }
+
+  const handlePlantWildTree = (treeType: WildTreeType) => {
+    const def = WILD_TREE_DEFS.find(d => d.type === treeType)
+    if (!def) return
+    if (!inventoryStore.removeItem(def.seedItemId)) {
+      addLog('背包中没有该种子。')
+      return
+    }
+    if (farmStore.plantWildTree(treeType)) {
+      addLog(`种下了${def.name}，需${def.growthDays}天成熟。`)
+      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.plantTree)
+      if (tr.message) addLog(tr.message)
+    } else {
+      inventoryStore.addItem(def.seedItemId)
+      addLog(`野树位已满（最多${MAX_WILD_TREES}棵）。`)
+    }
+  }
+
+  const handleAttachTapper = (treeId: number) => {
+    if (!inventoryStore.removeItem('tapper')) {
+      addLog('背包中没有采脂器。')
+      return
+    }
+    if (farmStore.attachTapper(treeId)) {
+      addLog('安装了采脂器，将定期产出树脂。')
+    } else {
+      inventoryStore.addItem('tapper')
+      addLog('无法安装采脂器（需要已成熟且未装采脂器的野树）。')
+    }
+  }
+
+  const handleCollectTapProduct = (treeId: number) => {
+    const productId = farmStore.collectTapProduct(treeId)
+    if (productId) {
+      inventoryStore.addItem(productId)
+      const def = WILD_TREE_DEFS.find(d => d.tapProduct === productId)
+      addLog(`收取了${def?.tapProductName ?? productId}！`)
+    }
+  }
+
+  const handleChopTree = (treeId: number) => {
+    const tree = farmStore.wildTrees.find(t => t.id === treeId)
+    if (!tree) return
+    chopWildTreeTarget.value = { id: tree.id, type: tree.type, chopCount: tree.chopCount }
+  }
+
+  const confirmChopWildTree = () => {
+    const target = chopWildTreeTarget.value
+    if (!target) return
+    chopWildTreeTarget.value = null
+    if (gameStore.isPastBedtime) {
+      addLog('太晚了，没法伐木了。')
+      return
+    }
+    if (!inventoryStore.isToolAvailable('axe')) {
+      addLog('斧头正在升级中，无法伐木。')
+      return
+    }
+    const skillStore = useSkillStore()
+    const cost = Math.max(
+      1,
+      Math.floor(5 * inventoryStore.getToolStaminaMultiplier('axe') * (1 - skillStore.getStaminaReduction('foraging')))
+    )
+    if (!playerStore.consumeStamina(cost)) {
+      addLog('体力不足，无法伐木。')
+      return
+    }
+    const baseQty = 2
+    const hasLumberjack = skillStore.getSkill('foraging').perk5 === 'lumberjack' || skillStore.getSkill('foraging').perk10 === 'forester'
+    const qty = baseQty + (hasLumberjack ? 2 : Math.random() < 0.5 ? 1 : 0)
+    inventoryStore.addItem('wood', qty)
+    const { removed } = farmStore.chopWildTree(target.id)
+    const treeName = getWildTreeName(target.type)
+    if (removed) {
+      addLog(`伐木获得了${qty}个木材，${treeName}已被砍倒消失了。（体力-${cost}）`)
+    } else {
+      addLog(`伐木获得了${qty}个木材。（体力-${cost}）`)
+    }
+    const tr = gameStore.advanceTime(ACTION_TIME_COSTS.chopTree)
+    if (tr.message) addLog(tr.message)
+  }
+
+  // === 果树 ===
+
+  const getTreeName = (type: string): string => {
+    return FRUIT_TREE_DEFS.find(d => d.type === type)?.name ?? type
+  }
+
+  const getTreeFruitSeason = (type: string): string => {
+    const def = FRUIT_TREE_DEFS.find(d => d.type === type)
+    if (!def) return '?'
+    return SEASON_NAMES[def.fruitSeason as keyof typeof SEASON_NAMES]
+  }
+
+  const plantableSaplings = computed(() => {
+    return FRUIT_TREE_DEFS.filter(d => inventoryStore.hasItem(d.saplingId)).map(d => ({
+      type: d.type as FruitTreeType,
+      saplingId: d.saplingId,
+      name: d.name,
+      count: inventoryStore.getItemCount(d.saplingId)
+    }))
+  })
+
+  const plantableWildSeeds = computed(() => {
+    return WILD_TREE_DEFS.filter(d => inventoryStore.hasItem(d.seedItemId)).map(d => ({
+      type: d.type as WildTreeType,
+      seedItemId: d.seedItemId,
+      name: d.name,
+      count: inventoryStore.getItemCount(d.seedItemId)
+    }))
+  })
+
+  const hasTapper = computed(() => inventoryStore.getItemCount('tapper') > 0)
+
+  const handlePlantTree = (treeType: FruitTreeType) => {
+    const def = FRUIT_TREE_DEFS.find(d => d.type === treeType)
+    if (!def) return
+    if (!inventoryStore.removeItem(def.saplingId)) {
+      addLog('背包中没有该树苗。')
+      return
+    }
+    if (farmStore.plantFruitTree(treeType)) {
+      addLog(`种下了${def.name}苗，需28天成熟。`)
+      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.plantTree)
+      if (tr.message) addLog(tr.message)
+    } else {
+      inventoryStore.addItem(def.saplingId)
+      addLog(`果树位已满（最多${MAX_FRUIT_TREES}棵）。`)
+    }
+  }
+
+  const confirmChopFruitTree = () => {
+    const target = chopFruitTreeTarget.value
+    if (!target) return
+    chopFruitTreeTarget.value = null
+    if (gameStore.isPastBedtime) {
+      addLog('太晚了，没法砍伐了。')
+      return
+    }
+    if (!inventoryStore.isToolAvailable('axe')) {
+      addLog('斧头正在升级中，无法砍伐。')
+      return
+    }
+    const skillStore = useSkillStore()
+    const cost = Math.max(
+      1,
+      Math.floor(5 * inventoryStore.getToolStaminaMultiplier('axe') * (1 - skillStore.getStaminaReduction('foraging')))
+    )
+    if (!playerStore.consumeStamina(cost)) {
+      addLog('体力不足，无法砍伐。')
+      return
+    }
+    const treeName = getTreeName(target.type)
+    const woodQty = farmStore.removeFruitTree(target.id)
+    if (woodQty > 0) {
+      inventoryStore.addItem('wood', woodQty)
+      addLog(`砍掉了${treeName}，获得${woodQty}个木材。（体力-${cost}）`)
+      const tr = gameStore.advanceTime(ACTION_TIME_COSTS.chopTree)
+      if (tr.message) addLog(tr.message)
+    }
+  }
+
 </script>
 
 <style scoped>

@@ -42,7 +42,7 @@
         <div
           v-for="item in allItems"
           :key="item.id"
-          class="border rounded-xs p-1.5 text-xs text-center transition-colors truncate"
+          class="relative border rounded-xs p-1.5 text-xs text-center transition-colors truncate"
           :class="
             achievementStore.isDiscovered(item.id)
               ? 'border-accent/20 cursor-pointer hover:bg-accent/5 ' + getCategoryColor(item.category)
@@ -50,7 +50,10 @@
           "
           @click="achievementStore.isDiscovered(item.id) && (activeCollectionId = item.id)"
         >
-          <template v-if="achievementStore.isDiscovered(item.id)">{{ item.name }}</template>
+          <template v-if="achievementStore.isDiscovered(item.id)">
+            {{ item.name }}
+              <Sparkles v-if="achievementStore.isCollected(item.id)" :size="12" class="absolute top-2 right-2" />
+          </template>
           <Lock v-else :size="12" class="mx-auto text-muted/30" />
         </div>
       </div>
@@ -68,7 +71,10 @@
             <X :size="14" />
           </button>
 
-          <p class="text-sm mb-2" :class="getCategoryColor(activeCollectionItem.category)">{{ activeCollectionItem.name }}</p>
+          <p class="text-sm mb-2" :class="getCategoryColor(activeCollectionItem.category)">
+            {{ activeCollectionItem.name }}
+            <Sparkles v-if="achievementStore.isCollected(activeCollectionItem.id)" :size="14" class="inline" />
+          </p>
 
           <div class="border border-accent/10 rounded-xs p-2 mb-2">
             <p class="text-xs text-muted">{{ activeCollectionItem.description }}</p>
@@ -120,6 +126,27 @@
               <span class="text-xs text-muted">发现于</span>
               <span class="text-xs text-muted">{{ achievementStore.getDiscoveryTime(activeCollectionItem.id) }}</span>
             </div>
+          </div>
+
+          <!-- ！收藏功能 -->
+          <div class="mt-2" v-if="!['ore', 'gem', 'machine', 'sprinkler', 'fertilizer', 'bait', 'tackle'].includes(activeCollectionItem.category)">
+            <Button
+              v-if="achievementStore.isCollected(activeCollectionItem.id)"
+              @click="handleCollectionWithdraw(activeCollectionItem.id)"
+            >
+              取出珍品
+            </Button>
+            <!-- 未收藏但背包有珍品 -->
+            <Button
+              v-else-if="canCollect(activeCollectionItem.id)"
+              @click="handleCollectionDeposit(activeCollectionItem.id)"
+            >
+              存入珍品
+            </Button>
+            <!-- 没有珍品 -->
+            <Button v-else disabled>
+              暂无珍品
+            </Button>
           </div>
         </div>
       </div>
@@ -473,7 +500,7 @@
 </template>
 
 <script setup lang="ts">
-  import { BookOpen, CircleCheck, Circle, Send, X, ScrollText, Lock } from 'lucide-vue-next'
+  import { BookOpen, CircleCheck, Circle, Send, X, ScrollText, Lock, Sparkles } from 'lucide-vue-next'
   import Button from '@/components/game/Button.vue'
   import { ref, computed } from 'vue'
   import {
@@ -510,6 +537,19 @@
   const questStore = useQuestStore()
   const museumStore = useMuseumStore()
   const guildStore = useGuildStore()
+
+  /** 收藏珍品 */
+  const canCollect = (itemId: string) => {
+    return inventoryStore.getItemCount(itemId, 'supreme') > 0
+  }
+  const handleCollectionDeposit = (itemId: string) => {
+    if (!inventoryStore.removeItem(itemId, 1, 'supreme')) return
+    achievementStore.collectItem(itemId)
+  }
+  const handleCollectionWithdraw = (itemId: string) => {
+    if (!achievementStore.retrieveItem(itemId)) return
+    inventoryStore.addItem(itemId, 1, 'supreme')
+  }
 
   type Tab = 'collection' | 'achievements' | 'bundles' | 'shipping' | 'notes'
   const tab = ref<Tab>('collection')
